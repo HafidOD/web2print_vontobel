@@ -1,7 +1,9 @@
 import Image from 'next/image'
 
+const URL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function getUsers() {
-  const res = await fetch('http://localhost:3000/api/users');
+  const res = await fetch(`${URL}/users`);
   const data = await res.json();
 // console.log(data.users);
   return data.users;
