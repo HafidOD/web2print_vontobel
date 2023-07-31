@@ -19,9 +19,9 @@ export async function GET(request) {
 
 export async function POST(request) {
   // const { ...user } = await request.json();
-  const { enterprises, ...newuser } = await request.json();
-
+  
   try {
+    const { enterprises, ...newuser } = await request.json();
     const connect = enterprises.reduce((arr, item) => {
       arr.push({ id: item });
       return arr;

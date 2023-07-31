@@ -8,38 +8,52 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  password    String
+  userName    String
+  enterprises Enterprise[]
+  role        Role         @default(USER)
+  sales       Sale[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Enterprise {
+  id             Int        @id @default(autoincrement())
+  enterpriseName String
+  logo           String?
+  users          User[]
+  products       Product[]
+  addresses      Address[]
+  categories     Category[]
+  sale           Sale[]
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
 model Address {
-  id           Int      @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   officeName   String
   address      String
   city         String
   country      String
   state        String
   postalCode   Int
+  enterprise   Enterprise @relation(fields: [enterpriseId], references: [id])
   enterpriseId Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime
-}
-
-model Category {
-  id             Int      @id @default(autoincrement())
-  categoryName   String
-  imageCategory  String?
-  parentCategory Int
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime
-}
-
-model Enterprise {
-  id             Int      @id @default(autoincrement())
-  enterpriseName String
-  logo           String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Product {
-  id                 Int      @id @default(autoincrement())
+  id                 Int        @id @default(autoincrement())
   nameProduct        String
   imageProduct       String?
   priceLocal         Float
@@ -48,68 +62,34 @@ model Product {
   descriptionProduct String?
   stockProduct       Int?
   unitsPackage       Int
-  published          Boolean  @default(false)
+  categories         Category[]
+  published          Boolean    @default(false)
   enterpriseId       Int
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime
+  enterprise         Enterprise @relation(fields: [enterpriseId], references: [id])
+  sales              Sale[]
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+}
+
+model Category {
+  id             Int          @id @default(autoincrement())
+  categoryName   String
+  imageCategory  String?
+  parentCategory Int
+  products       Product[]
+  enterprises    Enterprise[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 model Sale {
-  id            Int      @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   userId        Int
   totalSale     Float
+  products      Product[]
   enterpriseInt Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime
-}
-
-model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  password  String
-  userName  String
-  role      User_role @default(USER)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime
-}
-
-model CategoryToEnterprise {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_CategoryToEnterprise_AB_unique")
-  @@index([B], map: "_CategoryToEnterprise_B_index")
-  @@map("_CategoryToEnterprise")
-}
-
-model CategoryToProduct {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_CategoryToProduct_AB_unique")
-  @@index([B], map: "_CategoryToProduct_B_index")
-  @@map("_CategoryToProduct")
-}
-
-model EnterpriseToUser {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_EnterpriseToUser_AB_unique")
-  @@index([B], map: "_EnterpriseToUser_B_index")
-  @@map("_EnterpriseToUser")
-}
-
-model ProductToSale {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_ProductToSale_AB_unique")
-  @@index([B], map: "_ProductToSale_B_index")
-  @@map("_ProductToSale")
-}
-
-enum User_role {
-  USER
-  ADMIN
+  enterprise    Enterprise @relation(fields: [enterpriseInt], references: [id])
+  user          User       @relation(fields: [userId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 }
