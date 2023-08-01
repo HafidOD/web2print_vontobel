@@ -21,6 +21,24 @@ export async function GET(request, { params }) {
   }
 }
 
+export async function PUT(request, { params }) {
+  try {
+    const address = await prisma.address.update({
+      where: {
+        id: parseInt(params.id),
+      },
+      data: await request.json(),
+    });
+
+    return NextResponse.json({ address }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal Error", error },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(request, { params }) {
   try {
     const deleteAddress = await prisma.address.delete({
