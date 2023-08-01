@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 
 // const handleChange = (event) => {
 //   const { name, value } = event.target;
@@ -19,7 +20,7 @@ export default function FormLogin() {
   const [error, setError] = useState("");
 
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+  // const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -27,28 +28,38 @@ export default function FormLogin() {
       setLoading(true);
       // const data = await request.formData();
       // console.log(data);
-      setFormValues({ email: "hola@mundo.com", password: "holamundo1" });
+      // setFormValues({ email: "hola@mundo.com", password: "holamundo1" });
+
+      // console.log(formValues.email, formValues.password);
 
       const res = await signIn("credentials", {
         redirect: false,
         email: formValues.email,
         password: formValues.password,
-        callbackUrl,
+        callbackUrl: "/login",
       });
 
-      setLoading(false);
-
-      console.log(res);
+      // console.log(res);
       if (!res?.error) {
-        router.push(callbackUrl);
+        // setLoading(false);
+        router.push("/dashboard");
       } else {
-        setError("invalid email or password");
+        setLoading(false);
+        toast.error("Correo o contraseña invalido");
+        // setError("Correo o contraseña ");
       }
     } catch (error) {
       setLoading(false);
       setError(error);
     }
   };
+  const handleChange = (event) => {
+    // console.log(event.target.value);
+    const { name, value } = event.target;
+    // console.log(name, value);
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   return (
     <div className="max-w-2xl w-full md:w-4/12">
       <div className="w-full p-4 sm:p-6 lg:p-8">
@@ -65,6 +76,8 @@ export default function FormLogin() {
               type="email"
               name="email"
               id="email"
+              value={formValues.email}
+              onChange={handleChange}
               className="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
               placeholder="Correo Electrónico"
               required={true}
@@ -76,24 +89,26 @@ export default function FormLogin() {
               type="password"
               name="password"
               id="password"
+              value={formValues.password}
+              onChange={handleChange}
               placeholder="Contraseña"
               className="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
               required={true}
             ></input>
           </div>
-          {/* <div className="flex justify-center">
-            <a
-              href="/dashboard"
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Iniciar Sesión
-            </a>
-          </div> */}
-          <button
+          {/* <button
             type="submit"
             className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Iniciar Sesión
+          </button> */}
+          <button
+            type="submit"
+            style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}
+            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            disabled={loading}
+          >
+            {loading ? "Autenticando..." : "Iniciar Sesión"}
           </button>
         </form>
       </div>
