@@ -1,4 +1,4 @@
-import { prisma } from "@/libs/db";
+import { prisma } from "@/libs/prisma";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
