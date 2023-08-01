@@ -1,10 +1,10 @@
-import { prisma } from "@/libs/prisma";
 import Link from "next/link";
+import { PrinterIcon, TruckIcon } from "@heroicons/react/24/solid";
+
 import { redirect } from "next/navigation";
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
-import { PrinterIcon, TruckIcon } from "@heroicons/react/24/solid";
 export async function fetchEnterprises(id) {
   const res = await fetch(`${URL}/enterprises/${id}`);
   const data = await res.json();

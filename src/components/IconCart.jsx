@@ -5,7 +5,7 @@ import userCart from "@/app/hooks/use-cart";
 import { useEffect, useState } from "react";
 
 export default function IconCart({ params }) {
-  console.log(params);
+  // console.log(params);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

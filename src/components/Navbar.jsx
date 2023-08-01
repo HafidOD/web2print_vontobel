@@ -8,11 +8,13 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import IconCart from "./IconCart";
+
+import useCart from "@/app/hooks/use-cart";
 import { signOut } from "next-auth/react";
 
 const navigation = [
-  { name: "Panel", href: "/dashboard" },
-  { name: "Historial", href: "/dashboard/pedidos" },
+  { name: "Empresas", href: "/dashboard" },
+  { name: "Pedidos", href: "/dashboard/pedidos" },
 ];
 
 function classNames(...classes) {
@@ -21,6 +23,14 @@ function classNames(...classes) {
 
 export default function Navbar({ params }) {
   // console.log(params);
+  const removeAll = useCart((state) => state.removeAll);
+  removeAll();
+
+  function logout() {
+    removeAll();
+    signOut();
+  }
+
   return (
     <Disclosure as="nav" className="bg-blue-700">
       {({ open }) => (
@@ -84,7 +94,7 @@ export default function Navbar({ params }) {
                 </div> */}
                 <div className="relative ml-3 flex justify-center">
                   <button
-                    onClick={() => signOut()}
+                    onClick={logout}
                     type="button"
                     className="rounded-full bg-white p-1 text-blue-700 focus:outline-none"
                   >

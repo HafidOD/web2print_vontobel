@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-export const enterpriseContext = createContext();
+import useCart from "@/app/hooks/use-cart";
 
 export default function Enterpises({ enterprises }) {
   const [enterprise, setEnterpise] = useState(null);
+  const removeAll = useCart((state) => state.removeAll);
+  removeAll();
 
   return (
     <div className="grid gap-3 lg:grid-cols-3 justify-items-center">
