@@ -8,7 +8,7 @@ export default function CheckoutPage({ params }) {
   const [isMounted, setIsMounted] = useState(false);
   const cart = useCart();
   const items = useCart((state) => state.items);
-  const removeAll = useCart((state) => state.removeAll);
+  // const removeAll = useCart((state) => state.removeAll);
   // console.log(items);
   useEffect(() => {
     setIsMounted(true);
@@ -20,6 +20,10 @@ export default function CheckoutPage({ params }) {
   const totalPrice = items.reduce((total, item) => {
     return total + item.quantity * item.priceLocal;
   }, 0);
+
+  function refresh() {
+    location.reload();
+  }
   // console.log(totalPrice);
   return (
     <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
@@ -41,12 +45,12 @@ export default function CheckoutPage({ params }) {
       {cart.items.length !== 0 && (
         <div>
           <div className="flex justify-center mb-4">
-            <a
-              href="#"
+            <button
+              onClick={refresh}
               className="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Actualizar carrito
-            </a>
+            </button>
           </div>
           <div className="flex justify-center mb-4">
             <Link

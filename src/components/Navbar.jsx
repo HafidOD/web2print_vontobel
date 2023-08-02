@@ -24,7 +24,6 @@ function classNames(...classes) {
 export default function Navbar({ params }) {
   // console.log(params);
   const removeAll = useCart((state) => state.removeAll);
-  removeAll();
 
   function logout() {
     removeAll();

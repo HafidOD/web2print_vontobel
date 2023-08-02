@@ -5,26 +5,35 @@ import { useEffect, useState } from "react";
 import useCart from "@/app/hooks/use-cart";
 
 export default function ButtonCheckout({ quantity, productId }) {
-  // const cart = useCart();
-  // const updateItem = useCart((state) => state.updateItem);
-  // console.log(cart);
+  const cart = useCart();
   const [counter, setCounter] = useState(quantity);
-  const onUpdate = () => {
-    // cart.updateItem(productId, counter);
-  };
+  // const onUpdate = useCart((state) => state.onUpdate);
   const plusCounter = () => {
     setCounter(counter + 1);
-    // onUpdate(productId, counter);
+    // console.log(productId, counter);
+    cart.updateItem(productId, counter + 1);
   };
   const minusCounter = () => {
     // Counter state is decremented
     if (counter > 1) {
       setCounter(counter - 1);
+      cart.updateItem(productId, counter - 1);
       // onUpdate(productId, counter);
     } else {
       setCounter(1);
     }
   };
+  // useEffect(
+  //   (productId) => {
+  //     // console.log(productId, counter);
+  //   },
+  //   [counter]
+  // );
+
+  // const onUpdate = () => {
+  //   // console.log(productId, counter);
+  //   // cart.updateItem(product.id, counter);
+  // };
 
   return (
     <div className="pl-3 flex flex-col justify-center">

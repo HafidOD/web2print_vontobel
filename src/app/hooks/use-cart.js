@@ -20,11 +20,20 @@ const useCart = create(
         toast.success("Producto agregado");
       },
 
-      updateItem: (id, counter) => {
+      updateItem: (id, quantity) => {
+        console.log(id, quantity);
         const currentItems = get().items;
-        const existingItem = currentItems.find((item) => item.id === id);
-        existingItem.quantity = counter;
-        set({ items: [...get().items, existingItem] });
+
+        // console.log(currentItems);
+        const newItems = currentItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: quantity };
+          }
+          return item;
+        });
+
+        // console.log(newItems);
+        set({ items: newItems });
       },
 
       removeItem: (id) => {
