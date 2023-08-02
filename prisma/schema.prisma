@@ -10,6 +10,7 @@ datasource db {
 
 enum Role {
   USER
+  SUPERUSER
   ADMIN
 }
 
@@ -19,15 +20,18 @@ model User {
   password    String
   userName    String
   enterprises Enterprise[]
-  role        Role         @default(USER)
+  addresses   Address[]
+  role        Int          @default(1)
   sales       Sale[]
+  typePrice   Int
+  currency    String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
 
 model Enterprise {
   id             Int        @id @default(autoincrement())
-  enterpriseName String
+  enterpriseName String     @unique
   logo           String?
   users          User[]
   products       Product[]
@@ -40,7 +44,7 @@ model Enterprise {
 
 model Address {
   id           Int        @id @default(autoincrement())
-  officeName   String
+  officeName   String     @unique
   address      String
   city         String
   country      String
@@ -48,13 +52,14 @@ model Address {
   postalCode   Int
   enterprise   Enterprise @relation(fields: [enterpriseId], references: [id])
   enterpriseId Int
+  users        User[]
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 }
 
 model Product {
   id                 Int        @id @default(autoincrement())
-  nameProduct        String
+  nameProduct        String     @unique
   imageProduct       String?
   priceLocal         Float
   priceNacional      Float?
@@ -73,7 +78,7 @@ model Product {
 
 model Category {
   id             Int          @id @default(autoincrement())
-  categoryName   String
+  categoryName   String       @unique
   imageCategory  String?
   parentCategory Int
   products       Product[]
@@ -90,6 +95,7 @@ model Sale {
   enterpriseInt Int
   enterprise    Enterprise @relation(fields: [enterpriseInt], references: [id])
   user          User       @relation(fields: [userId], references: [id])
+  date          DateTime
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }

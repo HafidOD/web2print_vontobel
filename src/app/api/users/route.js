@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
+import { Role } from "@prisma/client";
 
 export async function GET(request) {
   try {
     const users = await prisma.user.findMany({
       include: {
         enterprises: true,
+        addresses: true,
       },
     });
     return NextResponse.json({ users }, { status: 200 });
@@ -19,21 +21,31 @@ export async function GET(request) {
 
 export async function POST(request) {
   // const { ...user } = await request.json();
-  
+
   try {
-    const { enterprises, ...newuser } = await request.json();
+    const { enterprises, addresses, ...newuser } = await request.json();
     const connect = enterprises.reduce((arr, item) => {
       arr.push({ id: item });
       return arr;
     }, []);
-    // console.log(connect);
+    const connectAddress = addresses.reduce((arr, item) => {
+      arr.push({ id: item });
+      return arr;
+    }, []);
+    // console.log(connectAddress);
     const user = await prisma.user.create({
       data: {
         email: newuser.email,
         password: newuser.password,
         userName: newuser.userName,
+        typePrice: newuser.typePrice,
+        role: newuser.role,
+        currency: newuser.currency,
         enterprises: {
           connect: connect,
+        },
+        addresses: {
+          connect: connectAddress,
         },
       },
     });

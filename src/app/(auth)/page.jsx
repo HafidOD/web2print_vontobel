@@ -3,9 +3,11 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/auth";
 import { redirect } from "next/navigation";
+import { hash } from "bcryptjs";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
+  console.log(session);
   if (session) {
     redirect("/dashboard");
   }

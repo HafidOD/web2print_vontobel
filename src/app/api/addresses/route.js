@@ -5,6 +5,7 @@ export async function GET(request) {
     const addresses = await prisma.address.findMany({
       include: {
         enterprise: true,
+        users: true,
       },
     });
     return NextResponse.json({ addresses }, { status: 200 });

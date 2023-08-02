@@ -31,6 +31,7 @@ export const authOptions = {
             email: credentials.email,
           },
         });
+        // console.log(user);
 
         if (!user || !(await compare(credentials.password, user.password))) {
           return null;

@@ -52,7 +52,7 @@ export async function DELETE(request, { params }) {
     return NextResponse.json(
       {
         message: "User deleted",
-        enterprise: deleteUser,
+        user: deleteUser,
       },
       { status: 200 }
     );

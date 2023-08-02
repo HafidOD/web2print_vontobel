@@ -21,7 +21,7 @@ const useCart = create(
       },
 
       updateItem: (id, quantity) => {
-        console.log(id, quantity);
+        // console.log(id, quantity);
         const currentItems = get().items;
 
         // console.log(currentItems);
