@@ -1,13 +1,24 @@
 "use client";
+import shallow from "zustand/shallow";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 import useCart from "@/app/hooks/use-cart";
+import useAddress from "@/app/hooks/use-address";
 
 export default function ThankyouPage() {
   // const cart = useCart();
+  const items = useCart((state) => state.items);
+  const address = useAddress((state) => state.address);
   const removeAll = useCart((state) => state.removeAll);
-  removeAll();
+  const removeAddress = useAddress((state) => state.removeAddress);
+
+  // console.log(items);
+  // console.log(address);
+  function remove() {
+    removeAll();
+    removeAddress();
+  }
   return (
     <div class="flex items-center justify-center h-96">
       <div>
@@ -32,13 +43,14 @@ export default function ThankyouPage() {
           <p className="text-center">
             Te enviaremos una confirmación por correo electrónico en breve.
           </p>
-          <Link
-            href="/dashboard"
+          <button
+            // href="/dashboard"
+            onClick={remove}
             class="inline-flex items-center px-4 py-2 text-white bg-blue-700 border border-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring"
           >
             <ArrowLeftIcon className="h-4 w-4 mr-2" aria-hidden="true" />
             <span class="text-md font-medium">Inicio</span>
-          </Link>
+          </button>
         </div>
       </div>
     </div>

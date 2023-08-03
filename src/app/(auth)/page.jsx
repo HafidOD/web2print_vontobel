@@ -7,7 +7,7 @@ import { hash } from "bcryptjs";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  console.log(session);
+  // console.log(session);
   if (session) {
     redirect("/dashboard");
   }
