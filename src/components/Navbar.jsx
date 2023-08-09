@@ -13,7 +13,7 @@ import useCart from "@/app/hooks/use-cart";
 import { signOut } from "next-auth/react";
 
 const navigation = [
-  { name: "Empresas", href: "/dashboard" },
+  { name: "Marcas", href: "/dashboard" },
   { name: "Pedidos", href: "/dashboard/pedidos" },
 ];
 
@@ -21,8 +21,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar({ params }) {
-  // console.log(params);
+export default function Navbar() {
   const removeAll = useCart((state) => state.removeAll);
 
   function logout() {
@@ -83,7 +82,7 @@ export default function Navbar({ params }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <IconCart params={params}></IconCart>
+                <IconCart></IconCart>
                 {/* <div className="relative ml-3">
                       <img
                         className="h-8 w-8 rounded-full"

@@ -1,4 +1,7 @@
+import usePrice from "@/app/hooks/use-price";
 import ProductCard from "@/components/ProductCard";
+import { authOptions } from "@/libs/auth";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
@@ -10,12 +13,14 @@ export async function fetchProducts(id, parentId, categoryId) {
   return data.products;
 }
 export default async function ProductPageCategory({ params }) {
+  const { user } = await getServerSession(authOptions);
+  // console.log(user);
+
   const products = await fetchProducts(
     params.enterpriseId,
     params.categoryParentId,
     params.categoryId
   );
-
   // console.log(params);
   return (
     <div className="flex flex-col items-center justify-center">
@@ -31,12 +36,17 @@ export default async function ProductPageCategory({ params }) {
           )}
           {/* <ProductCard products={products}></ProductCard> */}
           {products.map((product) => (
-            <ProductCard key={product.id} product={product}></ProductCard>
+            <ProductCard
+              key={product.id}
+              product={product}
+              typePrice={user.typePrice}
+              currency={user.currency}
+            ></ProductCard>
           ))}
           <div className="flex justify-center">
             {products.length !== 0 && (
               <Link
-                href={`/dashboard/${params.enterpriseId}/checkout`}
+                href={`/dashboard/cart`}
                 className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Ver Carrito

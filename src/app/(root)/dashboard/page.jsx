@@ -13,8 +13,7 @@ export async function fetchUser(id) {
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
-  // console.log(session.user.id);
-  // const user2 = await getUsers(session.user.id);
+  // console.log(session.user);
   const user = await fetchUser(session.user.id);
   // console.log(user);
   return (

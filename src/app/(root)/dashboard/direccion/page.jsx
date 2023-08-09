@@ -5,14 +5,14 @@ import { authOptions } from "@/libs/auth";
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function fetchAddresses(enterpriseId) {
-  const res = await fetch(`${URL}/${enterpriseId}/addresses/`);
-  const data = await res.json();
+// export async function fetchAddresses(enterpriseId) {
+//   const res = await fetch(`${URL}/${enterpriseId}/addresses/`);
+//   const data = await res.json();
 
-  return data.addresses;
-}
+//   return data.addresses;
+// }
 export async function fetchSingleAddresses(enterpriseId, userId) {
-  const res = await fetch(`${URL}/${enterpriseId}/addresses/${userId}`);
+  const res = await fetch(`${URL}/addresses/user/${userId}`);
   const data = await res.json();
 
   return data.addresses;
@@ -20,13 +20,12 @@ export async function fetchSingleAddresses(enterpriseId, userId) {
 export default async function AddressPage({ params }) {
   const { user } = await getServerSession(authOptions);
 
-  let addresses = [];
-  // console.log(user.role);
-  if (user.role === 1) {
-    addresses = await fetchSingleAddresses(params.enterpriseId, user.id);
-  } else {
-    addresses = await fetchAddresses(params.enterpriseId);
-  }
+  const addresses = await fetchSingleAddresses(params.enterpriseId, user.id);
+  // console.log(user);
+  // if (user.role === 1) {
+  // } else {
+  //   addresses = await fetchAddresses(params.enterpriseId);
+  // }
 
   // console.log(addresses);
   return (
@@ -45,7 +44,7 @@ export default async function AddressPage({ params }) {
       </div>
       <div className="flex justify-center">
         <Link
-          href={`/dashboard/${params.enterpriseId}/thankyou`}
+          href={`/dashboard/checkout`}
           className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Finalizar pedido

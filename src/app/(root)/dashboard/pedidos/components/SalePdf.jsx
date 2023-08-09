@@ -1,6 +1,4 @@
 "use client";
-import useAddress from "@/app/hooks/use-address";
-import useCart from "@/app/hooks/use-cart";
 import {
   Document,
   Page,
@@ -10,16 +8,10 @@ import {
   PDFViewer,
   Image,
 } from "@react-pdf/renderer";
-import { useSession } from "next-auth/react";
-
-export default function Pagepdf() {
-  // const { data } = useSession();
-  // console.log(data);
-  // const user = data.user;
-  const items = useCart((state) => state.items);
-  const address = useAddress((state) => state.address);
-  console.log(items);
-  const currentDate = new Date().toLocaleDateString("es-MX");
+import { format } from "date-fns";
+const SalePdf = ({ sale, items, address }) => {
+  const fecha = format(new Date(sale.date), "dd-MM-yyyy");
+  // console.log(fecha);
   const styles = StyleSheet.create({
     page: {
       fontFamily: "Helvetica",
@@ -135,27 +127,8 @@ export default function Pagepdf() {
     },
   });
 
-  const PDFComponent = ({ data }) => (
-    // <Document>
-    //   <Page size="A4" style={styles.page}>
-    //     <View style={styles.section}>
-    //       <Image
-    //         src={"/images/logos/logo_grupo_regio.png"}
-    //         style={styles.image}
-    //         alt="logo grupo regio"
-    //       />
-    //       {data.map((item) => (
-    //         <Text key={item.id}>{item.nameProduct}</Text>
-    //       ))}
-    //       <Text>{address.officeName}</Text>
-    //       <Text>
-    //         {address.address}, {address.city}, {address.state},{" "}
-    //         {address.country}, CP. {address.postalCode}
-    //       </Text>
-    //     </View>
-    //   </Page>
-    // </Document>
-
+  return (
+    // <PDFViewer style={{ width: "100%", height: "500px" }}>
     <Document>
       <Page size="A4" style={styles.page}>
         <Image
@@ -164,18 +137,24 @@ export default function Pagepdf() {
           alt="logo grupo regio"
         />
         <View style={styles.address}>
-          <Text>Fecha del pedido: {currentDate}</Text>
+          <Text>Fecha del pedido: {fecha}</Text>
         </View>
-        <View style={styles.address}>
-          {/* <Text>Pedido por: {user}</Text> */}
-        </View>
+        {/* <View style={styles.address}>
+          <Text>Pedido por: {user.name}</Text>
+        </View> */}
         <Text style={styles.address}>
           Dirección de envío: {address.officeName}
         </Text>
-        <Text style={styles.address}>
-          {address.address}, {address.city}, {address.state}, {address.country},
-          CP. {address.postalCode}
-        </Text>
+        {address.city &&
+        address.city &&
+        address.state &&
+        address.country &&
+        address.postalCode ? (
+          <Text style={styles.address}>
+            {address.address}, {address.city}, {address.state},{" "}
+            {address.country}, CP. {address.postalCode}
+          </Text>
+        ) : null}
         <View style={styles.table}>
           <View style={styles.tableRow}>
             <View style={styles.tableColHeader}>
@@ -194,7 +173,7 @@ export default function Pagepdf() {
               <Text>Total</Text>
             </View>
           </View>
-          {data.map((producto) => (
+          {items.map((producto) => (
             <View key={producto.id} style={styles.tableRow}>
               <View style={styles.tableCol}>
                 {/* <Text style={styles.productName}>{producto.nameProduct}</Text> */}
@@ -210,10 +189,14 @@ export default function Pagepdf() {
                 <Text>{producto.quantity}</Text>
               </View>
               <View style={styles.tableColp}>
-                <Text>${producto.priceLocal} MXN</Text>
+                <Text>
+                  ${producto.price} {producto.currency}
+                </Text>
               </View>
               <View style={styles.tableColp}>
-                <Text>${producto.priceLocal * producto.quantity} MXN</Text>
+                <Text>
+                  ${producto.price * producto.quantity} {producto.currency}
+                </Text>
               </View>
             </View>
           ))}
@@ -223,14 +206,8 @@ export default function Pagepdf() {
         </View>
       </Page>
     </Document>
+    // </PDFViewer>
   );
-  return (
-    <div>
-      <h1>PDF Generation Example</h1>
-      {/* {console.log(items)} */}
-      <PDFViewer style={{ width: "100%", height: "500px" }}>
-        <PDFComponent data={items} />
-      </PDFViewer>
-    </div>
-  );
-}
+};
+
+export default SalePdf;

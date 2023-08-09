@@ -42,6 +42,8 @@ export const authOptions = {
           email: user.email,
           name: user.userName,
           role: user.role,
+          typePrice: user.typePrice,
+          currency: user.currency,
           randomKey: "escapetefate",
         };
       },
@@ -56,6 +58,8 @@ export const authOptions = {
           ...session.user,
           id: token.id,
           role: token.role,
+          typePrice: token.typePrice,
+          currency: token.currency,
           randomKey: token.randomKey,
         },
       };
@@ -69,6 +73,8 @@ export const authOptions = {
           ...token,
           id: user.id,
           role: user.role,
+          typePrice: user.typePrice,
+          currency: user.currency,
           randomKey: user.randomKey,
         };
       }

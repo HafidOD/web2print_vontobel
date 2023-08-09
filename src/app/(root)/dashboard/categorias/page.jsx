@@ -1,21 +1,5 @@
 import Categories from "@/components/Categories";
 
-// const categories = [
-//   {
-//     "id": 1,
-//     "categoryName": "Stationery",
-//     "imageCategory": "/images/logos/gruporegio_isotipo.png",
-//     "createdAt": "2023-07-27T21:46:56.595Z",
-//     "updatedAt": "2023-07-27T21:46:56.595Z"
-//   },
-//   {
-//     "id": 2,
-//     "categoryName": "F&B",
-//     "imageCategory": "/images/logos/gruporegio_isotipo.png",
-//     "createdAt": "2023-07-27T21:47:18.492Z",
-//     "updatedAt": "2023-07-28T21:58:43.051Z"
-//   }
-// ]
 // const URL = process.env.NEXT_PUBLIC_API_URL;
 // export async function fetchCategories() {
 //   const res = await fetch(`${URL}/categories`);

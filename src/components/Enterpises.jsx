@@ -2,15 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { createContext, useState } from "react";
-
-import useCart from "@/app/hooks/use-cart";
+// import { useState } from "react";
 
 export default function Enterpises({ enterprises }) {
-  const [enterprise, setEnterpise] = useState(null);
-  const removeAll = useCart((state) => state.removeAll);
-  removeAll();
-
   return (
     <div className="grid gap-3 lg:grid-cols-3 justify-items-center">
       {/* <p>enterprise id = { enterprise }</p> */}
@@ -20,7 +14,6 @@ export default function Enterpises({ enterprises }) {
             href={"/dashboard/" + enterprise.id}
             className="w-full"
             key={enterprise.id}
-            onClick={() => setEnterpise(enterprise.id)}
           >
             <div className="w-full rounded-lg shadow-lg lg:max-w-sm bg-white">
               <img

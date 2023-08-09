@@ -18,6 +18,7 @@ model User {
   id          Int          @id @default(autoincrement())
   email       String       @unique
   password    String
+  telefono    String?
   userName    String
   enterprises Enterprise[]
   addresses   Address[]
@@ -59,6 +60,7 @@ model Address {
 
 model Product {
   id                 Int        @id @default(autoincrement())
+  sku                String     @unique
   nameProduct        String     @unique
   imageProduct       String?
   priceLocal         Float
@@ -88,14 +90,16 @@ model Category {
 }
 
 model Sale {
-  id            Int        @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   userId        Int
   totalSale     Float
   products      Product[]
-  enterpriseInt Int
-  enterprise    Enterprise @relation(fields: [enterpriseInt], references: [id])
-  user          User       @relation(fields: [userId], references: [id])
+  data          Json
+  address       Json
+  enterpriseInt Int?
+  enterprise    Enterprise? @relation(fields: [enterpriseInt], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
   date          DateTime
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }

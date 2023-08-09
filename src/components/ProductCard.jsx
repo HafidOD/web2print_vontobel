@@ -5,12 +5,21 @@ import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 import { toast } from "react-hot-toast";
 import useCart from "@/app/hooks/use-cart";
 import { useState } from "react";
+import usePrice from "@/app/hooks/use-price";
 
 // import ButtonProduct from "./ButtonProduct";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, typePrice, currency }) {
+  const prices = { 1: "priceLocal", 2: "priceNacional", 3: "priceExt" };
+  const priceProduct = product[prices[typePrice]];
   const cart = useCart();
-  const data = product;
+  const data = {
+    ...product,
+    currency: currency,
+    price: product[prices[typePrice]],
+  };
+  // const data2 = { ...product, price: product[prices[typePrice]] };
+  // console.log(data2);
   // console.log(product);
   const [counter, setCounter] = useState(0);
   const plusCounter = () => {
@@ -28,11 +37,13 @@ export default function ProductCard({ product }) {
     e.stopPropagation();
     if (counter > 0) {
       data.quantity = counter;
+      data.total = counter * data.price;
       cart.addItem(data);
     } else {
       toast.error("Aumenta el numero de productos");
     }
   };
+  // console.log(product[prices[typePrice]]);
 
   return (
     <div className="w-full p-2 rounded-lg shadow-xl flex items-center justify-between my-3 bg-white">
@@ -58,7 +69,7 @@ export default function ProductCard({ product }) {
               {product.unitsPackage} piezas por paquete
             </p>
             <p className="text-xs md:text-sm text-gray-500 leading-normal">
-              ${product.priceLocal}.00 MXN
+              ${priceProduct} {currency}
             </p>
           </div>
         </div>

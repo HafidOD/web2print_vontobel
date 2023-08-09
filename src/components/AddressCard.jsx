@@ -27,9 +27,11 @@ export default function AddressCard({ address }) {
             <p className="mt-1 truncate text-xs leading-5 text-gray-500">
               {address.address}
             </p>
-            <p className="truncate text-xs leading-5 text-gray-500">
-              {address.city}, {address.state}, {address.country}
-            </p>
+            {address.city && address.state && address.country ? (
+              <p className="truncate text-xs leading-5 text-gray-500">
+                {address.city}, {address.state}, {address.country}
+              </p>
+            ) : null}
           </div>
         </div>
       </label>
