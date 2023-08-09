@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";

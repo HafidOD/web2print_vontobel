@@ -33,7 +33,7 @@ export async function POST(req) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "hafid@tachuela.mx, hafido1403@gmail.com",
+      to: "hafid@tachuela.mx",
       subject: "test de envio de correo",
       html: emailContent,
       // text: `Detalles del pedido:\n\n${JSON.stringify(items)}`,
@@ -61,7 +61,7 @@ function generateEmailContent(items) {
   content += "<tbody>";
 
   items.items.forEach((producto) => {
-    content += `<tr><td><img src=${process.env.NEXT_URL_BASE}${producto.imageProduct} alt=${producto.nameProduct}></td><td>${producto.nameProduct}</td><td>${producto.currency}</td><td>${producto.quantity}</td><td>${producto.price}</td></tr>`;
+    content += `<tr><td><img src=${process.env.NEXT_URL_BASE}${producto.imageProduct} width="140" alt=${producto.nameProduct}></td><td>${producto.nameProduct}</td><td>${producto.currency}</td><td>${producto.quantity}</td><td>${producto.price}</td></tr>`;
   });
 
   content += "</tbody></table>";
