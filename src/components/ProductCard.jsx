@@ -5,7 +5,6 @@ import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 import { toast } from "react-hot-toast";
 import useCart from "@/app/hooks/use-cart";
 import { useState } from "react";
-import usePrice from "@/app/hooks/use-price";
 
 // import ButtonProduct from "./ButtonProduct";
 
