@@ -1,4 +1,3 @@
-import usePrice from "@/app/hooks/use-price";
 import ProductCard from "@/components/ProductCard";
 import { authOptions } from "@/libs/auth";
 import { getServerSession } from "next-auth";
