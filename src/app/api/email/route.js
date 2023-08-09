@@ -58,11 +58,11 @@ function generateEmailContent(items) {
   let content = "<h1>Detalles del Pedido</h1>";
   content += "<table>";
   content +=
-    "<thead><tr><th>Imagen</th><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Moneda</th></tr></thead>";
+    "<thead><tr><th style='padding:2px 10px'>Imagen</th><th style='padding:2px 10px'>Producto</th><th style='padding:2px 10px'>Cantidad</th><th style='padding:2px 10px'>Precio</th><th style='padding:2px 10px'>Moneda</th></tr></thead>";
   content += "<tbody>";
 
   items.items.forEach((producto) => {
-    content += `<tr><td style='padding:2px 8px'><img src=${process.env.NEXT_URL_BASE}${producto.imageProduct} width="130" alt=${producto.nameProduct}></td><td style='padding:2px 8px'>${producto.nameProduct}</td><td style='padding:2px 8px'>${producto.quantity}</td><td style='padding:2px 8px'>${producto.price}</td><td style='padding:2px 8px'>${producto.currency}</td></tr>`;
+    content += `<tr><td style='padding:2px 10px'><img src=${process.env.NEXT_URL_BASE}${producto.imageProduct} width="110" alt=${producto.nameProduct}></td><td style='padding:2px 10px'>${producto.nameProduct}</td><td style='padding:2px 10px'>${producto.quantity}</td><td style='padding:2px 10px'>${producto.price}</td><td style='padding:2px 10px'>${producto.currency}</td></tr>`;
   });
 
   content += "</tbody></table>";
