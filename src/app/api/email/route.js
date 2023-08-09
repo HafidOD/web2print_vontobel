@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import prisma from "@/libs/prisma";
 
 export async function POST(req) {
   const items = await req.json();
