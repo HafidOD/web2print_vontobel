@@ -1,14 +1,9 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
-
-// const handleChange = (event) => {
-//   const { name, value } = event.target;
-//   setFormValues({ ...formValues, [name]: value });
-// };
 
 export default function FormLogin() {
   const router = useRouter();
@@ -18,19 +13,10 @@ export default function FormLogin() {
     password: "",
   });
   const [error, setError] = useState("");
-
-  const searchParams = useSearchParams();
-  // const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
-
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      // const data = await request.formData();
-      // console.log(data);
-      // setFormValues({ email: "hola@mundo.com", password: "holamundo1" });
-
-      // console.log(formValues.email, formValues.password);
 
       const res = await signIn("credentials", {
         redirect: false,
@@ -96,12 +82,6 @@ export default function FormLogin() {
               required={true}
             ></input>
           </div>
-          {/* <button
-            type="submit"
-            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Iniciar Sesión
-          </button> */}
           <button
             type="submit"
             style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}

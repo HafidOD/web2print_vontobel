@@ -22,7 +22,7 @@ export default async function pagePedidos() {
         <p>Pedidos anteriores</p>
       </div>
       <div className="rounded-lg shadow-lg mt-5 bg-white">
-        {sales.length === 0 && <p className="py-6">No hay Pedidos aun</p>}
+        {sales.length === 0 && <p className="p-6">No hay Pedidos anteriores</p>}
 
         <ul role="list" className="divide-y divide-gray-100 px-3">
           {sales.map((sale) => (

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import prisma from "@/libs/prisma";
+// import prisma from "@/libs/prisma";
 
 export async function POST(req) {
   const items = await req.json();
@@ -9,7 +9,7 @@ export async function POST(req) {
     const totalSale = items.items.reduce((total, item) => {
       return total + item.total;
     }, 0);
-    console.log(items.items[0].enterpriseId);
+    // console.log(items.items[0].enterpriseId);
     const sale = await prisma.sale.create({
       data: {
         userId: items.userId,
@@ -33,7 +33,7 @@ export async function POST(req) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "hafid@tachuela.mx",
+      to: "hafid@tachuela.mx, hafido1403@gmail.com",
       subject: "test de envio de correo",
       html: emailContent,
       // text: `Detalles del pedido:\n\n${JSON.stringify(items)}`,

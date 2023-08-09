@@ -10,6 +10,9 @@ export async function GET(request, { params }) {
       include: {
         user: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return NextResponse.json({ sales }, { status: 200 });
   } catch (error) {
