@@ -17,7 +17,7 @@ export default async function pagePedidos() {
 
   const sales = await fetchSales(user.id);
   return (
-    <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
+    <div className="w-full md:w-3/5 px-2 m-auto py-5 space-y-5 sm:px-0">
       <div>
         <p>Pedidos anteriores</p>
       </div>

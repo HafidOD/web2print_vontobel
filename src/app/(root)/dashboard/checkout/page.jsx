@@ -30,7 +30,7 @@ const GeneratePDF = async () => {
       </div>
       <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
         <div className="flex justify-center mb-4">
-          <ExButt user={user.id}></ExButt>
+          <ExButt user={user}></ExButt>
         </div>
       </div>
       {/* <PDFDownloadLink

@@ -20,7 +20,7 @@ export default function ExButt({ user }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ items, userId: user, address }),
+        body: JSON.stringify({ items, user: user, address }),
       });
       // console.log(response);
 

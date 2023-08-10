@@ -14,6 +14,7 @@ export async function fetchSingleSales(saleId) {
 export default async function SingleSale({ params }) {
   // console.log(params.saleId);
   const sale = await fetchSingleSales(params.saleId);
+  console.log(sale);
   const items = JSON.parse(sale.data);
   const address = JSON.parse(sale.address);
   const currency = items.items[0].currency;

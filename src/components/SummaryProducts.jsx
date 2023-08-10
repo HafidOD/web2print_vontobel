@@ -15,6 +15,9 @@ export default function SummaryProducts() {
   if (!isMounted) {
     return null;
   }
+  const totalPrice = items.reduce((total, item) => {
+    return total + item.quantity * item.price;
+  }, 0);
   return (
     <div>
       {items.length === 0 && (
@@ -29,6 +32,11 @@ export default function SummaryProducts() {
           ></SummaryListProducts>
         ))}
       </ul>
+      <div className="border-t-2 border-t-gray-200 pt-2">
+        <p className="text-end">
+          Total: ${totalPrice} {items[0].currency}
+        </p>
+      </div>
     </div>
   );
 }
