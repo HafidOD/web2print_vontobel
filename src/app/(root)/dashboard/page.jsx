@@ -14,6 +14,7 @@ export async function fetchUser(id) {
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
   // console.log(session.user);
+  if (!session) return;
   const user = await fetchUser(session.user.id);
   // console.log(user);
   return (

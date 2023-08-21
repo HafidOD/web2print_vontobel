@@ -20,7 +20,7 @@ export default function ProductList({ product }) {
           alt={product.nameProduct}
         />
         <div className="min-w-0 flex-auto">
-          <p className="text-xs md:text-sm font-semibold leading-6 text-gray-900 leading-tight">
+          <p className="text-xs md:text-sm font-semibold text-gray-900 leading-tight">
             {product.nameProduct}
           </p>
           <p className="mt-1 truncate text-xs leading-5 text-gray-500">

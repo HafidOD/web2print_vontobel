@@ -44,12 +44,12 @@ export async function POST(req) {
       // text: `Detalles del pedido:\n\n${JSON.stringify(items)}`,
     };
 
-    // const info = await transporter.sendMail(mailOptions);
-    // console.log("Email sent: " + info.response);
-    // return NextResponse.json(
-    //   { message: "email enviado", sale: sale },
-    //   { status: 200 }
-    // );
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent: " + info.response);
+    return NextResponse.json(
+      { message: "email enviado", sale: sale },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error sending email:", error);
     return NextResponse.json({ message: "error", error }, { status: 500 });
