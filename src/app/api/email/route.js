@@ -9,10 +9,11 @@ export async function POST(req) {
     const totalSale = items.items.reduce((total, item) => {
       return total + item.total;
     }, 0);
-    console.log(items.items[0].enterpriseId);
+    // console.log(items.user.id);
+    // console.log(items.items[0].enterpriseId);
     const sale = await prisma.sale.create({
       data: {
-        userId: items.userId,
+        userId: items.user.id,
         totalSale: totalSale,
         data: JSON.stringify(items),
         address: JSON.stringify(items.address),
@@ -37,13 +38,14 @@ export async function POST(req) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "hafid@tachuela.mx, lili@tachuela.mx, rocio@tachuela.mx",
+      // to: `${items.user.email}, hafid@tachuela.mx, lili@tachuela.mx, rocio@tachuela.mx`,
+      to: `hafid@tachuela.mx, lili@tachuela.mx, rocio@tachuela.mx`,
       cc: "hola@tachuela.mx",
       subject: "test de envio de correo",
       html: emailContent,
       // text: `Detalles del pedido:\n\n${JSON.stringify(items)}`,
     };
-
+    // console.log(mailOptions);
     const info = await transporter.sendMail(mailOptions);
     console.log("Email sent: " + info.response);
     return NextResponse.json(
