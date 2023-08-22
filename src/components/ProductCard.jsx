@@ -65,10 +65,10 @@ export default function ProductCard({ product, typePrice, currency }) {
           </h4>
           <div>
             <p className="text-xs md:text-sm text-gray-500 leading-normal">
-              {product.unitsPackage} piezas por paquete
-            </p>
-            <p className="text-xs md:text-sm text-gray-500 leading-normal">
               ${priceProduct} {currency}
+            </p>
+            <p className="text-xs md:text-xs text-gray-500 leading-normal">
+              {product.unitsPackage} piezas por paquete
             </p>
           </div>
         </div>

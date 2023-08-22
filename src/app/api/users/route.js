@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
-import { Role } from "@prisma/client";
 
 export async function GET(request) {
   try {

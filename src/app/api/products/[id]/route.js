@@ -20,6 +20,24 @@ export async function GET(request, { params }) {
   }
 }
 
+export async function PUT(request, { params }) {
+  // cosnt updateData = await re
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id: parseInt(params.id),
+      },
+      data: await request.json(),
+    });
+    return NextResponse.json({ product }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal Error", error },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(request, { params }) {
   try {
     const productDeleted = await prisma.product.delete({

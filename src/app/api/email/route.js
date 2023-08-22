@@ -72,9 +72,9 @@ function generateEmailContent(items, totalSale, currentDate) {
   content += "<tbody>";
 
   items.items.forEach((producto) => {
-    content += `<tr><td style='padding:2px 10px'><img src=${process.env.NEXT_URL_BASE}${producto.imageProduct} width="100" alt=${producto.nameProduct}></td><td style='padding:2px 10px'>${producto.nameProduct}</td><td style='padding:2px 10px'>${producto.sku}</td><td style='padding:2px 10px'>${producto.price}</td><td style='padding:2px 10px'>${producto.quantity}</td><td style='padding:2px 10px'>${producto.total}</td><td style='padding:2px 10px'>${producto.currency}</td></tr>`;
+    content += `<tr><td style='padding:2px 10px'><img src=${process.env.NEXT_URL_BASE}${producto.imageProduct} width="100" alt=${producto.nameProduct}></td><td style='padding:2px 10px'>${producto.nameProduct}</td><td style='padding:2px 10px'>${producto.sku}</td><td style='padding:2px 10px'>${producto.price}</td><td style='padding:2px 10px'>${producto.quantity}</td><td style='padding:2px 10px'>$${producto.total}</td><td style='padding:2px 10px'>${producto.currency}</td></tr>`;
   });
-  content += `<tr><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'>Total:</td><td style='padding:2px 10px'>${totalSale} ${items.user.currency}</td></tr>`;
+  content += `<tr><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'>Total:</td><td style='padding:2px 10px'>$${totalSale} ${items.user.currency}</td></tr>`;
   // content += `<p>Total: ${totalSale} ${items.user.currency}</p>`;
 
   content += "</tbody></table>";
