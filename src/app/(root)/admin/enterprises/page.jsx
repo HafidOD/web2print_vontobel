@@ -1,0 +1,71 @@
+import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
+import { PlusSmallIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+
+const URL = process.env.NEXT_PUBLIC_API_URL;
+
+export async function fetchEnterprisesAdmin() {
+  const res = await fetch(`${URL}/enterprises/`);
+  const data = await res.json();
+  // console.log(data);
+
+  return data.enterprises;
+}
+export default async function AdminEnterprisesPage() {
+  const enterprises = await fetchEnterprisesAdmin();
+  // console.log(enterprises);
+
+  return (
+    <div className="w-full px-2 pt-8 m-auto md:w-3/5 sm:px-0">
+      <section className="flex justify-between">
+        <div>
+          <h2>Listado de empresas</h2>
+        </div>
+        <div>
+          <Link
+            href="/admin/enterprises/nuevo"
+            className="flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Nuevo
+            <PlusSmallIcon className="block w-5 h-5 ml-1" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+      <div className="p-4 mt-5 bg-white rounded-lg shadow-lg">
+        {enterprises.length === 0 && (
+          <p className="mb-2">Aun no hay empresas agregadas</p>
+        )}
+        <ul role="list" className="divide-y divide-gray-100">
+          {enterprises.map((enterprise) => (
+            <li
+              key={enterprise.id}
+              className="flex items-center justify-between py-2 gap-x-6"
+            >
+              <div className="flex items-center gap-x-4">
+                <img
+                  className="flex-none object-contain w-12 h-12 rounded-full"
+                  src={enterprise.logo}
+                  alt={enterprise.enterpriseName}
+                />
+                <div className="flex-auto min-w-0">
+                  <p className="text-xs font-semibold leading-tight text-gray-900 md:text-sm">
+                    {enterprise.enterpriseName}
+                  </p>
+                  {/* <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
+                    ${product.price} {product.currency}
+                  </p> */}
+                </div>
+              </div>
+              <div className="justify-center sm:flex sm:flex-col sm:items-end ">
+                <ButtonsActionAdmin
+                  itemURL={"enterprises"}
+                  id={enterprise.id}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}

@@ -11,7 +11,7 @@ import { signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Inicio", href: "/admin" },
-  { name: "Empresas", href: "/admin/empresas" },
+  { name: "Empresas", href: "/admin/enterprises" },
   { name: "Direcciones", href: "/admin/direcciones" },
   { name: "Usuarios", href: "/admin/usuarios" },
   { name: "Categorias", href: "/admin/categorias" },

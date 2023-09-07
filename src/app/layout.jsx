@@ -55,7 +55,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       {/* <userContext.Provider value={contextUserValue}> */}
-      <body className="min-h-screen bg-slate-100">
+      <body className="min-h-screen bg-slate-100 bg-[url('/images/fondo.png')] bg-no-repeat bg-left-bottom bg-[length:350px] bg-fixed">
         <ToastProvider />
         <Providers>{children}</Providers>
       </body>
