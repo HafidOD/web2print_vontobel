@@ -12,14 +12,33 @@ function AddressForm() {
     postalCode: null,
     enterpriseId: null,
   });
-  const options = ["Opción 1", "Opción 2", "Opción 3", "Opción 4"];
-  const [file, setFile] = useState(null);
+  // const options = ["Opción 1", "Opción 2", "Opción 3", "Opción 4"];
+  const [enterpriseOptions, setEnterpriseOptions] = useState([]);
+
   const form = useRef(null);
   const router = useRouter();
   const params = useParams();
 
+  useEffect(() => {
+    // Hacer una solicitud fetch para obtener las empresas
+    fetch("/api/enterprises")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.enterprises);
+        // Extraer los IDs de las empresas y establecerlos como opciones
+        const options = data.enterprises.map((enterprise) => ({
+          value: enterprise.id,
+          label: enterprise.enterpriseName, // Supongamos que el nombre de la empresa se llama 'name'
+        }));
+        setEnterpriseOptions(options);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las empresas:", error);
+      });
+  }, []);
+
   const handleChange = (e) => {
-    setProduct({
+    setAddress({
       ...address,
       [e.target.name]: e.target.value,
     });
@@ -49,16 +68,12 @@ function AddressForm() {
     formData.append("postalCode", address.postalCode);
     formData.append("enterpriseId", address.enterpriseId);
 
-    if (file) {
-      formData.append("image", file);
-    }
-
     if (!params.id) {
-      const res = await axios.post("/api/addresses", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const res = await fetch("/api/addresses", {
+        method: "POST",
+        body: formData,
       });
+      console.log(res);
     } else {
       const res = await axios.put("/api/products/" + params.id, formData, {
         headers: {
@@ -69,7 +84,7 @@ function AddressForm() {
 
     form.current.reset();
     router.refresh();
-    router.push("/products");
+    router.push("/admin/addresses/");
   };
 
   return (
@@ -96,13 +111,13 @@ function AddressForm() {
           />
 
           <label
-            htmlFor="name"
+            htmlFor="address"
             className="block my-2 text-sm font-bold text-gray-700"
           >
             Dirección:
           </label>
           <input
-            name="officeName"
+            name="address"
             type="text"
             onChange={handleChange}
             value={address.address}
@@ -110,13 +125,13 @@ function AddressForm() {
           />
 
           <label
-            htmlFor="name"
+            htmlFor="city"
             className="block my-2 text-sm font-bold text-gray-700"
           >
             Ciudad:
           </label>
           <input
-            name="ciudad"
+            name="city"
             type="text"
             onChange={handleChange}
             value={address.city}
@@ -161,29 +176,42 @@ function AddressForm() {
             name="postalCode"
             type="text"
             onChange={handleChange}
-            value={address.country}
+            value={address.postalCode}
             placeholder="77500"
             className="w-full px-3 py-2 border rounded shadow appearance-none"
           />
 
           <label
             htmlFor="users"
-            className="block mt-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-gray-700"
           >
             Empresa:
           </label>
-          {options.map((option, index) => (
+          <select
+            name="enterpriseId"
+            onChange={handleChange}
+            value={address.enterpriseId}
+            className="w-full px-3 py-2 border rounded shadow"
+          >
+            <option value="">Selecciona una empresa</option>
+            {enterpriseOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          {/* {enterpriseOptions.map((option, index) => (
             <label key={index} className="mr-5">
               <input
                 type="checkbox"
-                value={option}
+                value={option.value}
                 className="mr-1"
                 // checked={selectedOptions.includes(option)}
                 // onChange={handleCheckboxChange}
               />
-              {option}
+              {option.label}
             </label>
-          ))}
+          ))} */}
 
           <br />
 

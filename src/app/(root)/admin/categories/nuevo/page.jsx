@@ -2,9 +2,11 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-function UserForm() {
-  const [enterprise, setEnterprise] = useState({
-    enterpriseName: "",
+function CategoryForm() {
+  const [category, setCategory] = useState({
+    categoryName: "",
+    parentCategory: null,
+    enterprises: [],
   });
   const [file, setFile] = useState(null);
   const form = useRef(null);
@@ -12,8 +14,8 @@ function UserForm() {
   const params = useParams();
 
   const handleChange = (e) => {
-    setEnterprise({
-      ...enterprise,
+    setCategory({
+      ...category,
       [e.target.name]: e.target.value,
     });
   };
@@ -34,10 +36,12 @@ function UserForm() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("enterpriseName", enterprise.enterpriseName);
+    formData.append("categoryName", category.categoryName);
+    formData.append("parentCategory", category.parentCategory);
+    formData.append("enterprises", category.enterprises);
 
     if (file) {
-      formData.append("image", file);
+      formData.append("imageCategory", file);
     }
 
     if (!params.id) {
@@ -68,26 +72,58 @@ function UserForm() {
           ref={form}
         >
           <label
-            htmlFor="enterpriseName"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            htmlFor="categoryName"
+            className="block my-2 text-sm font-bold text-gray-700"
           >
-            Nombre de la empresa:
+            Nombre de la categoria:
           </label>
           <input
-            name="enterpriseName"
+            name="categoryName"
             type="text"
             // placeholder="Marr"
             onChange={handleChange}
-            value={enterprise.enterpriseName}
+            value={category.categoryName}
             className="w-full px-3 py-2 border rounded shadow appearance-none"
             autoFocus
           />
 
           <label
-            htmlFor="productImage"
+            htmlFor="categoryName"
             className="block my-2 text-sm font-bold text-gray-700"
           >
-            Logo:
+            Categoria padre:
+          </label>
+          <input
+            name="parentCategory"
+            type="text"
+            // placeholder="Marr"
+            onChange={handleChange}
+            value={category.parentCategory}
+            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            autoFocus
+          />
+
+          <label
+            htmlFor="enterprises"
+            className="block my-2 text-sm font-bold text-gray-700"
+          >
+            Empresas:
+          </label>
+          <input
+            name="parentCategory"
+            type="text"
+            // placeholder="Marr"
+            onChange={handleChange}
+            value={category.enterprises}
+            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            autoFocus
+          />
+
+          <label
+            htmlFor="imageCategory"
+            className="block my-2 text-sm font-bold text-gray-700"
+          >
+            Imagen:
           </label>
           <input
             type="file"
@@ -114,4 +150,4 @@ function UserForm() {
   );
 }
 
-export default UserForm;
+export default CategoryForm;

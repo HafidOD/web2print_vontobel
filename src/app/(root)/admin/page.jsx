@@ -8,19 +8,19 @@ export default function AdminPage() {
     },
     {
       name: "Direcciones",
-      href: "admin/direcciones",
+      href: "admin/addresses",
     },
     {
       name: "Usuarios",
-      href: "admin/usuarios",
+      href: "admin/users",
     },
     {
       name: "Categorias",
-      href: "admin/categorias",
+      href: "admin/categories",
     },
     {
       name: "Productos",
-      href: "admin/productos",
+      href: "admin/products",
     },
   ];
   return (
