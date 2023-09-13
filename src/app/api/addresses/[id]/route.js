@@ -23,13 +23,24 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
+    const data = await request.formData();
+    // console.log(data);
     const address = await prisma.address.update({
       where: {
         id: parseInt(params.id),
       },
-      data: await request.json(),
+      data: {
+        officeName: data.get('officeName'),
+        address: data.get('address'),
+        city: data.get('city'),
+        country: data.get('country'),
+        state: data.get('state'),
+        postalCode: parseInt(data.get('postalCode')),
+        enterpriseId: parseInt(data.get('enterpriseId'))
+      },
     });
 
+    // return NextResponse.json({ mensaje: "ok" }, { status: 200 });
     return NextResponse.json({ address }, { status: 200 });
   } catch (error) {
     return NextResponse.json(

@@ -1,3 +1,4 @@
+import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
 import {
   PencilSquareIcon,
   TrashIcon,
@@ -8,7 +9,7 @@ import Link from "next/link";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchCategoriesAdmin() {
-  const res = await fetch(`${URL}/categories/`);
+  const res = await fetch(`${URL}/categories/`, { cache: 'no-store' });
   const data = await res.json();
   // console.log(data);
 
@@ -40,7 +41,7 @@ export default async function AdminCategoriesPage() {
         <ul role="list" className="divide-y divide-gray-100">
           {categories.map((category) => (
             <li
-              key={categories.id}
+              key={category.id}
               className="flex items-center justify-between py-2 gap-x-6"
             >
               <div className="flex items-center gap-x-4">
@@ -59,21 +60,7 @@ export default async function AdminCategoriesPage() {
                 </div>
               </div>
               <div className="justify-center sm:flex sm:flex-col sm:items-end ">
-                <div className="flex">
-                  <div className="flex items-center justify-center ml-3 ">
-                    <button className="text-sm text-green-500">
-                      <PencilSquareIcon
-                        className="w-5 h-5"
-                        aria-hidden="true"
-                      />
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-center ml-3 ">
-                    <button className="text-sm text-red-600">
-                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
-                    </button>
-                  </div>
-                </div>
+                <ButtonsActionAdmin id={category.id} itemURL={'categories'}/>
               </div>
             </li>
           ))}

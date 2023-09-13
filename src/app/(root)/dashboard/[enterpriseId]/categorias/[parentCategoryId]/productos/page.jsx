@@ -4,7 +4,7 @@ import Link from "next/link";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchProducts() {
-  const res = await fetch(`${URL}/products`);
+  const res = await fetch(`${URL}/products`,{ cache: 'no-store' });
   const data = await res.json();
 
   return data.products;
@@ -16,7 +16,7 @@ export default async function ProductsPage() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
+      <div className="w-full px-2 py-5 m-auto space-y-5 md:w-2/5 sm:px-0">
         <div className="space-y-4">
           <h3 className="text-xl font-medium text-center text-blue-700">
             Selecciona los productos

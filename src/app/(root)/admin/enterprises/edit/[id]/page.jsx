@@ -2,14 +2,16 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-function EnterpriseForm() {
-  const [enterprise, setEnterprise] = useState({
+export default function EditEnterprisePage() {
+   const form = useRef(null);
+   const router = useRouter();
+   const params = useParams();
+
+   const [enterprise, setEnterprise] = useState({
     enterpriseName: "",
+    old_logo: ""
   });
   const [file, setFile] = useState(null);
-  const form = useRef(null);
-  const router = useRouter();
-  const params = useParams();
 
   const handleChange = (e) => {
     setEnterprise({
@@ -18,35 +20,47 @@ function EnterpriseForm() {
     });
   };
 
+  useEffect(() => {
+    if (params.id) {
+      fetch("/api/enterprises/" + params.id)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.data);
+        setEnterprise({
+          enterpriseName: data.data.enterpriseName,
+          old_logo: data.data.logo
+        })
+        // console.log(enterprise.logo);
+      })
+      .catch((error) => {
+        console.error("Error al obtener le empresa:", error);
+      });
+    }
+  },[])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("enterpriseName", enterprise.enterpriseName);
+    formData.append("old_logo", enterprise.old_logo);
 
     if (file) {
       formData.append("logo", file);
     }
-
-    if (!params.id) {
-      const res = await fetch("/api/enterprises", {
-        method: "POST",
+    const res = await fetch(`/api/enterprises/${params.id}`, {
+        method: "PUT",
         body: formData,
         // headers: { "Content-type": "multipart/form-data" },
       });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
-
-    form.current.reset();
-    router.refresh();
-    router.push(`/admin/enterprises`);
-  };
-
+      // console.log(res);
+      if (res.ok){
+        form.current.reset();
+        router.refresh();
+        router.push(`/admin/enterprises`);
+      }
+  }
+  
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
       <div className="">
@@ -85,6 +99,13 @@ function EnterpriseForm() {
             }}
           />
 
+          {!file && (
+            <img
+              className="object-contain mx-auto my-4 w-96"
+              src={enterprise.old_logo}
+              alt=""
+            />
+          )}
           {file && (
             <img
               className="object-contain mx-auto my-4 w-96"
@@ -99,7 +120,5 @@ function EnterpriseForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }
-
-export default EnterpriseForm;

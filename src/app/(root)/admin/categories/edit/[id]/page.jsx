@@ -2,10 +2,11 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-function CategoryForm() {
+export default function EditCategoryPage() {
   const [category, setCategory] = useState({
     categoryName: "",
     parentCategory: null,
+    old_image: "",
     enterprises: [],
   });
   const [file, setFile] = useState(null);
@@ -36,8 +37,27 @@ function CategoryForm() {
       });
     }
   };
-
   useEffect(() => {
+    fetch("/api/categories/" + params.id)
+      .then((response) => response.json())
+      .then((data) => {
+        const enterprises = [];
+        data.category.enterprises.forEach(enterprise => {
+          enterprises.push(enterprise.id)
+        });
+        // console.log(data);
+        setCategory({
+          categoryName: data.category.categoryName,
+          parentCategory: data.category.parentCategory,
+          old_image: data.category.imageCategory,
+          enterprises: enterprises,
+        })
+        // console.log(enterprise.logo);
+      })
+      .catch((error) => {
+        console.error("Error al obtener le empresa:", error);
+      });
+
     fetch("/api/enterprises")
       .then((response) => response.json())
       .then((data) => {
@@ -61,30 +81,24 @@ function CategoryForm() {
     formData.append("categoryName", category.categoryName);
     formData.append("parentCategory", category.parentCategory);
     formData.append("enterprises", category.enterprises);
-
+    formData.append("old_image", category.old_image);
+    
     if (file) {
       formData.append("imageCategory", file);
     }
 
-    if (!params.id) {
-      const res = await fetch("/api/categories", {
-        method: "POST",
+      const res = await fetch(`/api/categories/${params.id}`, {
+        method: "PUT",
         body: formData,
-        // headers: { "Content-type": "multipart/form-data" },
       });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+    
+      if(res.ok) {
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/categories");
+        form.current.reset();
+        router.refresh();
+        router.push("/admin/categories");
+      }
   };
-
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
       <div className="">
@@ -141,8 +155,8 @@ function CategoryForm() {
                   name="enterprises"
                   type="checkbox"
                   value={option.value}
+                  // checked={category.enterprises.includes(option.value)}
                   onChange={handleChange}
-                  // checked={user.enterprises.includes(option.value)}
                 />
                 <span>{option.label}</span>
               </label>
@@ -162,7 +176,13 @@ function CategoryForm() {
               setFile(e.target.files[0]);
             }}
           />
-
+          {!file && (
+            <img
+              className="object-contain mx-auto my-4 w-96"
+              src={category.old_image}
+              alt=""
+            />
+          )}
           {file && (
             <img
               className="object-contain mx-auto my-4 w-96"
@@ -177,7 +197,5 @@ function CategoryForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }
-
-export default CategoryForm;

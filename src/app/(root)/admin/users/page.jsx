@@ -9,7 +9,7 @@ import Link from "next/link";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchUsersAdmin() {
-  const res = await fetch(`${URL}/users/`);
+  const res = await fetch(`${URL}/users/`, { cache: 'no-store' });
   const data = await res.json();
   // console.log(data);
 

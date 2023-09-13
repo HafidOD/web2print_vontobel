@@ -5,7 +5,7 @@ import Link from "next/link";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchEnterprisesAdmin() {
-  const res = await fetch(`${URL}/enterprises/`);
+  const res = await fetch(`${URL}/enterprises/`,{ cache: 'no-cache' });
   const data = await res.json();
   // console.log(data);
 

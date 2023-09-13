@@ -2,9 +2,14 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-function UserForm() {
+export default function EditUserpage() {
+  const form = useRef(null);
+  const router = useRouter();
+  const params = useParams();
+  // console.log(params);
   const [user, setUser] = useState({
     email: "",
+    old_password: "",
     password: "",
     telefono: "",
     userName: "",
@@ -15,23 +20,20 @@ function UserForm() {
     addresses: [],
   });
 
-  const form = useRef(null);
-  const router = useRouter();
-  const params = useParams();
-
   const [enterpriseOptions, setEnterpriseOptions] = useState([]);
   const [addressOptions, setAddressOptions] = useState([]);
 
   const handleChange = (e) => {
     // console.log(e.target.type);
     if (e.target.type === "checkbox") {
-      console.log(e.target.checked);
       if (e.target.checked) {
         setUser({
           ...user,
           [e.target.name]: [...user[e.target.name], e.target.value],
         });
+        // console.log(user.addresses);
       } else {
+        // console.log(e.target.name);
         setUser({
           ...user,
           [e.target.name]: user[e.target.name].filter((item) => item !== e.target.value),
@@ -47,9 +49,45 @@ function UserForm() {
     }
     // console.log(user);
   };
-
   useEffect(() => {
-    // Hacer una solicitud fetch para obtener las empresas
+    if (params.id) {
+      fetch("/api/users/" + params.id)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.data);
+        const enterprises = [];
+        data.data.enterprises.forEach(enterprise => {
+          enterprises.push(enterprise.id)
+        });
+        const addresses = [];
+        data.data.addresses.forEach(address => {
+          addresses.push(address.id)
+        });
+        // console.log(enterprises);
+        // console.log(addresses);
+        setUser({
+          email: data.data.email,
+          old_password: data.data.password,
+          telefono: data.data.telefono,
+          userName: data.data.userName,
+          // enterprises: enterprises,
+          enterprises: [],
+          role: data.data.role, //1:admin, 2:user
+          typePrice: data.data.typePrice, //1:local, 2:nacional, 3:extrangero
+          currency: data.data.currency, //MXN, USD
+          // addresses: addresses,
+          addresses: [],
+        })
+      })
+      .catch((error) => {
+        console.error("Error al obtener le usuario:", error);
+      });
+
+      // console.log(typeof(user.addresses));
+      // console.log(user.addresses);
+      // console.log(typeof(addressOptions));
+      // console.log(addressOptions);
+    }
     fetch("/api/enterprises")
       .then((response) => response.json())
       .then((data) => {
@@ -57,7 +95,7 @@ function UserForm() {
         // Extraer los IDs de las empresas y establecerlos como opciones
         const options = data.enterprises.map((enterprise) => ({
           value: enterprise.id,
-          label: enterprise.enterpriseName, // Supongamos que el nombre de la empresa se llama 'name'
+          label: enterprise.enterpriseName,
         }));
         setEnterpriseOptions(options);
       })
@@ -73,21 +111,20 @@ function UserForm() {
         // Mapear los datos de las direcciones para obtener opciones
         const options = data.addresses.map((address) => ({
           value: address.id,
-          label: address.officeName, // Supongamos que el nombre de la dirección se llama 'name'
+          label: address.officeName,
         }));
         setAddressOptions(options);
       })
       .catch((error) => {
         console.error("Error al obtener las direcciones:", error);
       });
-  }, []);
-
-  const handleSubmit = async (e) => {
+  }, [params.id]);
+const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("email", user.email);
-    formData.append("password", user.password);
+    // formData.append("password", user.password);
     formData.append("telefono", user.telefono);
     formData.append("userName", user.userName);
     formData.append("enterprises", user.enterprises);
@@ -95,25 +132,27 @@ function UserForm() {
     formData.append("typePrice", user.typePrice);
     formData.append("currency", user.currency);
     formData.append("addresses", user.addresses);
+    // console.log(user.password == null);
+    if (user.password == null || user.password == '') {
+      // console.log("contra vacia");
+    // Usar el valor antiguo de la contraseña
+    formData.append("old_password", user.old_password);
+  } else {
+    formData.append("new_password", user.password);
+  }
 
-    if (!params.id) {
-      const res = await fetch("/api/users", {
-        method: "POST",
+      const res = await fetch(`/api/users/${params.id}`, {
+        method: "PUT",
         body: formData,
       });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/users");
-  };
+      if(res.ok)  {
 
+        form.current.reset();
+        router.refresh();
+        router.push("/admin/users");
+      }
+  }
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
       <div className="">
@@ -189,6 +228,7 @@ function UserForm() {
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (
+              
               <label key={option.value} className="flex items-center space-x-2">
                 <input
                   name="enterprises"
@@ -273,6 +313,7 @@ function UserForm() {
                   value={option.value}
                   onChange={handleChange}
                   // checked={user.addresses.includes(option.value)}
+                  // checked={user.addresses.indexOf(option.value) !== -1}
                 />
                 <span>{option.label}</span>
               </label>
@@ -285,7 +326,5 @@ function UserForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }
-
-export default UserForm;

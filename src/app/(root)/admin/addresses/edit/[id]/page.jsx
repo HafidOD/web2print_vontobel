@@ -2,8 +2,8 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-function AddressForm() {
-  const [address, setAddress] = useState({
+export default function EditAddressPage() {
+   const [address, setAddress] = useState({
     officeName: "",
     address: "",
     city: "",
@@ -20,6 +20,25 @@ function AddressForm() {
 
   useEffect(() => {
     // Hacer una solicitud fetch para obtener las empresas
+    fetch("/api/addresses/" + params.id)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.data);
+        setAddress({
+          officeName: data.address.officeName,
+          address: data.address.address,
+          city: data.address.city,
+          country: data.address.country,
+          state: data.address.state,
+          postalCode: data.address.postalCode,
+          enterpriseId: data.address.enterpriseId,
+        })
+        // console.log(enterprise.logo);
+      })
+      .catch((error) => {
+        console.error("Error al obtener le empresa:", error);
+      });
+
     fetch("/api/enterprises")
       .then((response) => response.json())
       .then((data) => {
@@ -43,18 +62,6 @@ function AddressForm() {
     });
   };
 
-  // useEffect(() => {
-  //   if (params.id) {
-  //     axios.get("/api/adresses/" + params.id).then((res) => {
-  //       setProduct({
-  //         name: res.data.name,
-  //         price: res.data.price,
-  //         description: res.data.description,
-  //       });
-  //     });
-  //   }
-  // }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -67,25 +74,18 @@ function AddressForm() {
     formData.append("postalCode", address.postalCode);
     formData.append("enterpriseId", address.enterpriseId);
 
-    if (!params.id) {
-      const res = await fetch("/api/addresses", {
-        method: "POST",
+      const res = await fetch(`/api/addresses/${params.id}`, {
+        method: "PUT",
         body: formData,
       });
-      console.log(res);
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+      // console.log(res);
+      if(res.ok) {
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/addresses/");
+        form.current.reset();
+        router.refresh();
+        router.push("/admin/addresses/");
+      }
   };
-
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
       <div className="">
@@ -199,18 +199,6 @@ function AddressForm() {
               </option>
             ))}
           </select>
-          {/* {enterpriseOptions.map((option, index) => (
-            <label key={index} className="mr-5">
-              <input
-                type="checkbox"
-                value={option.value}
-                className="mr-1"
-                // checked={selectedOptions.includes(option)}
-                // onChange={handleCheckboxChange}
-              />
-              {option.label}
-            </label>
-          ))} */}
 
           <br />
 
@@ -220,7 +208,5 @@ function AddressForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }
-
-export default AddressForm;

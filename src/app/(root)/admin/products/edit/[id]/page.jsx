@@ -2,11 +2,11 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-function ProductForm() {
+export default function EditProductPage() {
   const [product, setProduct] = useState({
     sku: "",
     nameProduct: "",
-    imageProduct: "",
+    old_imageProduct: "",
     priceLocal: null,
     priceNacional: null,
     priceExt: null,
@@ -24,7 +24,6 @@ function ProductForm() {
 
   const [categoryOptions, setCategryOptions] = useState([]);
   const [enterpriseOptions, setEnterpriseOptions] = useState([]);
-
   const handleChange = (e) => {
     if (e.target.type === "checkbox") {
       console.log(e.target.checked);
@@ -48,8 +47,41 @@ function ProductForm() {
       });
     }
   };
-
   useEffect(() => {
+    fetch(`/api/products/${params.id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // Extraer los IDs de las empresas y establecerlos como opciones
+        const categories = [];
+        data.product.categories.forEach(category => {
+          categories.push(category.id)
+        });
+        setProduct({
+          sku: data.product.sku,
+          nameProduct: data.product.nameProduct,
+          old_imageProduct: data.product.imageProduct,
+          priceLocal: data.product.priceLocal,
+          priceNacional: data.product.priceNacional,
+          priceExt: data.product.priceExt,
+          descriptionProduct: data.product.descriptionProduct,
+          stockProduct: data.product.stockProduct,
+          unitsPackage: data.product.unitsPackage,
+          published: data.product.published,
+          enterpriseId: data.product.enterpriseId,
+          categories: categories,
+
+          // UPDATE `User` SET `password` = '$2a$12$mm75a9HEcagLhHJwDcRrBeEIaFhWMkZa1b8CXczhpvTfdLVZNzT4W' WHERE `User`.`id` = 1
+        })
+        // const options = data.enterprises.map((enterprise) => ({
+        //   value: enterprise.id,
+        //   label: enterprise.enterpriseName, // Supongamos que el nombre de la empresa se llama 'name'
+        // }));
+        // setEnterpriseOptions(options);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las empresas:", error);
+      });
     fetch("/api/enterprises")
       .then((response) => response.json())
       .then((data) => {
@@ -81,7 +113,6 @@ function ProductForm() {
       });
 
   }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -98,30 +129,24 @@ function ProductForm() {
     formData.append("published", product.published);
     formData.append("enterpriseId", product.enterpriseId);
     formData.append("categories", product.categories);
+    formData.append("old_image", product.old_imageProduct);
 
     if (file) {
       formData.append("imageProduct", file);
     }
 
-    if (!params.id) {
-      const res = await fetch("/api/products", {
-        method: "POST",
+      const res = await fetch(`/api/products/${params.id}`, {
+        method: "PUT",
         body: formData,
-        // headers: { "Content-type": "multipart/form-data" },
       });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/products/");
+      if(res.ok){
+
+        form.current.reset();
+        router.refresh();
+        router.push("/admin/products/");
+      }
   };
-
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
       <div className="">
@@ -314,7 +339,13 @@ function ProductForm() {
               setFile(e.target.files[0]);
             }}
           />
-
+          {!file && (
+            <img
+              className="object-contain mx-auto my-4 w-96"
+              src={product.old_imageProduct}
+              alt=""
+            />
+          )}
           {file && (
             <img
               className="object-contain mx-auto my-4 w-96"
@@ -329,7 +360,5 @@ function ProductForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }
-
-export default ProductForm;

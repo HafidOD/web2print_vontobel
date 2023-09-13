@@ -49,18 +49,21 @@ export default function ThankyouPage() {
             ¡Gracias por tu solicitud!
           </h1>
           <p className="text-center">
-            Te enviaremos una confirmación por correo electrónico en breve.
+            Te enviaremos una confirmación por correo electrónico para un seguimiento personalizado con un asesor.
           </p>
           <p className="text-center">
             <b>Tu ID de pedido es: {saleId}</b>
+          </p>
+          <p className="text-center">
+            Dudas: marriott@gruporegio.mx
           </p>
           <Link
             href="/dashboard"
             // onClick={remove}
             className="inline-flex items-center px-4 py-2 text-white bg-blue-700 border border-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring"
           >
-            <ArrowLeftIcon className="h-4 w-4 mr-2" aria-hidden="true" />
-            <span className="text-md font-medium">Inicio</span>
+            <ArrowLeftIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+            <span className="font-medium text-md">Inicio</span>
           </Link>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { writeFile } from "fs/promises";
+import path from "path";
 import prisma from "@/libs/prisma";
 
 export async function GET(request, { params }) {
@@ -20,22 +22,30 @@ export async function GET(request, { params }) {
 
 export async function POST(request) {
   try {
-    const { enterprises, ...newCategory } = await request.json();
-    const connect = enterprises.reduce((arr, item) => {
-      arr.push({ id: item });
-      return arr;
-    }, []);
+    const data = await request.formData();
+    const imageCategory = data.get('imageCategory');
+    // console.log(imageCategory);
+    if (imageCategory){
+      const bytes = await imageCategory.arrayBuffer()
+      const buffer = Buffer.from(bytes)
+
+      const logoPath = path.join(process.cwd(), 'public/images/categories', imageCategory.name)
+      await writeFile(logoPath, buffer)
+    }
+    const enterpriseIds = data.get('enterprises').split(",").map(id => ({ id: parseInt(id) }));
+    // console.log(enterpriseIds);
     const category = await prisma.category.create({
       data: {
-        categoryName: newCategory.categoryName,
-        imageCategory: newCategory.imageCategory,
-        parentCategory: newCategory.parentCategory,
+        categoryName: data.get('categoryName'),
+        imageCategory: `/images/categories/${imageCategory.name}`,
+        parentCategory: parseInt(data.get('parentCategory')),
         enterprises: {
-          connect: connect,
+          connect: enterpriseIds,
         },
       },
     });
 
+    // return NextResponse.json({ message: "ok" }, { status: 200 });
     return NextResponse.json({ category }, { status: 200 });
   } catch (error) {
     return NextResponse.json(

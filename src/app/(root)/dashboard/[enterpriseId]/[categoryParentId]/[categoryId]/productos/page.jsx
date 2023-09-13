@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
 export async function fetchProducts(id, parentId, categoryId) {
-  const res = await fetch(`${URL}/${id}/${parentId}/${categoryId}`);
+  const res = await fetch(`${URL}/${id}/${parentId}/${categoryId}`, {cache: "no-cache"});
   const data = await res.json();
   // console.log(data);
 
@@ -23,13 +23,13 @@ export default async function ProductPageCategory({ params }) {
   // console.log(params);
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
+      <div className="w-full px-2 py-5 m-auto space-y-5 md:w-2/5 sm:px-0">
         <div className="space-y-4">
           <h3 className="text-xl font-medium text-center text-blue-700">
             Selecciona los productos
           </h3>
           {products.length === 0 && (
-            <p className="py-6 px-4 bg-white rounded-lg">
+            <p className="px-4 py-6 bg-white rounded-lg">
               No hay productos disponibles
             </p>
           )}

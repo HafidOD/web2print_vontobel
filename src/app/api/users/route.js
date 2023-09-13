@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
+import bcrypt from "bcryptjs";
 
 export async function GET(request) {
   try {
@@ -22,30 +23,29 @@ export async function POST(request) {
   // const { ...user } = await request.json();
 
   try {
-    const { enterprises, addresses, ...newuser } = await request.json();
-    const connect = enterprises.reduce((arr, item) => {
-      arr.push({ id: item });
-      return arr;
-    }, []);
-    const connectAddress = addresses.reduce((arr, item) => {
-      arr.push({ id: item });
-      return arr;
-    }, []);
-    // console.log(connectAddress);
+    const data = await request.formData();
+    // console.log(data);
+    const enterpriseIds = data.get('enterprises').split(",").map(id => ({ id: parseInt(id) }));
+    const addressIds = data.get('addresses').split(",").map(id => ({ id: parseInt(id) }));
+    const password = await bcrypt.hash(data.get('password'), 10)
+
+    // console.log(enterpriseIds);
+    // console.log(addressIds);
+
     const user = await prisma.user.create({
       data: {
-        email: newuser.email,
-        password: newuser.password,
-        telefono: newuser.telefono,
-        userName: newuser.userName,
-        typePrice: newuser.typePrice,
-        role: newuser.role,
-        currency: newuser.currency,
+        email: data.get('email'),
+        password: data.get('password'),
+        telefono: data.get('telefono'),
+        userName: data.get('userName'),
+        typePrice: parseInt(data.get('typePrice')),
+        role: parseInt(data.get('role')),
+        currency: data.get('currency'),
         enterprises: {
-          connect: connect,
+          connect: enterpriseIds,
         },
         addresses: {
-          connect: connectAddress,
+          connect: addressIds,
         },
       },
     });

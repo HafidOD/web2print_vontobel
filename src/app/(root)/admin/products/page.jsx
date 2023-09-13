@@ -1,3 +1,4 @@
+import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
 import {
   PencilSquareIcon,
   TrashIcon,
@@ -8,7 +9,7 @@ import Link from "next/link";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchProductsAdmin() {
-  const res = await fetch(`${URL}/products/`);
+  const res = await fetch(`${URL}/products/`, { cache: 'no-store' });
   const data = await res.json();
   // console.log(data);
 
@@ -56,7 +57,7 @@ export default async function AdminProductsPage() {
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
                     Precio Local: ${product.priceLocal}, Precio Nacional: $
-                    {product.priceLocal}, Precio Extranjero: ${product.priceExt}
+                    {product.priceNacional}, Precio Extranjero: ${product.priceExt}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
                     Empresa: {product.enterpriseId}
@@ -77,21 +78,7 @@ export default async function AdminProductsPage() {
                 </div>
               </div>
               <div className="justify-center sm:flex sm:flex-col sm:items-end ">
-                <div className="flex justify-center">
-                  <div className="flex items-center justify-center ml-3 ">
-                    <button className="text-sm text-green-500">
-                      <PencilSquareIcon
-                        className="w-5 h-5"
-                        aria-hidden="true"
-                      />
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-center ml-3 ">
-                    <button className="text-sm text-red-600">
-                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
-                    </button>
-                  </div>
-                </div>
+                <ButtonsActionAdmin id={product.id} itemURL={"products"} />
               </div>
             </li>
           ))}

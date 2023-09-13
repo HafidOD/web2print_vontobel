@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
+import { writeFile } from "fs/promises";
+import path from "path";
 
 export async function GET(request) {
   try {
@@ -20,30 +22,41 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const { categories, ...newProduct } = await request.json();
+    const data = await request.formData();
+    console.log(data);
+    const imageProduct = data.get('imageProduct');
+    //  console.log(data);
+    if (imageProduct){
+      const bytes = await imageProduct.arrayBuffer()
+      const buffer = Buffer.from(bytes)
 
-    const connect = categories.reduce((arr, item) => {
-      arr.push({ id: item });
-      return arr;
-    }, []);
+      const logoPath = path.join(process.cwd(), 'public/images/products', imageProduct.name)
+      await writeFile(logoPath, buffer)
+    }
+    const categoriesIds = data.get('categories').split(",").map(id => ({ id: parseInt(id) }));
+    const booleanValue = data.get("published") === "true";
+    // console.log(booleanValue);
+    console.log();
+  
     const product = await prisma.product.create({
       data: {
-        sku: newProduct.sku,
-        nameProduct: newProduct.nameProduct,
-        imageProduct: newProduct.imageProduct,
-        priceLocal: newProduct.priceLocal,
-        priceNacional: newProduct.priceNacional,
-        priceExt: newProduct.priceExt,
-        descriptionProduct: newProduct.descriptionProduct,
-        stockProduct: newProduct.stockProduct,
-        unitsPackage: newProduct.unitsPackage,
-        published: newProduct.published,
-        enterpriseId: newProduct.enterpriseId,
+        sku: data.get('sku'),
+        nameProduct: data.get('nameProduct'),
+        imageProduct: `/images/products/${imageProduct.name}`,
+        priceLocal: parseInt(data.get('priceLocal')),
+        priceNacional: parseInt(data.get('priceNacional')),
+        priceExt: parseInt(data.get('priceExt')),
+        descriptionProduct: data.get('descriptionProduct'),
+        stockProduct: parseInt(data.get('stockProduct')),
+        unitsPackage: parseInt(data.get('unitsPackage')),
+        published: booleanValue,
+        enterpriseId: parseInt(data.get('enterpriseId')),
         categories: {
-          connect: connect,
+          connect: categoriesIds,
         },
       },
     });
+    return NextResponse.json({ mensaje: "ok" }, { status: 200 });
     return NextResponse.json({ product }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
