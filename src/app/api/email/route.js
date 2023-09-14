@@ -39,8 +39,8 @@ export async function POST(req) {
     const mailOptions = {
       from: process.env.SMTP_USER,
       // to: `${items.user.email}, hafid@tachuela.mx, lili@tachuela.mx, rocio@tachuela.mx`,
-      to: `hafid@tachuela.mx, lili@tachuela.mx, rocio@tachuela.mx`,
-      cc: "hola@tachuela.mx",
+      to: `hafid@tachuela.mx, lili@tachuela.mx, Fgarzag@gruporegio.mx`,
+      cc: "Jorge.cabral@marriott.com, paloma.berumen@marriott.com",
       subject: "test de envio de correo",
       html: emailContent,
       // text: `Detalles del pedido:\n\n${JSON.stringify(items)}`,
