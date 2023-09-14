@@ -61,8 +61,7 @@ export async function POST(request) {
         .end(buffer);
     });
     }
-    console.log(res.secure_url);
-    // const { ...newEnterprise } = await request.json();
+    // console.log(res.secure_url);
     const enterprise = await prisma.enterprise.create({
       data: {
         enterpriseName: data.get('enterpriseName'),
