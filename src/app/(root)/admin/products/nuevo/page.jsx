@@ -188,7 +188,7 @@ function ProductForm() {
             htmlFor="priceExt"
             className="block my-2 text-sm font-bold text-gray-700"
           >
-            Precio Extrangero:
+            Precio Extranjero:
           </label>
           <input
             name="priceExt"
