@@ -23,7 +23,7 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const data = await request.formData();
-    console.log(data);
+    // console.log(data);
     const imageProduct = data.get('imageProduct');
     //  console.log(data);
     if (imageProduct){
@@ -36,7 +36,6 @@ export async function POST(request) {
     const categoriesIds = data.get('categories').split(",").map(id => ({ id: parseInt(id) }));
     const booleanValue = data.get("published") === "true";
     // console.log(booleanValue);
-    console.log();
   
     const product = await prisma.product.create({
       data: {
@@ -56,9 +55,10 @@ export async function POST(request) {
         },
       },
     });
-    return NextResponse.json({ mensaje: "ok" }, { status: 200 });
+    // return NextResponse.json({ mensaje: "ok" }, { status: 200 });
     return NextResponse.json({ product }, { status: 200 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { message: "Internal Error", error },
       { status: 500 }

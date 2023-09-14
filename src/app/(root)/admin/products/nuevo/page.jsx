@@ -103,23 +103,19 @@ function ProductForm() {
       formData.append("imageProduct", file);
     }
 
-    if (!params.id) {
       const res = await fetch("/api/products", {
         method: "POST",
         body: formData,
         // headers: { "Content-type": "multipart/form-data" },
       });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+      console.log(res);
+      if(res.ok) {
+        form.current.reset();
+        router.refresh();
+        router.push("/admin/products/");
+      }
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/products/");
+    
   };
 
   return (
