@@ -33,7 +33,7 @@ export default function ThankyouPage() {
         <div className="flex flex-col items-center space-y-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="text-blue-700 w-28 h-28"
+            className="text-primaryBlue w-28 h-28"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -45,25 +45,26 @@ export default function ThankyouPage() {
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <h1 className="text-4xl font-bold text-center">
+          <h1 className="text-4xl font-bold text-center text-primaryBlue">
             ¡Gracias por tu solicitud!
           </h1>
-          <p className="text-center">
-            Te enviaremos una confirmación por correo electrónico para un seguimiento personalizado con un asesor.
+          <p className="text-center text-gray-600">
+            Te enviaremos una confirmación por correo electrónico para un
+            seguimiento personalizado con un asesor.
           </p>
-          <p className="text-center">
+          <p className="text-center text-primaryBlue">
             <b>Tu ID de pedido es: {saleId}</b>
           </p>
-          <p className="text-center">
+          <p className="text-center text-gray-600">
             Dudas: marriott@gruporegio.mx
           </p>
           <Link
             href="/dashboard"
             // onClick={remove}
-            className="inline-flex items-center px-4 py-2 text-white bg-blue-700 border border-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring"
+            className="inline-flex items-center px-4 py-2 text-white rounded-full bg-primaryBlue "
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-            <span className="font-medium text-md">Inicio</span>
+            <span className="font-bold text-md">Inicio</span>
           </Link>
         </div>
       </div>

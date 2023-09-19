@@ -37,11 +37,12 @@ function ProductForm() {
       } else {
         setProduct({
           ...product,
-          [e.target.name]: product[e.target.name].filter((item) => item !== e.target.value),
+          [e.target.name]: product[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
         });
       }
     } else {
-
       setProduct({
         ...product,
         [e.target.name]: e.target.value,
@@ -65,7 +66,7 @@ function ProductForm() {
         console.error("Error al obtener las empresas:", error);
       });
 
-      fetch("/api/categories")
+    fetch("/api/categories")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data.enterprises);
@@ -79,7 +80,6 @@ function ProductForm() {
       .catch((error) => {
         console.error("Error al obtener las categorias:", error);
       });
-
   }, []);
 
   const handleSubmit = async (e) => {
@@ -103,19 +103,17 @@ function ProductForm() {
       formData.append("imageProduct", file);
     }
 
-      const res = await fetch("/api/products", {
-        method: "POST",
-        body: formData,
-        // headers: { "Content-type": "multipart/form-data" },
-      });
-      console.log(res);
-      if(res.ok) {
-        form.current.reset();
-        router.refresh();
-        router.push("/admin/products/");
-      }
-
-    
+    const res = await fetch("/api/products", {
+      method: "POST",
+      body: formData,
+      // headers: { "Content-type": "multipart/form-data" },
+    });
+    console.log(res);
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push("/admin/products/");
+    }
   };
 
   return (
@@ -128,7 +126,7 @@ function ProductForm() {
         >
           <label
             htmlFor="nameProduct"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-primaryBlue"
           >
             Nombre del producto:
           </label>
@@ -138,13 +136,13 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.nameProduct}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
             autoFocus
           />
 
           <label
             htmlFor="priceLocal"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             SKU:
           </label>
@@ -154,11 +152,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.sku}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="priceLocal"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Precio local:
           </label>
@@ -168,11 +166,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.priceLocal}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="priceNacional"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Precio Nacional:
           </label>
@@ -182,11 +180,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.priceNacional}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="priceExt"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Precio Extranjero:
           </label>
@@ -196,11 +194,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.priceExt}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="descriptionProduct"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Descripción del producto:
           </label>
@@ -210,11 +208,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.descriptionProduct}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="stockProduct"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Stock:
           </label>
@@ -224,11 +222,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.stockProduct}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="unitsPackage"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Unidades por paquete:
           </label>
@@ -238,11 +236,11 @@ function ProductForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.unitsPackage}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="published"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Visibilidad:
           </label>
@@ -251,7 +249,7 @@ function ProductForm() {
             name="published"
             onChange={handleChange}
             value={product.published}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="true">Publicado</option>
             <option value="false">Borrador</option>
@@ -259,7 +257,7 @@ function ProductForm() {
 
           <label
             htmlFor="enterpriseId"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Empresa:
           </label>
@@ -267,7 +265,7 @@ function ProductForm() {
             name="enterpriseId"
             onChange={handleChange}
             value={product.enterpriseId}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona una empresa</option>
             {enterpriseOptions.map((option) => (
@@ -278,7 +276,7 @@ function ProductForm() {
           </select>
           <label
             htmlFor="categories"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Categoria:
           </label>
@@ -299,13 +297,13 @@ function ProductForm() {
 
           <label
             htmlFor="productImage"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Imagen:
           </label>
           <input
             type="file"
-            className="w-full px-3 py-2 mb-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 mb-2 border shadow appearance-none"
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
@@ -319,7 +317,7 @@ function ProductForm() {
             />
           )}
 
-          <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

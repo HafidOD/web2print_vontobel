@@ -24,7 +24,7 @@ function classNames(...classes) {
 
 export default function NavbarAdmin() {
   return (
-    <Disclosure as="nav" className="bg-blue-700">
+    <Disclosure as="nav" className="bg-primaryBlue">
       {({ open }) => (
         <>
           <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -80,7 +80,7 @@ export default function NavbarAdmin() {
                   <button
                     onClick={() => signOut()}
                     type="button"
-                    className="p-1 text-blue-700 bg-white rounded-full focus:outline-none"
+                    className="p-1 bg-white rounded-full text-primaryBlue focus:outline-none"
                   >
                     <ArrowRightOnRectangleIcon
                       className="w-6 h-6"

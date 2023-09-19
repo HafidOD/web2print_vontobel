@@ -5,7 +5,7 @@ import Link from "next/link";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchEnterprisesAdmin() {
-  const res = await fetch(`${URL}/enterprises/`,{ cache: 'no-cache' });
+  const res = await fetch(`${URL}/enterprises/`, { cache: "no-cache" });
   const data = await res.json();
   // console.log(data);
 
@@ -18,13 +18,15 @@ export default async function AdminEnterprisesPage() {
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-3/5 sm:px-0">
       <section className="flex justify-between">
-        <div>
-          <h2>Listado de empresas</h2>
+        <div className="mb-8">
+          <h3 className="text-xl font-bold text-center text-primaryBlue">
+            Propiedades
+          </h3>
         </div>
         <div>
           <Link
             href="/admin/enterprises/nuevo"
-            className="flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="flex text-white bg-primaryBlue font-medium rounded-lg text-sm px-5 py-2.5 text-center "
           >
             Nuevo
             <PlusSmallIcon className="block w-5 h-5 ml-1" aria-hidden="true" />
@@ -48,7 +50,7 @@ export default async function AdminEnterprisesPage() {
                   alt={enterprise.enterpriseName}
                 />
                 <div className="flex-auto min-w-0">
-                  <p className="text-xs font-semibold leading-tight text-gray-900 md:text-sm">
+                  <p className="text-xs font-semibold leading-tight text-primaryBlue md:text-sm">
                     {enterprise.enterpriseName}
                   </p>
                   {/* <p className="mt-1 text-xs leading-5 text-gray-500 truncate">

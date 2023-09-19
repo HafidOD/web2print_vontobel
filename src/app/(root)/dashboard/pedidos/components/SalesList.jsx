@@ -20,48 +20,48 @@ export default function SalesList({ sale, address }) {
     <li className="py-3">
       <Link href={`/dashboard/pedidos/${sale.id}`}>
         <div className="md:grid md:grid-cols-6">
-          <div className="col-span-1 flex items-center justify-center">
+          <div className="flex items-center justify-center col-span-1">
             <div className="">
               <ClipboardDocumentCheckIcon
-                className="inline-block h-6 w-6 mx-3 text-green-600"
+                className="inline-block w-6 h-6 mx-3 text-green-600"
                 aria-hidden="true"
               />
             </div>
             <div>
               <p className="text-xs"># Pedido</p>
-              <p className="text-sm leading-6 text-gray-900 text-center">
+              <p className="text-sm leading-6 text-center text-primaryBlue">
                 <b>{sale.id}</b>
               </p>
             </div>
           </div>
-          <div className="p-2 col-span-3">
+          <div className="col-span-3 p-2">
             <p className="text-xs text-center md:text-start">Oficina</p>
-            <p className="text-sm font-semibold leading-6 text-gray-900 text-center md:text-start">
+            <p className="text-sm font-semibold leading-6 text-center text-primaryBlue md:text-start">
               {address.officeName}
             </p>
           </div>
-          <div className="col-span-2 flex justify-evenly items-center">
+          <div className="flex items-center col-span-2 justify-evenly">
             <div className="p-2">
               <p className="text-xs text-center">Fecha</p>
-              <p className="mt-1 truncate text-xs leading-5 text-gray-500 text-center">
+              <p className="mt-1 text-xs leading-5 text-center text-gray-500 truncate">
                 {fecha}
               </p>
             </div>
             <div className="p-2">
               <p className="text-xs text-center">Items</p>
-              <p className="mt-1 truncate text-xs leading-5 text-gray-500 text-center">
+              <p className="mt-1 text-xs leading-5 text-center text-gray-500 truncate">
                 {totalItems}
               </p>
             </div>
             <div className="p-2">
               <p className="text-xs text-center">Total</p>
-              <p className="mt-1 truncate text-xs leading-5 text-gray-500 text-center">
+              <p className="mt-1 text-xs leading-5 text-center text-gray-500 truncate">
                 ${sale.totalSale} {currency}
               </p>
             </div>
             <div className="">
               <ChevronRightIcon
-                className="inline-block h-4 w-4 mx-3 text-gray-400"
+                className="inline-block w-4 h-4 mx-3 text-gray-400"
                 aria-hidden="true"
               />
             </div>

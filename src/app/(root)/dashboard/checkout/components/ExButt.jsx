@@ -44,8 +44,8 @@ export default function ExButt({ user }) {
     <button
       // href={`/dashboard/thankyou`}
       onClick={handleClick}
-      style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}
-      className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      style={{ backgroundColor: `${loading ? "#ccc" : "#193761"}` }}
+      className="w-full text-white bg-primaryBlue font-bold rounded-lg text-md px-5 py-2.5 text-center"
       disabled={loading}
     >
       {loading ? "Relizando pedido..." : "Realizar pedido"}

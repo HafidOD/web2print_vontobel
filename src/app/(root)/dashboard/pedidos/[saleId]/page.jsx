@@ -14,7 +14,7 @@ export async function fetchSingleSales(saleId) {
 export default async function SingleSale({ params }) {
   // console.log(params.saleId);
   const sale = await fetchSingleSales(params.saleId);
-  console.log(sale);
+  // console.log(sale);
   const items = JSON.parse(sale.data);
   const address = JSON.parse(sale.address);
   const currency = items.items[0].currency;
@@ -24,27 +24,31 @@ export default async function SingleSale({ params }) {
   return (
     <div>
       <div>
-        <div className="flex justify-center flex-col md:flex-row m-4">
-          <div className="md:w-2/5 p-6 bg-white rounded-lg shadow-lg mb-4 mx-2 md:mb-0">
-            <h2 className="text-xl font-semibold mb-4">Resumen de Compra</h2>
+        <div className="flex flex-col justify-center m-4 md:flex-row">
+          <div className="p-6 mx-2 mb-4 bg-white rounded-lg shadow-lg md:w-2/5 md:mb-0">
+            <h2 className="mb-4 text-xl font-semibold text-center text-primaryBlue">
+              Resumen de Compra
+            </h2>
             <ul className="divide-y divide-gray-100">
               {/* <SummaryProducts></SummaryProducts> */}
               {items.items.map((item) => (
                 <ProductSale key={item.id} product={item}></ProductSale>
               ))}
             </ul>
-            <div className="border-t-2 border-t-gray-200 pt-2">
+            <div className="pt-2 border-t-2 border-t-gray-200">
               <p className="text-end">
                 Total: ${sale.totalSale} {currency}
               </p>
             </div>
           </div>
-          <div className="md:w-2/5 mx-2 p-6 rounded-lg bg-white shadow-lg align-middle">
-            <h2 className="text-xl font-semibold mb-4">Dirección de Envío</h2>
+          <div className="p-6 mx-2 align-middle bg-white rounded-lg shadow-lg md:w-2/5">
+            <h2 className="mb-4 text-xl font-semibold text-center text-primaryBlue">
+              Dirección de Envío
+            </h2>
             <AddressSale address={address}></AddressSale>
           </div>
         </div>
-        <div className="w-full md:w-1/5 px-2 m-auto py-5 space-y-5 sm:px-0">
+        <div className="w-full px-2 py-5 m-auto space-y-5 md:w-1/5 sm:px-0">
           <div className="flex justify-center mb-4">
             <ButtonPdf sale={sale} items={items} address={address}></ButtonPdf>
           </div>

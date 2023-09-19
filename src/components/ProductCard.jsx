@@ -45,7 +45,7 @@ export default function ProductCard({ product, typePrice, currency }) {
   // console.log(product[prices[typePrice]]);
 
   return (
-    <div className="w-full p-2 rounded-lg shadow-xl flex items-center justify-between my-3 bg-white">
+    <div className="flex items-center justify-between w-full p-2 my-3 bg-white rounded-lg shadow-xl">
       <div className="flex items-center">
         <img
           className="object-contain w-20 h-20 md:w-40 md:h-40"
@@ -59,26 +59,26 @@ export default function ProductCard({ product, typePrice, currency }) {
         width={40}
         height={40}
       /> */}
-        <div className="pl-4 flex flex-col justify-evenly">
-          <h4 className="text-sm md:text-lg font-semibold leading-tight text-blue-600 mb-2">
+        <div className="flex flex-col pl-4 justify-evenly">
+          <h4 className="mb-2 text-sm font-semibold leading-tight md:text-lg text-primaryBlue">
             {product.nameProduct}
           </h4>
           <div>
-            <p className="text-xs md:text-sm text-gray-500 leading-normal">
+            <p className="text-xs leading-normal text-secondGray md:text-sm">
               ${priceProduct} {currency}
             </p>
-            <p className="text-xs md:text-xs text-gray-500 leading-normal">
+            <p className="text-xs leading-normal text-secondGray md:text-xs">
               {product.unitsPackage} piezas por paquete
             </p>
           </div>
         </div>
       </div>
       {/* <ButtonProduct></ButtonProduct> */}
-      <div className="pl-3 flex flex-col justify-center">
+      <div className="flex flex-col justify-center pl-3">
         <div className="flex">
-          <button className="text-sm text-blue-700">
+          <button className="text-sm text-primaryBlue">
             <MinusCircleIcon
-              className="h-6 w-6 "
+              className="w-6 h-6 "
               aria-hidden="true"
               onClick={minusCounter}
             />
@@ -86,22 +86,22 @@ export default function ProductCard({ product, typePrice, currency }) {
           <div>
             <input
               type="number"
-              className="w-12 text-xs px-4 py-2 md:py-4 md:text-base outline-none"
+              className="w-12 px-4 py-2 text-xs font-bold outline-none md:py-4 md:text-base text-primaryBlue"
               value={counter}
               readOnly
             />
           </div>
-          <button className="text-sm text-blue-700">
+          <button className="text-sm text-primaryBlue">
             <PlusCircleIcon
-              className="h-6 w-6"
+              className="w-6 h-6"
               aria-hidden="true"
               onClick={plusCounter}
             />
           </button>
         </div>
-        <div className="pt-2 md:pt-4 w-full flex justify-center">
+        <div className="flex justify-center w-full pt-2 md:pt-4">
           <button
-            className="px-4 py-2 text-xs md:text-sm text-blue-100 bg-blue-700 rounded shadow"
+            className="px-4 py-2 text-xs text-blue-100 rounded shadow bg-primaryBlue md:text-sm"
             onClick={onAddToCart}
           >
             Agregar

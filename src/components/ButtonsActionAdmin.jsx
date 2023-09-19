@@ -23,12 +23,15 @@ export default function ButtonsActionAdmin({ itemURL, id }) {
   return (
     <div className="flex">
       <div className="flex items-center justify-center ml-3 ">
-        <a href={`/admin/${itemURL}/edit/${id}`} className="text-sm text-green-500">
+        <a
+          href={`/admin/${itemURL}/edit/${id}`}
+          className="text-sm text-secondGray"
+        >
           <PencilSquareIcon className="w-5 h-5" aria-hidden="true" />
         </a>
       </div>
       <div className="flex items-center justify-center ml-3 ">
-        <button className="text-sm text-red-600" onClick={remove}>
+        <button className="text-sm text-red-700" onClick={remove}>
           <TrashIcon className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>

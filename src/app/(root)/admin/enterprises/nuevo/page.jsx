@@ -57,7 +57,7 @@ function EnterpriseForm() {
         >
           <label
             htmlFor="enterpriseName"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-primaryBlue"
           >
             Nombre de la empresa:
           </label>
@@ -67,19 +67,19 @@ function EnterpriseForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={enterprise.enterpriseName}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none "
             autoFocus
           />
 
           <label
             htmlFor="productImage"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Logo:
           </label>
           <input
             type="file"
-            className="w-full px-3 py-2 mb-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 mb-2 border shadow appearance-none"
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
@@ -93,7 +93,7 @@ function EnterpriseForm() {
             />
           )}
 
-          <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

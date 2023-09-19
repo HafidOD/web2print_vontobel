@@ -30,26 +30,26 @@ export default function Navbar() {
   }
 
   return (
-    <Disclosure as="nav" className="bg-blue-700">
+    <Disclosure as="nav" className="bg-primaryBlue">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
+          <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white focus:outline-none">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none">
                   <span className="sr-only">
                     <Menu></Menu>
                   </span>
                   {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
                   ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon className="block w-6 h-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+              <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+                <div className="flex items-center flex-shrink-0">
                   <Link href="/dashboard/">
                     <Image
                       className=""
@@ -85,19 +85,19 @@ export default function Navbar() {
                 <IconCart></IconCart>
                 {/* <div className="relative ml-3">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       ></img>
                 </div> */}
-                <div className="relative ml-3 flex justify-center">
+                <div className="relative flex justify-center ml-3">
                   <button
                     onClick={logout}
                     type="button"
-                    className="rounded-full bg-white p-1 text-blue-700 focus:outline-none"
+                    className="p-1 text-[#193761] bg-white rounded-full focus:outline-none"
                   >
                     <ArrowRightOnRectangleIcon
-                      className="h-6 w-6"
+                      className="w-6 h-6"
                       aria-hidden="true"
                     />
                   </button>
@@ -107,7 +107,7 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}

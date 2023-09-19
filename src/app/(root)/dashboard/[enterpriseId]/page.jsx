@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 const URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchEnterprises(id) {
-  const res = await fetch(`${URL}/enterprises/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${URL}/enterprises/${id}`, { cache: "no-store" });
   const data = await res.json();
   // console.log(data);
 
@@ -25,7 +25,7 @@ export default async function EnterprisePage({ params }) {
       <div className="w-full px-2 py-5 m-auto space-y-5 md:w-2/5 sm:px-0">
         <div>
           <div className="space-y-4">
-            <h3 className="text-xl font-medium text-center text-blue-700">
+            <h3 className="text-xl font-medium text-center text-primaryBlue">
               ¿Qué deseas realizar hoy?
             </h3>
 
@@ -41,7 +41,7 @@ export default async function EnterprisePage({ params }) {
             </Link> */}
 
             <Link
-              className="block w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="block w-full text-white bg-primaryBlue hover:bg-primaryBlue focus:ring-4 font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center"
               href={`${params.enterpriseId}/2`}
             >
               <TruckIcon

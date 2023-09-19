@@ -11,19 +11,19 @@ export default function ProductList({ product }) {
   return (
     <li
       key={product.id}
-      className="flex justify-between items-center gap-x-6 py-2"
+      className="flex items-center justify-between py-2 gap-x-6"
     >
       <div className="flex items-center gap-x-4">
         <img
-          className="object-contain h-12 w-12 flex-none rounded-full"
+          className="flex-none object-contain w-12 h-12 rounded-full"
           src={product.imageProduct}
           alt={product.nameProduct}
         />
-        <div className="min-w-0 flex-auto">
-          <p className="text-xs md:text-sm font-semibold text-gray-900 leading-tight">
+        <div className="flex-auto min-w-0">
+          <p className="text-xs font-semibold leading-tight md:text-sm text-primaryBlue">
             {product.nameProduct}
           </p>
-          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+          <p className="mt-1 text-xs leading-5 truncate text-secondGray">
             ${product.price} {product.currency}
           </p>
         </div>
@@ -34,14 +34,14 @@ export default function ProductList({ product }) {
             quantity={product.quantity}
             productId={product.id}
           ></ButtonCheckout>
-          <div className="flex justify-center items-center ml-3">
+          <div className="flex items-center justify-center ml-3">
             <p className="text-xs md:text-sm">
               ${product.quantity * product.price} {product.currency}
             </p>
           </div>
-          <div className="flex justify-center items-center ml-3 ">
-            <button className="text-sm text-red-600" onClick={onRemove}>
-              <TrashIcon className="h-5 w-5" aria-hidden="true" />
+          <div className="flex items-center justify-center ml-3 ">
+            <button className="text-sm text-red-800" onClick={onRemove}>
+              <TrashIcon className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
         </div>

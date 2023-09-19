@@ -21,7 +21,9 @@ export default function SummaryProducts() {
   return (
     <div>
       {items.length === 0 && (
-        <p className="mb-2">No hay productos en el carrito</p>
+        <p className="mb-2 text-md text-primaryBlue">
+          No hay productos en el carrito
+        </p>
       )}
       <ul role="list" className="divide-y divide-gray-100">
         {items.map((product) => (
@@ -32,7 +34,7 @@ export default function SummaryProducts() {
           ></SummaryListProducts>
         ))}
       </ul>
-      <div className="border-t-2 border-t-gray-200 pt-2">
+      <div className="pt-2 border-t-2 border-t-gray-200">
         <p className="text-end">
           Total: ${totalPrice} {items[0].currency}
         </p>

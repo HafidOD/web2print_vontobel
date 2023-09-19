@@ -29,14 +29,20 @@ export default async function AddressPage({ params }) {
 
   // console.log(addresses);
   return (
-    <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
-      <div>page seleccion de direcciones</div>
-      <div className="rounded-lg shadow-lg mt-5 bg-white">
+    <div className="w-full px-2 py-5 m-auto space-y-5 md:w-2/5 sm:px-0">
+      <div>
+        <h3 className="text-xl font-bold text-center text-primaryBlue">
+          Selecciona la dirección de envio
+        </h3>
+      </div>
+      <div className="mt-5 bg-white rounded-lg shadow-lg">
         {addresses.length === 0 && (
-          <p className="py-6">No hay direcciones disponibles</p>
+          <p className="py-6 font-bold text-center text-primaryBlue">
+            No hay direcciones disponibles
+          </p>
         )}
 
-        <ul role="list" className="divide-y divide-gray-100 px-3">
+        <ul role="list" className="px-3 divide-y divide-gray-100">
           {addresses.map((address) => (
             <AddressCard key={address.id} address={address}></AddressCard>
           ))}
@@ -45,7 +51,7 @@ export default async function AddressPage({ params }) {
       <div className="flex justify-center">
         <Link
           href={`/dashboard/checkout`}
-          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="w-full text-white bg-primaryBlue rounded-lg text-md px-5 py-2.5 text-center font-bold"
         >
           Finalizar pedido
         </Link>

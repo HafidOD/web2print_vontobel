@@ -36,11 +36,11 @@ export default function ButtonCheckout({ quantity, productId }) {
   // };
 
   return (
-    <div className="pl-3 flex flex-col justify-center">
-      <div className=" flex">
-        <button className="text-sm text-blue-700">
+    <div className="flex flex-col justify-center pl-3">
+      <div className="flex ">
+        <button className="text-sm text-primaryBlue">
           <MinusCircleIcon
-            className="h-6 w-6 "
+            className="w-6 h-6 "
             aria-hidden="true"
             onClick={minusCounter}
           />
@@ -48,14 +48,14 @@ export default function ButtonCheckout({ quantity, productId }) {
         <div className="">
           <input
             type="number"
-            className="w-12 text-xs px-4 py-2 md:py-4 md:text-base outline-none"
+            className="w-12 px-4 py-2 text-xs font-bold outline-none md:py-4 md:text-base text-primaryBlue"
             value={counter}
             readOnly
           />
         </div>
-        <button className="text-sm text-blue-700">
+        <button className="text-sm text-primaryBlue">
           <PlusCircleIcon
-            className="h-6 w-6"
+            className="w-6 h-6"
             aria-hidden="true"
             onClick={plusCounter}
           />

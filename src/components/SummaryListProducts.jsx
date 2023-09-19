@@ -3,29 +3,29 @@ export default function SummaryCheckout({ product }) {
   return (
     <li
       key={product.id}
-      className="flex justify-between items-center gap-x-6 py-2"
+      className="flex items-center justify-between py-2 gap-x-6"
     >
       <div className="flex items-center gap-x-4">
         <img
-          className="object-contain h-12 w-12 flex-none rounded-full"
+          className="flex-none object-contain w-12 h-12 rounded-full"
           src={product.imageProduct}
           alt={product.nameProduct}
         />
-        <div className="min-w-0 flex-auto">
-          <p className="text-xs md:text-sm font-semibold text-gray-900 leading-tight">
+        <div className="flex-auto min-w-0">
+          <p className="text-xs font-semibold leading-tight md:text-sm text-primaryBlue">
             {product.nameProduct}
           </p>
-          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+          <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
             ${product.price} {product.currency}
           </p>
         </div>
       </div>
       <div className="justify-center sm:flex sm:flex-col sm:items-end ">
         <div className="flex">
-          <div className="pl-3 flex flex-col justify-center">
+          <div className="flex flex-col justify-center pl-3">
             <p className="text-xs md:text-sm">x {product.quantity}</p>
           </div>
-          <div className="flex justify-center items-center ml-3">
+          <div className="flex items-center justify-center ml-3">
             <p className="text-xs md:text-sm">
               ${product.quantity * product.price} {product.currency}
             </p>

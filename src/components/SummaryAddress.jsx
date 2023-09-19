@@ -21,22 +21,22 @@ export default function SummaryAddress() {
   return (
     <div>
       {Object.keys(address).length === 0 ? (
-        <p className="">No haz seleccionado dirección</p>
+        <p className=" text-primaryBlue">No haz seleccionado dirección</p>
       ) : (
         <div>
-          <p>
+          <p className=" text-primaryBlue">
             <b>Empresa:</b> {address.officeName}
           </p>
-          <p>
+          <p className=" text-primaryBlue">
             <b>Dirección:</b> {address.address}, CP.{address.postalCode}.
           </p>
-          <p>
+          <p className=" text-primaryBlue">
             <b>Ciudad:</b> {address.city}.
           </p>
-          <p>
+          <p className=" text-primaryBlue">
             <b>Estado:</b> {address.state}.
           </p>
-          <p>
+          <p className=" text-primaryBlue">
             <b>País:</b> {address.country}.
           </p>
         </div>

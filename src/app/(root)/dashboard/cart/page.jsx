@@ -22,9 +22,13 @@ export default function CheckoutPage({ params }) {
 
   // console.log(totalPrice);
   return (
-    <div className="w-full md:w-2/5 px-2 m-auto py-5 space-y-5 sm:px-0">
-      <div>Resumen de compra</div>
-      <div className="rounded-lg shadow-lg mt-5 bg-white p-4">
+    <div className="w-full px-2 py-5 m-auto space-y-5 md:w-2/5 sm:px-0">
+      <div>
+        <h3 className="mb-4 text-xl font-bold text-center text-primaryBlue">
+          Resumen de compra
+        </h3>
+      </div>
+      <div className="p-4 mt-5 bg-white rounded-lg shadow-lg">
         {items.length === 0 && (
           <p className="mb-2">No hay productos en el carrito</p>
         )}
@@ -35,7 +39,7 @@ export default function CheckoutPage({ params }) {
           ))}
         </ul>
         {items.length !== 0 && (
-          <div className="border-t-2 border-t-gray-200 pt-2">
+          <div className="pt-2 border-t-2 border-t-gray-200">
             <p className="text-end">
               Total: ${totalPrice} {items[0].currency}
             </p>
@@ -47,7 +51,7 @@ export default function CheckoutPage({ params }) {
           <div className="flex justify-center mb-4">
             <Link
               href={`/dashboard/direccion`}
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="w-full text-white bg-primaryBlue font-bold rounded-lg text-md px-5 py-2.5 text-center"
             >
               Seleccionar dirección
             </Link>

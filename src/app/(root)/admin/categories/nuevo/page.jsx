@@ -26,7 +26,9 @@ function CategoryForm() {
       } else {
         setCategory({
           ...category,
-          [e.target.name]: category[e.target.name].filter((item) => item !== e.target.value),
+          [e.target.name]: category[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
         });
       }
     } else {
@@ -95,7 +97,7 @@ function CategoryForm() {
         >
           <label
             htmlFor="categoryName"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Nombre de la categoria:
           </label>
@@ -105,14 +107,14 @@ function CategoryForm() {
             // placeholder="Marr"
             onChange={handleChange}
             value={category.categoryName}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
             required
             autoFocus
           />
 
           <label
             htmlFor="categoryName"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Categoria padre:
           </label>
@@ -120,17 +122,17 @@ function CategoryForm() {
             name="parentCategory"
             onChange={handleChange}
             value={category.parentCategory}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona categoria padre</option>
 
             <option value="2">Inventarios</option>
-            <option value="1">Impresiones</option>
+            {/* <option value="1">Impresiones</option> */}
           </select>
 
           <label
             htmlFor="enterprises"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Empresas:
           </label>
@@ -151,13 +153,13 @@ function CategoryForm() {
 
           <label
             htmlFor="imageCategory"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Imagen:
           </label>
           <input
             type="file"
-            className="w-full px-3 py-2 mb-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 mb-2 border shadow appearance-none"
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
@@ -171,7 +173,7 @@ function CategoryForm() {
             />
           )}
 
-          <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

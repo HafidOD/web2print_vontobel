@@ -16,19 +16,19 @@ export default function AddressCard({ address }) {
   return (
     <li
       key={address.id}
-      className="flex justify-between gap-x-6 py-3 cursor-pointer"
+      className="flex justify-between py-3 cursor-pointer gap-x-6"
     >
       <label htmlFor={`address-${address.id}`} className="cursor-pointer">
         <div className="flex gap-x-4">
-          <div className="min-w-0 flex-auto">
-            <p className="text-sm font-semibold leading-6 text-gray-900">
+          <div className="flex-auto min-w-0">
+            <p className="text-sm font-semibold leading-6 text-primaryBlue">
               {address.officeName}
             </p>
-            <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+            <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
               {address.address}
             </p>
             {address.city && address.state && address.country ? (
-              <p className="truncate text-xs leading-5 text-gray-500">
+              <p className="text-xs leading-5 text-gray-500 truncate">
                 {address.city}, {address.state}, {address.country}
               </p>
             ) : null}
@@ -40,6 +40,7 @@ export default function AddressCard({ address }) {
         id={`address-${address.id}`}
         name="address"
         value={address.id}
+        className="text-white form-radio bg-primaryBlue border-primaryBlue"
         // checked={direccionSeleccionada === addresses.id}
         onChange={onAddAddress}
       />

@@ -17,14 +17,16 @@ export default async function pagePedidos() {
 
   const sales = await fetchSales(user.id);
   return (
-    <div className="w-full md:w-3/5 px-2 m-auto py-5 space-y-5 sm:px-0">
+    <div className="w-full px-2 py-5 m-auto space-y-5 md:w-3/5 sm:px-0">
       <div>
-        <p>Pedidos anteriores</p>
+        <h3 className="text-xl font-bold text-center text-primaryBlue">
+          Pedidos anteriores
+        </h3>
       </div>
-      <div className="rounded-lg shadow-lg mt-5 bg-white">
+      <div className="mt-5 bg-white rounded-lg shadow-lg">
         {sales.length === 0 && <p className="p-6">No hay Pedidos anteriores</p>}
 
-        <ul role="list" className="divide-y divide-gray-100 px-3">
+        <ul role="list" className="px-3 divide-y divide-gray-300">
           {sales.map((sale) => (
             <SalesList
               key={sale.id}

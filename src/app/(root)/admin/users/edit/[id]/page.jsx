@@ -36,12 +36,12 @@ export default function EditUserpage() {
         // console.log(e.target.name);
         setUser({
           ...user,
-          [e.target.name]: user[e.target.name].filter((item) => item !== e.target.value),
+          [e.target.name]: user[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
         });
       }
-    }
-    else {
-
+    } else {
       setUser({
         ...user,
         [e.target.name]: e.target.value,
@@ -52,36 +52,36 @@ export default function EditUserpage() {
   useEffect(() => {
     if (params.id) {
       fetch("/api/users/" + params.id)
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data.data);
-        const enterprises = [];
-        data.data.enterprises.forEach(enterprise => {
-          enterprises.push(enterprise.id)
-        });
-        const addresses = [];
-        data.data.addresses.forEach(address => {
-          addresses.push(address.id)
-        });
-        // console.log(enterprises);
-        // console.log(addresses);
-        setUser({
-          email: data.data.email,
-          old_password: data.data.password,
-          telefono: data.data.telefono,
-          userName: data.data.userName,
-          // enterprises: enterprises,
-          enterprises: [],
-          role: data.data.role, //1:admin, 2:user
-          typePrice: data.data.typePrice, //1:local, 2:nacional, 3:extrangero
-          currency: data.data.currency, //MXN, USD
-          // addresses: addresses,
-          addresses: [],
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data.data);
+          const enterprises = [];
+          data.data.enterprises.forEach((enterprise) => {
+            enterprises.push(enterprise.id);
+          });
+          const addresses = [];
+          data.data.addresses.forEach((address) => {
+            addresses.push(address.id);
+          });
+          // console.log(enterprises);
+          // console.log(addresses);
+          setUser({
+            email: data.data.email,
+            old_password: data.data.password,
+            telefono: data.data.telefono,
+            userName: data.data.userName,
+            // enterprises: enterprises,
+            enterprises: [],
+            role: data.data.role, //1:admin, 2:user
+            typePrice: data.data.typePrice, //1:local, 2:nacional, 3:extrangero
+            currency: data.data.currency, //MXN, USD
+            // addresses: addresses,
+            addresses: [],
+          });
         })
-      })
-      .catch((error) => {
-        console.error("Error al obtener le usuario:", error);
-      });
+        .catch((error) => {
+          console.error("Error al obtener le usuario:", error);
+        });
 
       // console.log(typeof(user.addresses));
       // console.log(user.addresses);
@@ -119,7 +119,7 @@ export default function EditUserpage() {
         console.error("Error al obtener las direcciones:", error);
       });
   }, [params.id]);
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -133,26 +133,25 @@ const handleSubmit = async (e) => {
     formData.append("currency", user.currency);
     formData.append("addresses", user.addresses);
     // console.log(user.password == null);
-    if (user.password == null || user.password == '') {
+    if (user.password == null || user.password == "") {
       // console.log("contra vacia");
-    // Usar el valor antiguo de la contraseña
-    formData.append("old_password", user.old_password);
-  } else {
-    formData.append("new_password", user.password);
-  }
+      // Usar el valor antiguo de la contraseña
+      formData.append("old_password", user.old_password);
+    } else {
+      formData.append("new_password", user.password);
+    }
 
-      const res = await fetch(`/api/users/${params.id}`, {
-        method: "PUT",
-        body: formData,
-      });
+    const res = await fetch(`/api/users/${params.id}`, {
+      method: "PUT",
+      body: formData,
+    });
 
-      if(res.ok)  {
-
-        form.current.reset();
-        router.refresh();
-        router.push("/admin/users");
-      }
-  }
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push("/admin/users");
+    }
+  };
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
       <div className="">
@@ -163,7 +162,7 @@ const handleSubmit = async (e) => {
         >
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-primaryBlue"
           >
             Email:
           </label>
@@ -173,13 +172,13 @@ const handleSubmit = async (e) => {
             placeholder="Correo electronico"
             onChange={handleChange}
             value={user.email}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
             required
             autoFocus
           />
           <label
             htmlFor="password"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Contraseña:
           </label>
@@ -189,11 +188,11 @@ const handleSubmit = async (e) => {
             placeholder="Contraseña"
             onChange={handleChange}
             value={user.password}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="telefono"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Telefono:
           </label>
@@ -203,11 +202,11 @@ const handleSubmit = async (e) => {
             placeholder="Telefono"
             onChange={handleChange}
             value={user.telefono}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="userName"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Nombre:
           </label>
@@ -217,18 +216,17 @@ const handleSubmit = async (e) => {
             placeholder="Nombre"
             onChange={handleChange}
             value={user.userName}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="enterprises"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Empresas:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (
-              
               <label key={option.value} className="flex items-center space-x-2">
                 <input
                   name="enterprises"
@@ -244,7 +242,7 @@ const handleSubmit = async (e) => {
 
           <label
             htmlFor="role"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Role:
           </label>
@@ -252,7 +250,7 @@ const handleSubmit = async (e) => {
             name="role"
             onChange={handleChange}
             value={user.role}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona tipo de usuario</option>
 
@@ -262,7 +260,7 @@ const handleSubmit = async (e) => {
 
           <label
             htmlFor="typePrice"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Ubicación del usuario:
           </label>
@@ -270,7 +268,7 @@ const handleSubmit = async (e) => {
             name="typePrice"
             onChange={handleChange}
             value={user.typePrice}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Seleccionar opción</option>
 
@@ -281,7 +279,7 @@ const handleSubmit = async (e) => {
 
           <label
             htmlFor="currency"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Divisa:
           </label>
@@ -289,7 +287,7 @@ const handleSubmit = async (e) => {
             name="currency"
             onChange={handleChange}
             value={user.currency}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
             required
           >
             <option value="">Seleccionar opción</option>
@@ -300,7 +298,7 @@ const handleSubmit = async (e) => {
 
           <label
             htmlFor="addresses"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Dirección:
           </label>
@@ -320,11 +318,11 @@ const handleSubmit = async (e) => {
             ))}
           </div>
 
-          <button className="px-4 py-2 mt-5 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-5 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }

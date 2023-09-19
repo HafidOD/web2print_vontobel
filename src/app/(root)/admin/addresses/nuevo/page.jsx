@@ -43,18 +43,6 @@ function AddressForm() {
     });
   };
 
-  // useEffect(() => {
-  //   if (params.id) {
-  //     axios.get("/api/adresses/" + params.id).then((res) => {
-  //       setProduct({
-  //         name: res.data.name,
-  //         price: res.data.price,
-  //         description: res.data.description,
-  //       });
-  //     });
-  //   }
-  // }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -96,7 +84,7 @@ function AddressForm() {
         >
           <label
             htmlFor="name"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-primaryBlue"
           >
             Nombre de la dirección:
           </label>
@@ -105,13 +93,13 @@ function AddressForm() {
             type="text"
             onChange={handleChange}
             value={address.officeName}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
             autoFocus
           />
 
           <label
             htmlFor="address"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Dirección:
           </label>
@@ -120,12 +108,12 @@ function AddressForm() {
             type="text"
             onChange={handleChange}
             value={address.address}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="city"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Ciudad:
           </label>
@@ -134,12 +122,12 @@ function AddressForm() {
             type="text"
             onChange={handleChange}
             value={address.city}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="country"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Estado:
           </label>
@@ -148,12 +136,12 @@ function AddressForm() {
             type="text"
             onChange={handleChange}
             value={address.state}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="country"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             País:
           </label>
@@ -162,12 +150,12 @@ function AddressForm() {
             type="text"
             onChange={handleChange}
             value={address.country}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="postalCode"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Codigo postal:
           </label>
@@ -177,12 +165,12 @@ function AddressForm() {
             onChange={handleChange}
             value={address.postalCode}
             placeholder="77500"
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="users"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Empresa:
           </label>
@@ -190,7 +178,7 @@ function AddressForm() {
             name="enterpriseId"
             onChange={handleChange}
             value={address.enterpriseId}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona una empresa</option>
             {enterpriseOptions.map((option) => (
@@ -199,22 +187,7 @@ function AddressForm() {
               </option>
             ))}
           </select>
-          {/* {enterpriseOptions.map((option, index) => (
-            <label key={index} className="mr-5">
-              <input
-                type="checkbox"
-                value={option.value}
-                className="mr-1"
-                // checked={selectedOptions.includes(option)}
-                // onChange={handleCheckboxChange}
-              />
-              {option.label}
-            </label>
-          ))} */}
-
-          <br />
-
-          <button className="px-4 py-2 mt-5 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

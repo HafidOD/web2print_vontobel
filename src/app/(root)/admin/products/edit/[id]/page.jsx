@@ -36,11 +36,12 @@ export default function EditProductPage() {
       } else {
         setProduct({
           ...product,
-          [e.target.name]: product[e.target.name].filter((item) => item !== e.target.value),
+          [e.target.name]: product[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
         });
       }
     } else {
-
       setProduct({
         ...product,
         [e.target.name]: e.target.value,
@@ -54,8 +55,8 @@ export default function EditProductPage() {
         console.log(data);
         // Extraer los IDs de las empresas y establecerlos como opciones
         const categories = [];
-        data.product.categories.forEach(category => {
-          categories.push(category.id)
+        data.product.categories.forEach((category) => {
+          categories.push(category.id);
         });
         setProduct({
           sku: data.product.sku,
@@ -72,7 +73,7 @@ export default function EditProductPage() {
           categories: categories,
 
           // UPDATE `User` SET `password` = '$2a$12$mm75a9HEcagLhHJwDcRrBeEIaFhWMkZa1b8CXczhpvTfdLVZNzT4W' WHERE `User`.`id` = 1
-        })
+        });
         // const options = data.enterprises.map((enterprise) => ({
         //   value: enterprise.id,
         //   label: enterprise.enterpriseName, // Supongamos que el nombre de la empresa se llama 'name'
@@ -97,7 +98,7 @@ export default function EditProductPage() {
         console.error("Error al obtener las empresas:", error);
       });
 
-      fetch("/api/categories")
+    fetch("/api/categories")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data.enterprises);
@@ -111,7 +112,6 @@ export default function EditProductPage() {
       .catch((error) => {
         console.error("Error al obtener las categorias:", error);
       });
-
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -135,17 +135,16 @@ export default function EditProductPage() {
       formData.append("imageProduct", file);
     }
 
-      const res = await fetch(`/api/products/${params.id}`, {
-        method: "PUT",
-        body: formData,
-      });
+    const res = await fetch(`/api/products/${params.id}`, {
+      method: "PUT",
+      body: formData,
+    });
 
-      if(res.ok){
-
-        form.current.reset();
-        router.refresh();
-        router.push("/admin/products/");
-      }
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push("/admin/products/");
+    }
   };
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
@@ -157,7 +156,7 @@ export default function EditProductPage() {
         >
           <label
             htmlFor="nameProduct"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-primaryBlue"
           >
             Nombre del producto:
           </label>
@@ -167,13 +166,13 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.nameProduct}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
             autoFocus
           />
 
           <label
             htmlFor="priceLocal"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             SKU:
           </label>
@@ -183,11 +182,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.sku}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="priceLocal"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Precio local:
           </label>
@@ -197,11 +196,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.priceLocal}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="priceNacional"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Precio Nacional:
           </label>
@@ -211,11 +210,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.priceNacional}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="priceExt"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Precio Extrangero:
           </label>
@@ -225,11 +224,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.priceExt}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="descriptionProduct"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Descripción del producto:
           </label>
@@ -239,11 +238,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.descriptionProduct}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="stockProduct"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Stock:
           </label>
@@ -253,11 +252,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.stockProduct}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="unitsPackage"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Unidades por paquete:
           </label>
@@ -267,11 +266,11 @@ export default function EditProductPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={product.unitsPackage}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="published"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Visibilidad:
           </label>
@@ -280,7 +279,7 @@ export default function EditProductPage() {
             name="published"
             onChange={handleChange}
             value={product.published}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="true">Publicado</option>
             <option value="false">Borrador</option>
@@ -288,7 +287,7 @@ export default function EditProductPage() {
 
           <label
             htmlFor="enterpriseId"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Empresa:
           </label>
@@ -296,7 +295,7 @@ export default function EditProductPage() {
             name="enterpriseId"
             onChange={handleChange}
             value={product.enterpriseId}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona una empresa</option>
             {enterpriseOptions.map((option) => (
@@ -307,7 +306,7 @@ export default function EditProductPage() {
           </select>
           <label
             htmlFor="categories"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Categoria:
           </label>
@@ -328,13 +327,13 @@ export default function EditProductPage() {
 
           <label
             htmlFor="productImage"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Imagen:
           </label>
           <input
             type="file"
-            className="w-full px-3 py-2 mb-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 mb-2 border shadow appearance-none"
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
@@ -354,11 +353,11 @@ export default function EditProductPage() {
             />
           )}
 
-          <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }

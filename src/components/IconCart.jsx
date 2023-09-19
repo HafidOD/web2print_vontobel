@@ -18,14 +18,14 @@ export default function IconCart() {
   return (
     <Link
       href={`/dashboard/cart`}
-      className="ml-4 flow-root lg:ml-6 bg-white rounded-full px-3 py-1"
+      className="flow-root px-3 py-1 ml-4 bg-white rounded-full lg:ml-6"
     >
-      <div className="group flex items-center">
+      <div className="flex items-center group">
         <ShoppingBagIcon
-          className="h-6 w-6 flex-shrink-0 text-blue-700"
+          className="flex-shrink-0 w-6 h-6 text-primaryBlue"
           aria-hidden="true"
         />
-        <span className="ml-2 text-sm font-medium text-blue-700">
+        <span className="ml-2 text-sm font-bold text-primaryBlue">
           {cart.items.length}
         </span>
         <span className="sr-only">Ir al carrito</span>

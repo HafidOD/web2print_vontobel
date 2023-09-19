@@ -34,12 +34,12 @@ function UserForm() {
       } else {
         setUser({
           ...user,
-          [e.target.name]: user[e.target.name].filter((item) => item !== e.target.value),
+          [e.target.name]: user[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
         });
       }
-    }
-    else {
-
+    } else {
       setUser({
         ...user,
         [e.target.name]: e.target.value,
@@ -124,7 +124,7 @@ function UserForm() {
         >
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-primaryBlue"
           >
             Email:
           </label>
@@ -134,13 +134,13 @@ function UserForm() {
             placeholder="Correo electronico"
             onChange={handleChange}
             value={user.email}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
             required
             autoFocus
           />
           <label
             htmlFor="password"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Contraseña:
           </label>
@@ -150,11 +150,11 @@ function UserForm() {
             placeholder="Contraseña"
             onChange={handleChange}
             value={user.password}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="telefono"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Telefono:
           </label>
@@ -164,11 +164,11 @@ function UserForm() {
             placeholder="Telefono"
             onChange={handleChange}
             value={user.telefono}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
           <label
             htmlFor="userName"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Nombre:
           </label>
@@ -178,12 +178,12 @@ function UserForm() {
             placeholder="Nombre"
             onChange={handleChange}
             value={user.userName}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 border shadow appearance-none"
           />
 
           <label
             htmlFor="enterprises"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Empresas:
           </label>
@@ -204,7 +204,7 @@ function UserForm() {
 
           <label
             htmlFor="role"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Role:
           </label>
@@ -212,7 +212,7 @@ function UserForm() {
             name="role"
             onChange={handleChange}
             value={user.role}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona tipo de usuario</option>
 
@@ -222,7 +222,7 @@ function UserForm() {
 
           <label
             htmlFor="typePrice"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Ubicación del usuario:
           </label>
@@ -230,7 +230,7 @@ function UserForm() {
             name="typePrice"
             onChange={handleChange}
             value={user.typePrice}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Seleccionar opción</option>
 
@@ -241,7 +241,7 @@ function UserForm() {
 
           <label
             htmlFor="currency"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Divisa:
           </label>
@@ -249,7 +249,7 @@ function UserForm() {
             name="currency"
             onChange={handleChange}
             value={user.currency}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
             required
           >
             <option value="">Seleccionar opción</option>
@@ -260,7 +260,7 @@ function UserForm() {
 
           <label
             htmlFor="addresses"
-            className="block my-2 text-sm font-bold text-gray-700"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Dirección:
           </label>
@@ -279,7 +279,7 @@ function UserForm() {
             ))}
           </div>
 
-          <button className="px-4 py-2 mt-5 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-5 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

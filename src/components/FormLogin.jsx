@@ -47,15 +47,15 @@ export default function FormLogin() {
   };
 
   return (
-    <div className="max-w-2xl w-full md:w-4/12">
+    <div className="w-full max-w-2xl ">
       <div className="w-full p-4 sm:p-6 lg:p-8">
         {error && (
-          <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
+          <p className="py-4 mb-6 text-center bg-red-300 rounded">{error}</p>
         )}
         <form className="space-y-6" onSubmit={onSubmit}>
-          <h3 className="text-xl font-medium text-center text-blue-700">
+          {/* <h3 className="text-xl font-medium text-center text-primaryBlue">
             Iniciar Sesión
-          </h3>
+          </h3> */}
           <div>
             {/* <label for="email" class="text-sm font-medium">Correo Electrónico</label> */}
             <input
@@ -64,8 +64,8 @@ export default function FormLogin() {
               id="email"
               value={formValues.email}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
-              placeholder="Correo Electrónico"
+              className="block w-full p-4 border border-primaryBlue bg-gray-50 sm:text-sm focus:outline-none placeholder:text-primaryBlue placeholder:font-bold"
+              placeholder="Correo electrónico"
               required={true}
             ></input>
           </div>
@@ -78,17 +78,23 @@ export default function FormLogin() {
               value={formValues.password}
               onChange={handleChange}
               placeholder="Contraseña"
-              className="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
+              className="block w-full p-4 border border-primaryBlue bg-gray-50 sm:text-sm focus:outline-none placeholder:text-primaryBlue placeholder:font-bold"
               required={true}
             ></input>
           </div>
           <button
             type="submit"
-            style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}
-            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            style={{ backgroundColor: `${loading ? "#ccc" : "#193761"}` }}
+            className="w-full text-white bg-[#193761] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-md px-5 py-2.5 text-center"
             disabled={loading}
           >
-            {loading ? "Autenticando..." : "Iniciar Sesión"}
+            {loading ? (
+              "Autenticando..."
+            ) : (
+              <span
+                dangerouslySetInnerHTML={{ __html: "<b>Iniciar</b> Sesión" }}
+              />
+            )}
           </button>
         </form>
       </div>

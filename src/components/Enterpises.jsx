@@ -15,17 +15,17 @@ export default function Enterpises({ enterprises }) {
             className="w-full"
             key={enterprise.id}
           >
-            <div className="w-full rounded-lg shadow-lg lg:max-w-sm bg-white">
+            <div className="w-full bg-white rounded-sm shadow-lg lg:max-w-sm">
               <img
                 className="object-contain w-full h-48"
                 src={enterprise.logo}
                 alt={enterprise.enterpriseName}
               />
-              {/* <div className="p-4">
-                <h4 className="text-xl font-semibold tracking-tight text-center text-blue-600">
-                  {enterprise.enterpriseName}
-                </h4>
-              </div> */}
+            </div>
+            <div className="p-3">
+              <h4 className="text-center text-md text-primaryBlue">
+                {enterprise.enterpriseName}
+              </h4>
             </div>
           </Link>
         );

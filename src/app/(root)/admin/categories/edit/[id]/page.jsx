@@ -27,7 +27,9 @@ export default function EditCategoryPage() {
       } else {
         setCategory({
           ...category,
-          [e.target.name]: category[e.target.name].filter((item) => item !== e.target.value),
+          [e.target.name]: category[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
         });
       }
     } else {
@@ -42,8 +44,8 @@ export default function EditCategoryPage() {
       .then((response) => response.json())
       .then((data) => {
         const enterprises = [];
-        data.category.enterprises.forEach(enterprise => {
-          enterprises.push(enterprise.id)
+        data.category.enterprises.forEach((enterprise) => {
+          enterprises.push(enterprise.id);
         });
         // console.log(data);
         setCategory({
@@ -51,7 +53,7 @@ export default function EditCategoryPage() {
           parentCategory: data.category.parentCategory,
           old_image: data.category.imageCategory,
           enterprises: enterprises,
-        })
+        });
         // console.log(enterprise.logo);
       })
       .catch((error) => {
@@ -82,22 +84,21 @@ export default function EditCategoryPage() {
     formData.append("parentCategory", category.parentCategory);
     formData.append("enterprises", category.enterprises);
     formData.append("old_image", category.old_image);
-    
+
     if (file) {
       formData.append("imageCategory", file);
     }
 
-      const res = await fetch(`/api/categories/${params.id}`, {
-        method: "PUT",
-        body: formData,
-      });
-    
-      if(res.ok) {
+    const res = await fetch(`/api/categories/${params.id}`, {
+      method: "PUT",
+      body: formData,
+    });
 
-        form.current.reset();
-        router.refresh();
-        router.push("/admin/categories");
-      }
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push("/admin/categories");
+    }
   };
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-2/5 sm:px-0">
@@ -119,7 +120,7 @@ export default function EditCategoryPage() {
             // placeholder="Marr"
             onChange={handleChange}
             value={category.categoryName}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 shadow appearance-none"
             required
             autoFocus
           />
@@ -134,12 +135,12 @@ export default function EditCategoryPage() {
             name="parentCategory"
             onChange={handleChange}
             value={category.parentCategory}
-            className="w-full px-3 py-2 border rounded shadow"
+            className="w-full px-3 py-2 border shadow"
           >
             <option value="">Selecciona categoria padre</option>
 
             <option value="2">Inventarios</option>
-            <option value="1">Impresiones</option>
+            {/* <option value="1">Impresiones</option> */}
           </select>
 
           <label
@@ -171,7 +172,7 @@ export default function EditCategoryPage() {
           </label>
           <input
             type="file"
-            className="w-full px-3 py-2 mb-2 border rounded shadow appearance-none"
+            className="w-full px-3 py-2 mb-2 border shadow appearance-none"
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
@@ -191,11 +192,11 @@ export default function EditCategoryPage() {
             />
           )}
 
-          <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }

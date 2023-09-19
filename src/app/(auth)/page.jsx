@@ -12,27 +12,39 @@ export default async function Home() {
     redirect("/dashboard");
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-evenly p-10 bg-gradient-to-b from-blue-700 from-1% via-white via-40% to-white to-100%">
-      <div className="">
-        <Image
-          className=""
-          src="/images/logos/Logo_web_2_print.png"
-          alt="Web 2 Print Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-      <FormLogin></FormLogin>
-      <div className="">
-        <Image
-          className=""
-          src="/images/logos/Logo_Regio_Tachuela.png"
-          alt="Web 2 Print Logo"
-          width={180}
-          height={37}
-          priority
-        />
+    <main className="flex-col items-center min-h-screen justify-evenly bg-[url('/images/layout/Triangulos.png')] bg-no-repeat bg-right-bottom bg-[length:350px] bg-fixed">
+      <div className="grid min-h-screen md:grid-cols-2 bg-[url('/images/layout/triangulo.png')] bg-no-repeat bg-left-top bg-[length:250px] bg-fixed">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-5xl font-light md:text-7xl text-primaryBlue">
+            Bienvenido
+          </h2>
+          <h2 className="text-5xl font-bold md:text-7xl text-primaryBlue lg:ml-[-200px]">
+            Welcome
+          </h2>
+        </div>
+        <div className="flex flex-col items-center justify-evenly lg:mr-40">
+          <div className="">
+            <Image
+              className=""
+              src="/web2print.svg"
+              alt="Web 2 Print Logo"
+              width={250}
+              height={100}
+              priority
+            />
+          </div>
+          <FormLogin></FormLogin>
+          <div className="">
+            <Image
+              className=""
+              src="/Logopowered.svg"
+              alt="Web 2 Print Logo"
+              width={180}
+              height={81}
+              priority
+            />
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 export default function AdminPage() {
   const list = [
     {
-      name: "Empresas",
+      name: "Propiedades",
       href: "admin/enterprises",
     },
     {
