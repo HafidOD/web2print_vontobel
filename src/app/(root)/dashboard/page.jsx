@@ -31,7 +31,7 @@ export default async function DashboardPage() {
           - Simplifica y controla tu inventario.
         </p>
       </section>
-      <section className="mt-16 md:mt-32">
+      <section className="mt-16 md:mt-20">
         <Enterpises enterprises={user.data.enterprises}></Enterpises>
       </section>
     </div>
