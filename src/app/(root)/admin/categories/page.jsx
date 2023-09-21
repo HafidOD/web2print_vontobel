@@ -23,7 +23,7 @@ export default async function AdminCategoriesPage() {
       <section className="flex justify-between">
         <div className="mb-4">
           <h3 className="text-xl font-bold text-center text-primaryBlue">
-            Categorias
+            Divisiones
           </h3>
         </div>
         <div>
