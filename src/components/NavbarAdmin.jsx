@@ -14,7 +14,7 @@ const navigation = [
   { name: "Propiedades", href: "/admin/enterprises" },
   { name: "Direcciones", href: "/admin/addresses" },
   { name: "Usuarios", href: "/admin/users" },
-  { name: "Categorias", href: "/admin/categories" },
+  { name: "División", href: "/admin/categories" },
   { name: "Productos", href: "/admin/products" },
 ];
 

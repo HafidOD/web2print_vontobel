@@ -44,21 +44,21 @@ export default async function AdminCategoriesPage() {
           {categories.map((category) => (
             <li
               key={category.id}
-              className="flex items-center justify-between py-2 gap-x-6"
+              className="flex items-center justify-between py-4 gap-x-6"
             >
               <div className="flex items-center gap-x-4">
-                <img
+                {/* <img
                   className="flex-none object-contain w-12 h-12 rounded-full"
                   src={category.imageCategory}
                   alt={category.categoryName}
-                />
+                /> */}
                 <div className="flex-auto min-w-0">
                   <p className="text-xs font-semibold leading-tight text-primaryBlue md:text-sm">
                     {category.categoryName}
                   </p>
-                  <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
+                  {/* <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
                     {category.parentCategory}
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="justify-center sm:flex sm:flex-col sm:items-end ">

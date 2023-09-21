@@ -105,6 +105,7 @@ export default function EditAddressPage() {
             onChange={handleChange}
             value={address.officeName}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
             autoFocus
           />
 
@@ -120,6 +121,7 @@ export default function EditAddressPage() {
             onChange={handleChange}
             value={address.address}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -134,6 +136,7 @@ export default function EditAddressPage() {
             onChange={handleChange}
             value={address.city}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -148,6 +151,7 @@ export default function EditAddressPage() {
             onChange={handleChange}
             value={address.state}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -162,6 +166,7 @@ export default function EditAddressPage() {
             onChange={handleChange}
             value={address.country}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -177,31 +182,30 @@ export default function EditAddressPage() {
             value={address.postalCode}
             placeholder="77500"
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
             htmlFor="users"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Empresa:
+            Propiedad:
           </label>
           <select
             name="enterpriseId"
             onChange={handleChange}
             value={address.enterpriseId}
             className="w-full px-3 py-2 border shadow"
+            required
           >
-            <option value="">Selecciona una empresa</option>
+            <option value="">Selecciona una propiedad</option>
             {enterpriseOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
-
-          <br />
-
-          <button className="px-4 py-2 mt-5 font-bold text-white bg-primaryBlue">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

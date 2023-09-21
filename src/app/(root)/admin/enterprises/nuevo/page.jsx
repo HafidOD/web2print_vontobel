@@ -59,7 +59,7 @@ function EnterpriseForm() {
             htmlFor="enterpriseName"
             className="block mb-2 text-sm font-bold text-primaryBlue"
           >
-            Nombre de la empresa:
+            Nombre de la propiedad:
           </label>
           <input
             name="enterpriseName"
@@ -69,6 +69,7 @@ function EnterpriseForm() {
             value={enterprise.enterpriseName}
             className="w-full px-3 py-2 border shadow appearance-none "
             autoFocus
+            required
           />
 
           <label
@@ -83,6 +84,7 @@ function EnterpriseForm() {
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
+            required
           />
 
           {file && (

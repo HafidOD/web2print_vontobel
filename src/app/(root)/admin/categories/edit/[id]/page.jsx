@@ -112,7 +112,7 @@ export default function EditCategoryPage() {
             htmlFor="categoryName"
             className="block my-2 text-sm font-bold text-gray-700"
           >
-            Nombre de la categoria:
+            Nombre de la división:
           </label>
           <input
             name="categoryName"
@@ -136,6 +136,7 @@ export default function EditCategoryPage() {
             onChange={handleChange}
             value={category.parentCategory}
             className="w-full px-3 py-2 border shadow"
+            required
           >
             <option value="">Selecciona categoria padre</option>
 
@@ -147,7 +148,7 @@ export default function EditCategoryPage() {
             htmlFor="enterprises"
             className="block my-2 text-sm font-bold text-gray-700"
           >
-            Empresas:
+            Propiedades:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (
@@ -164,7 +165,7 @@ export default function EditCategoryPage() {
             ))}
           </div>
 
-          <label
+          {/* <label
             htmlFor="imageCategory"
             className="block my-2 text-sm font-bold text-gray-700"
           >
@@ -190,9 +191,9 @@ export default function EditCategoryPage() {
               src={URL.createObjectURL(file)}
               alt=""
             />
-          )}
+          )} */}
 
-          <button className="px-4 py-2 font-bold text-white bg-primaryBlue">
+          <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>
         </form>

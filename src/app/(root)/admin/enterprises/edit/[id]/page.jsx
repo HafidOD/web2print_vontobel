@@ -73,7 +73,7 @@ export default function EditEnterprisePage() {
             htmlFor="enterpriseName"
             className="block mb-2 text-sm font-bold text-primaryBlue"
           >
-            Nombre de la empresa:
+            Nombre de la propiedad:
           </label>
           <input
             name="enterpriseName"
@@ -83,6 +83,7 @@ export default function EditEnterprisePage() {
             value={enterprise.enterpriseName}
             className="w-full px-3 py-2 border shadow appearance-none"
             autoFocus
+            required
           />
 
           <label

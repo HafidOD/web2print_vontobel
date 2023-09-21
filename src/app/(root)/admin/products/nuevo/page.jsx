@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 function ProductForm() {
   const [product, setProduct] = useState({
@@ -106,13 +107,17 @@ function ProductForm() {
     const res = await fetch("/api/products", {
       method: "POST",
       body: formData,
-      // headers: { "Content-type": "multipart/form-data" },
     });
-    console.log(res);
+    // console.log(res);
     if (res.ok) {
       form.current.reset();
       router.refresh();
       router.push("/admin/products/");
+    }
+    if (res.status == 400) {
+      toast.error("El SKU ya esta asignado a otro producto");
+    } else {
+      toast.error("A ocurrido un error, por favor, reportelo");
     }
   };
 
@@ -145,6 +150,10 @@ function ProductForm() {
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
             SKU:
+            <i className="font-light">
+              <span className="text-red-700"> *</span> El sku tiene que ser
+              unico
+            </i>
           </label>
           <input
             name="sku"
@@ -153,6 +162,7 @@ function ProductForm() {
             onChange={handleChange}
             value={product.sku}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="priceLocal"
@@ -167,6 +177,7 @@ function ProductForm() {
             onChange={handleChange}
             value={product.priceLocal}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="priceNacional"
@@ -223,6 +234,7 @@ function ProductForm() {
             onChange={handleChange}
             value={product.stockProduct}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="unitsPackage"
@@ -237,6 +249,7 @@ function ProductForm() {
             onChange={handleChange}
             value={product.unitsPackage}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="published"
@@ -250,6 +263,7 @@ function ProductForm() {
             onChange={handleChange}
             value={product.published}
             className="w-full px-3 py-2 border shadow"
+            required
           >
             <option value="true">Publicado</option>
             <option value="false">Borrador</option>
@@ -259,15 +273,16 @@ function ProductForm() {
             htmlFor="enterpriseId"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Empresa:
+            Propiedad:
           </label>
           <select
             name="enterpriseId"
             onChange={handleChange}
             value={product.enterpriseId}
             className="w-full px-3 py-2 border shadow"
+            required
           >
-            <option value="">Selecciona una empresa</option>
+            <option value="">Selecciona una propiedad</option>
             {enterpriseOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -278,7 +293,7 @@ function ProductForm() {
             htmlFor="categories"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Categoria:
+            División:
           </label>
           <div className="flex flex-col space-y-2">
             {categoryOptions.map((option) => (
@@ -307,6 +322,7 @@ function ProductForm() {
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
+            required
           />
 
           {file && (

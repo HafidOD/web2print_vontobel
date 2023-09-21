@@ -94,6 +94,7 @@ function AddressForm() {
             onChange={handleChange}
             value={address.officeName}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
             autoFocus
           />
 
@@ -109,6 +110,7 @@ function AddressForm() {
             onChange={handleChange}
             value={address.address}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -123,6 +125,7 @@ function AddressForm() {
             onChange={handleChange}
             value={address.city}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -137,6 +140,7 @@ function AddressForm() {
             onChange={handleChange}
             value={address.state}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -151,6 +155,7 @@ function AddressForm() {
             onChange={handleChange}
             value={address.country}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
@@ -166,21 +171,23 @@ function AddressForm() {
             value={address.postalCode}
             placeholder="77500"
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
 
           <label
             htmlFor="users"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Empresa:
+            Propiedad:
           </label>
           <select
             name="enterpriseId"
             onChange={handleChange}
             value={address.enterpriseId}
             className="w-full px-3 py-2 border shadow"
+            required
           >
-            <option value="">Selecciona una empresa</option>
+            <option value="">Selecciona una propiedad</option>
             {enterpriseOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}

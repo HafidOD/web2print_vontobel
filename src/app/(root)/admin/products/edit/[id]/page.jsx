@@ -168,6 +168,7 @@ export default function EditProductPage() {
             value={product.nameProduct}
             className="w-full px-3 py-2 border shadow appearance-none"
             autoFocus
+            required
           />
 
           <label
@@ -175,6 +176,10 @@ export default function EditProductPage() {
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
             SKU:
+            <i className="font-light">
+              <span className="text-red-700"> *</span> El sku tiene que ser
+              unico
+            </i>
           </label>
           <input
             name="sku"
@@ -183,6 +188,7 @@ export default function EditProductPage() {
             onChange={handleChange}
             value={product.sku}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="priceLocal"
@@ -197,6 +203,7 @@ export default function EditProductPage() {
             onChange={handleChange}
             value={product.priceLocal}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="priceNacional"
@@ -253,6 +260,7 @@ export default function EditProductPage() {
             onChange={handleChange}
             value={product.stockProduct}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="unitsPackage"
@@ -267,6 +275,7 @@ export default function EditProductPage() {
             onChange={handleChange}
             value={product.unitsPackage}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="published"
@@ -280,6 +289,7 @@ export default function EditProductPage() {
             onChange={handleChange}
             value={product.published}
             className="w-full px-3 py-2 border shadow"
+            required
           >
             <option value="true">Publicado</option>
             <option value="false">Borrador</option>
@@ -289,15 +299,16 @@ export default function EditProductPage() {
             htmlFor="enterpriseId"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Empresa:
+            Propiedad:
           </label>
           <select
             name="enterpriseId"
             onChange={handleChange}
             value={product.enterpriseId}
             className="w-full px-3 py-2 border shadow"
+            required
           >
-            <option value="">Selecciona una empresa</option>
+            <option value="">Selecciona una propiedad</option>
             {enterpriseOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -308,7 +319,7 @@ export default function EditProductPage() {
             htmlFor="categories"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Categoria:
+            División:
           </label>
           <div className="flex flex-col space-y-2">
             {categoryOptions.map((option) => (

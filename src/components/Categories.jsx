@@ -16,12 +16,12 @@ export default function Categories({ categories, params }) {
             className="w-full"
             key={category.id}
           >
-            <div className="w-full bg-white rounded-lg shadow-md lg:max-w-sm">
-              <img
+            <div className="w-full bg-white rounded-lg shadow-md lg:max-w-sm border-l-6">
+              {/* <img
                 className="object-contain w-full h-48"
                 src={category.imageCategory}
                 alt={category.categoryName}
-              />
+              /> */}
               <div className="p-4">
                 <h4 className="text-xl font-semibold tracking-tight text-center text-primaryBlue">
                   {category.categoryName}

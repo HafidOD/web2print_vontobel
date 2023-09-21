@@ -123,8 +123,40 @@ function UserForm() {
           ref={form}
         >
           <label
+            htmlFor="userName"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            Marca:
+          </label>
+          <select
+            name="userName"
+            onChange={handleChange}
+            value={user.userName}
+            className="w-full px-3 py-2 border shadow"
+            required
+          >
+            <option value="">Selecciona la marca</option>
+
+            <option value="AC Hotels">AC Hotels</option>
+            <option value="Aloft">Aloft</option>
+            <option value="Bonvoy">Bonvoy</option>
+            <option value="Courtyard">Courtyard</option>
+            <option value="Delta">Delta</option>
+            <option value="Fairfield">Fairfield</option>
+            <option value="Four Points">Four Points</option>
+            <option value="JW Marriott">JW Marriott</option>
+            <option value="Marriott Hotels">Marriott Hotels</option>
+            <option value="Renaissance">Renaissance</option>
+            <option value="Residence Inn">Residence Inn</option>
+            <option value="Sheraton">Sheraton</option>
+            <option value="St. Regis">St. Regis</option>
+            <option value="The Luxury Collection">The Luxury Collection</option>
+            <option value="The Ritz Carlton">The Ritz Carlton</option>
+            <option value="Westin">Westin</option>
+          </select>
+          <label
             htmlFor="email"
-            className="block mb-2 text-sm font-bold text-primaryBlue"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Email:
           </label>
@@ -136,7 +168,6 @@ function UserForm() {
             value={user.email}
             className="w-full px-3 py-2 border shadow appearance-none"
             required
-            autoFocus
           />
           <label
             htmlFor="password"
@@ -151,33 +182,20 @@ function UserForm() {
             onChange={handleChange}
             value={user.password}
             className="w-full px-3 py-2 border shadow appearance-none"
+            required
           />
           <label
             htmlFor="telefono"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Telefono:
+            Teléfono:
           </label>
           <input
             name="telefono"
             type="text"
-            placeholder="Telefono"
+            placeholder="Teléfono"
             onChange={handleChange}
             value={user.telefono}
-            className="w-full px-3 py-2 border shadow appearance-none"
-          />
-          <label
-            htmlFor="userName"
-            className="block my-2 text-sm font-bold text-primaryBlue"
-          >
-            Nombre:
-          </label>
-          <input
-            name="userName"
-            type="text"
-            placeholder="Nombre"
-            onChange={handleChange}
-            value={user.userName}
             className="w-full px-3 py-2 border shadow appearance-none"
           />
 
@@ -185,7 +203,7 @@ function UserForm() {
             htmlFor="enterprises"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Empresas:
+            Propiedad:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (
@@ -195,6 +213,7 @@ function UserForm() {
                   type="checkbox"
                   value={option.value}
                   onChange={handleChange}
+
                   // checked={user.enterprises.includes(option.value)}
                 />
                 <span>{option.label}</span>
@@ -213,6 +232,7 @@ function UserForm() {
             onChange={handleChange}
             value={user.role}
             className="w-full px-3 py-2 border shadow"
+            required
           >
             <option value="">Selecciona tipo de usuario</option>
 
@@ -231,6 +251,7 @@ function UserForm() {
             onChange={handleChange}
             value={user.typePrice}
             className="w-full px-3 py-2 border shadow"
+            required
           >
             <option value="">Seleccionar opción</option>
 
@@ -272,6 +293,7 @@ function UserForm() {
                   type="checkbox"
                   value={option.value}
                   onChange={handleChange}
+
                   // checked={user.addresses.includes(option.value)}
                 />
                 <span>{option.label}</span>

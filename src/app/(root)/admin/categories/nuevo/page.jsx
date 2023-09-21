@@ -99,7 +99,7 @@ function CategoryForm() {
             htmlFor="categoryName"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Nombre de la categoria:
+            Nombre de la división:
           </label>
           <input
             name="categoryName"
@@ -123,6 +123,7 @@ function CategoryForm() {
             onChange={handleChange}
             value={category.parentCategory}
             className="w-full px-3 py-2 border shadow"
+            required
           >
             <option value="">Selecciona categoria padre</option>
 
@@ -134,7 +135,7 @@ function CategoryForm() {
             htmlFor="enterprises"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Empresas:
+            Propiedades:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (
@@ -151,7 +152,7 @@ function CategoryForm() {
             ))}
           </div>
 
-          <label
+          {/* <label
             htmlFor="imageCategory"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
@@ -171,7 +172,7 @@ function CategoryForm() {
               src={URL.createObjectURL(file)}
               alt=""
             />
-          )}
+          )} */}
 
           <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}

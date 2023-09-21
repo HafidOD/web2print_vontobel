@@ -15,7 +15,7 @@ export default function AdminPage() {
       href: "admin/users",
     },
     {
-      name: "Categorias",
+      name: "División",
       href: "admin/categories",
     },
     {
