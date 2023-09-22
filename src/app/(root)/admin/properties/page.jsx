@@ -37,7 +37,7 @@ export default async function PropertiesPage() {
         {/* {properties.length === 0 && (
           <p className="mb-2">Aun no hay propiedades agregadas</p>
         )} */}
-        <ul role="list" className="divide-y divide-gray-100">
+        {/* <ul role="list" className="divide-y divide-gray-100">
           {properties.map((property) => (
             <li
               key={property.id}
@@ -55,7 +55,7 @@ export default async function PropertiesPage() {
               </div>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );
