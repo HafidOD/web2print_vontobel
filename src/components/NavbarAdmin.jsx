@@ -11,11 +11,13 @@ import { signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Inicio", href: "/admin" },
-  { name: "Propiedades", href: "/admin/enterprises" },
+  { name: "Propiedades", href: "/admin/properties" },
+  { name: "Marcas", href: "/admin/enterprises" },
   { name: "Direcciones", href: "/admin/addresses" },
   { name: "Usuarios", href: "/admin/users" },
   { name: "Divisiones", href: "/admin/categories" },
   { name: "Productos", href: "/admin/products" },
+  { name: "Dashboard", href: "/dashboard" },
 ];
 
 function classNames(...classes) {

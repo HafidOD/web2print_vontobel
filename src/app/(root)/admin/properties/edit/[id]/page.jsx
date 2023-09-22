@@ -2,33 +2,30 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 
-export default function EditEnterprisePage() {
+export default function EditPropertyPage() {
   const form = useRef(null);
   const router = useRouter();
   const params = useParams();
 
-  const [enterprise, setEnterprise] = useState({
-    enterpriseName: "",
-    old_logo: "",
+  const [property, setProperty] = useState({
+    propertyName: "",
   });
-  const [file, setFile] = useState(null);
 
   const handleChange = (e) => {
-    setEnterprise({
-      ...enterprise,
+    setProperty({
+      ...property,
       [e.target.name]: e.target.value,
     });
   };
 
   useEffect(() => {
     if (params.id) {
-      fetch("/api/enterprises/" + params.id)
+      fetch("/api/properties/" + params.id)
         .then((response) => response.json())
         .then((data) => {
           // console.log(data.data);
-          setEnterprise({
-            enterpriseName: data.data.enterpriseName,
-            old_logo: data.data.logo,
+          setProperty({
+            propertyName: data.data.propertyName,
           });
           // console.log(enterprise.logo);
         })
@@ -42,22 +39,17 @@ export default function EditEnterprisePage() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("enterpriseName", enterprise.enterpriseName);
-    formData.append("old_logo", enterprise.old_logo);
+    formData.append("propertyName", property.propertyName);
 
-    if (file) {
-      formData.append("logo", file);
-    }
-    const res = await fetch(`/api/enterprises/${params.id}`, {
+    const res = await fetch(`/api/properties/${params.id}`, {
       method: "PUT",
       body: formData,
-      // headers: { "Content-type": "multipart/form-data" },
     });
     // console.log(res);
     if (res.ok) {
       form.current.reset();
       router.refresh();
-      router.push(`/admin/enterprises`);
+      router.push(`/admin/properties`);
     }
   };
 
@@ -70,50 +62,21 @@ export default function EditEnterprisePage() {
           ref={form}
         >
           <label
-            htmlFor="enterpriseName"
+            htmlFor="propertyName"
             className="block mb-2 text-sm font-bold text-primaryBlue"
           >
-            Nombre de la marca:
+            Nombre de la propiedad:
           </label>
           <input
-            name="enterpriseName"
+            name="propertyName"
             type="text"
             // placeholder="Marr"
             onChange={handleChange}
-            value={enterprise.enterpriseName}
+            value={property.propertyName}
             className="w-full px-3 py-2 border shadow appearance-none"
             autoFocus
             required
           />
-
-          <label
-            htmlFor="productImage"
-            className="block my-2 text-sm font-bold text-primaryBlue"
-          >
-            Logo:
-          </label>
-          <input
-            type="file"
-            className="w-full px-3 py-2 mb-2 border shadow appearance-none"
-            onChange={(e) => {
-              setFile(e.target.files[0]);
-            }}
-          />
-
-          {!file && (
-            <img
-              className="object-contain mx-auto my-4 w-96"
-              src={enterprise.old_logo}
-              alt=""
-            />
-          )}
-          {file && (
-            <img
-              className="object-contain mx-auto my-4 w-96"
-              src={URL.createObjectURL(file)}
-              alt=""
-            />
-          )}
 
           <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}

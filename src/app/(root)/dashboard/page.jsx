@@ -21,8 +21,8 @@ export default async function DashboardPage() {
     <div className="w-full px-2 py-16 m-auto md:w-3/5 sm:px-0">
       <section>
         <h3 className="text-3xl font-medium text-center text-primaryBlue">
-          ¡Bienvenido <span className="font-bold">{user.data.userName}</span> a
-          nuestra
+          ¡Bienvenido
+          <span className="font-bold"> {session.user.property} </span>a nuestra
         </h3>
         <h3 className="mb-5 text-3xl font-bold text-center text-primaryBlue">
           plataforma de gestión de inventario!

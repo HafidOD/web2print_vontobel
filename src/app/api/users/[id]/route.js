@@ -11,7 +11,8 @@ export async function GET(request, { params }) {
       },
       include: {
         enterprises: true,
-        addresses: true
+        addresses: true,
+        property: true,
       },
     });
     return NextResponse.json({ data: user }, { status: 200 });
@@ -28,32 +29,39 @@ export async function PUT(request, { params }) {
   try {
     const data = await request.formData();
     // console.log(data);
-    let newPassword = data.get('new_password') 
+    let newPassword = data.get("new_password");
     let password = "";
-    if(!newPassword) {
-      password = data.get("old_password")
+    if (!newPassword) {
+      password = data.get("old_password");
     } else {
-      password = await bcrypt.hash(data.get('new_password'), 10)
+      password = await bcrypt.hash(data.get("new_password"), 10);
     }
     // console.log(password);
-    const enterpriseIds = data.get('enterprises').split(",").map(id => ({ id: parseInt(id) }));
-    const addressIds = data.get('addresses').split(",").map(id => ({ id: parseInt(id) }));
+    const enterpriseIds = data
+      .get("enterprises")
+      .split(",")
+      .map((id) => ({ id: parseInt(id) }));
+    const addressIds = data
+      .get("addresses")
+      .split(",")
+      .map((id) => ({ id: parseInt(id) }));
     const user = await prisma.user.update({
       where: {
         id: parseInt(params.id),
       },
       data: {
-        email: data.get('email'),
+        propertyId: parseInt(data.get("propertyId")),
+        email: data.get("email"),
         password: password,
-        telefono: data.get('telefono'),
-        userName: data.get('userName'),
-        typePrice: parseInt(data.get('typePrice')),
-        role: parseInt(data.get('role')),
-        currency: data.get('currency'),
+        telefono: data.get("telefono"),
+        userName: data.get("userName"),
+        typePrice: parseInt(data.get("typePrice")),
+        role: parseInt(data.get("role")),
+        currency: data.get("currency"),
         enterprises: {
           connect: enterpriseIds,
         },
-        
+
         addresses: {
           connect: addressIds,
         },

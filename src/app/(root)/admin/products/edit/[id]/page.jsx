@@ -223,7 +223,7 @@ export default function EditProductPage() {
             htmlFor="priceExt"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Precio Extrangero:
+            Precio Extranjero:
           </label>
           <input
             name="priceExt"

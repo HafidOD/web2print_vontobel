@@ -4,6 +4,10 @@ export default function AdminPage() {
   const list = [
     {
       name: "Propiedades",
+      href: "admin/properties",
+    },
+    {
+      name: "Marcas",
       href: "admin/enterprises",
     },
     {

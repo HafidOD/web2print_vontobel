@@ -30,6 +30,9 @@ export const authOptions = {
           where: {
             email: credentials.email,
           },
+          include: {
+            property: true,
+          },
         });
         // console.log(user);
 
@@ -39,6 +42,7 @@ export const authOptions = {
 
         return {
           id: user.id,
+          property: user.property.propertyName,
           email: user.email,
           name: user.userName,
           role: user.role,
@@ -57,6 +61,7 @@ export const authOptions = {
         user: {
           ...session.user,
           id: token.id,
+          property: token.property,
           role: token.role,
           typePrice: token.typePrice,
           currency: token.currency,
@@ -68,10 +73,12 @@ export const authOptions = {
       // console.log(token, user);
 
       if (user) {
+        // console.log(user);
         // const u = user;
         return {
           ...token,
           id: user.id,
+          property: user.property,
           role: user.role,
           typePrice: user.typePrice,
           currency: user.currency,

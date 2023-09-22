@@ -59,7 +59,7 @@ function EnterpriseForm() {
             htmlFor="enterpriseName"
             className="block mb-2 text-sm font-bold text-primaryBlue"
           >
-            Nombre de la propiedad:
+            Nombre de la marca:
           </label>
           <input
             name="enterpriseName"

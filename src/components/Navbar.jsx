@@ -13,7 +13,7 @@ import useCart from "@/app/hooks/use-cart";
 import { signOut } from "next-auth/react";
 
 const navigation = [
-  { name: "Propiedades", href: "/dashboard" },
+  { name: "Marcas", href: "/dashboard" },
   { name: "Pedidos", href: "/dashboard/pedidos" },
 ];
 

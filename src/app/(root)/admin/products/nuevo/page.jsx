@@ -109,15 +109,16 @@ function ProductForm() {
       body: formData,
     });
     // console.log(res);
+    if (!res.ok) {
+      toast.error("A ocurrido un error, por favor, reportelo");
+    }
+    if (res.status == 400) {
+      toast.error("El SKU ya esta asignado a otro producto");
+    }
     if (res.ok) {
       form.current.reset();
       router.refresh();
       router.push("/admin/products/");
-    }
-    if (res.status == 400) {
-      toast.error("El SKU ya esta asignado a otro producto");
-    } else {
-      toast.error("A ocurrido un error, por favor, reportelo");
     }
   };
 

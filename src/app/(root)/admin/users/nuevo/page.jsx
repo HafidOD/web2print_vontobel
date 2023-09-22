@@ -8,6 +8,7 @@ function UserForm() {
     password: "",
     telefono: "",
     userName: "",
+    propertyId: null,
     enterprises: [],
     role: null, //1:admin, 2:user
     typePrice: null, //1:local, 2:nacional, 3:extrangero
@@ -21,6 +22,7 @@ function UserForm() {
 
   const [enterpriseOptions, setEnterpriseOptions] = useState([]);
   const [addressOptions, setAddressOptions] = useState([]);
+  const [propertyOptions, setPropertyOptions] = useState([]);
 
   const handleChange = (e) => {
     // console.log(e.target.type);
@@ -50,6 +52,21 @@ function UserForm() {
 
   useEffect(() => {
     // Hacer una solicitud fetch para obtener las empresas
+    fetch("/api/properties")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.enterprises);
+        // Extraer los IDs de las empresas y establecerlos como opciones
+        const options = data.properties.map((property) => ({
+          value: property.id,
+          label: property.propertyName, // Supongamos que el nombre de la empresa se llama 'name'
+        }));
+        setPropertyOptions(options);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las empresas:", error);
+      });
+
     fetch("/api/enterprises")
       .then((response) => response.json())
       .then((data) => {
@@ -90,6 +107,7 @@ function UserForm() {
     formData.append("password", user.password);
     formData.append("telefono", user.telefono);
     formData.append("userName", user.userName);
+    formData.append("propertyId", user.propertyId);
     formData.append("enterprises", user.enterprises);
     formData.append("role", user.role);
     formData.append("typePrice", user.typePrice);
@@ -126,34 +144,38 @@ function UserForm() {
             htmlFor="userName"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Marca:
+            Propiedad:
           </label>
           <select
-            name="userName"
+            name="propertyId"
             onChange={handleChange}
-            value={user.userName}
+            value={user.propertyId}
             className="w-full px-3 py-2 border shadow"
             required
           >
-            <option value="">Selecciona la marca</option>
+            <option value="">Selecciona propiedad</option>
 
-            <option value="AC Hotels">AC Hotels</option>
-            <option value="Aloft">Aloft</option>
-            <option value="Bonvoy">Bonvoy</option>
-            <option value="Courtyard">Courtyard</option>
-            <option value="Delta">Delta</option>
-            <option value="Fairfield">Fairfield</option>
-            <option value="Four Points">Four Points</option>
-            <option value="JW Marriott">JW Marriott</option>
-            <option value="Marriott Hotels">Marriott Hotels</option>
-            <option value="Renaissance">Renaissance</option>
-            <option value="Residence Inn">Residence Inn</option>
-            <option value="Sheraton">Sheraton</option>
-            <option value="St. Regis">St. Regis</option>
-            <option value="The Luxury Collection">The Luxury Collection</option>
-            <option value="The Ritz Carlton">The Ritz Carlton</option>
-            <option value="Westin">Westin</option>
+            {propertyOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
+          <label
+            htmlFor="userName"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            Nombre de usuario:
+          </label>
+          <input
+            name="userName"
+            type="email"
+            placeholder="Nombre"
+            onChange={handleChange}
+            value={user.userName}
+            className="w-full px-3 py-2 border shadow appearance-none"
+            required
+          />
           <label
             htmlFor="email"
             className="block my-2 text-sm font-bold text-primaryBlue"
@@ -203,7 +225,7 @@ function UserForm() {
             htmlFor="enterprises"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Propiedad:
+            Marca:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (

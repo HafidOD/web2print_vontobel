@@ -8,11 +8,12 @@ export default function EditUserpage() {
   const params = useParams();
   // console.log(params);
   const [user, setUser] = useState({
+    propertyId: null,
+    userName: "",
     email: "",
     old_password: "",
     password: "",
     telefono: "",
-    userName: "",
     enterprises: [],
     role: null, //1:admin, 2:user
     typePrice: null, //1:local, 2:nacional, 3:extrangero
@@ -22,6 +23,7 @@ export default function EditUserpage() {
 
   const [enterpriseOptions, setEnterpriseOptions] = useState([]);
   const [addressOptions, setAddressOptions] = useState([]);
+  const [propertyOptions, setPropertyOptions] = useState([]);
 
   const handleChange = (e) => {
     // console.log(e.target.type);
@@ -66,6 +68,7 @@ export default function EditUserpage() {
           // console.log(enterprises);
           // console.log(addresses);
           setUser({
+            propertyId: data.data.propertyId,
             email: data.data.email,
             old_password: data.data.password,
             telefono: data.data.telefono,
@@ -88,6 +91,20 @@ export default function EditUserpage() {
       // console.log(typeof(addressOptions));
       // console.log(addressOptions);
     }
+    fetch("/api/properties")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.enterprises);
+        // Extraer los IDs de las empresas y establecerlos como opciones
+        const options = data.properties.map((property) => ({
+          value: property.id,
+          label: property.propertyName, // Supongamos que el nombre de la empresa se llama 'name'
+        }));
+        setPropertyOptions(options);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las empresas:", error);
+      });
     fetch("/api/enterprises")
       .then((response) => response.json())
       .then((data) => {
@@ -123,6 +140,7 @@ export default function EditUserpage() {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("propertyId", user.propertyId);
     formData.append("email", user.email);
     // formData.append("password", user.password);
     formData.append("telefono", user.telefono);
@@ -161,8 +179,44 @@ export default function EditUserpage() {
           ref={form}
         >
           <label
+            htmlFor="userName"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            Propiedad:
+          </label>
+          <select
+            name="propertyId"
+            onChange={handleChange}
+            value={user.propertyId}
+            className="w-full px-3 py-2 border shadow"
+            required
+          >
+            <option value="">Selecciona propiedad</option>
+
+            {propertyOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <label
+            htmlFor="userName"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            Nombre de usuario:
+          </label>
+          <input
+            name="userName"
+            type="text"
+            placeholder="Nombre"
+            onChange={handleChange}
+            value={user.userName}
+            className="w-full px-3 py-2 border shadow appearance-none"
+            required
+          />
+          <label
             htmlFor="email"
-            className="block mb-2 text-sm font-bold text-primaryBlue"
+            className="block my-2 text-sm font-bold text-primaryBlue"
           >
             Email:
           </label>
@@ -204,26 +258,12 @@ export default function EditUserpage() {
             value={user.telefono}
             className="w-full px-3 py-2 border shadow appearance-none"
           />
-          <label
-            htmlFor="userName"
-            className="block my-2 text-sm font-bold text-primaryBlue"
-          >
-            Nombre:
-          </label>
-          <input
-            name="userName"
-            type="text"
-            placeholder="Nombre"
-            onChange={handleChange}
-            value={user.userName}
-            className="w-full px-3 py-2 border shadow appearance-none"
-          />
 
           <label
             htmlFor="enterprises"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Propiedad:
+            Marca:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (
