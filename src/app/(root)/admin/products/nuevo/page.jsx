@@ -274,7 +274,7 @@ function ProductForm() {
             htmlFor="enterpriseId"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Propiedad:
+            Marca:
           </label>
           <select
             name="enterpriseId"
@@ -283,7 +283,7 @@ function ProductForm() {
             className="w-full px-3 py-2 border shadow"
             required
           >
-            <option value="">Selecciona una propiedad</option>
+            <option value="">Selecciona una marca</option>
             {enterpriseOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}

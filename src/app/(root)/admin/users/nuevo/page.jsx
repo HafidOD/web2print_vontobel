@@ -169,7 +169,7 @@ function UserForm() {
           </label>
           <input
             name="userName"
-            type="email"
+            type="text"
             placeholder="Nombre"
             onChange={handleChange}
             value={user.userName}

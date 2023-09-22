@@ -18,6 +18,7 @@ model Property {
   id Int @id @default(autoincrement())
   propertyName String
   users User[]
+  addresses Address[]
 }
 
 model User {
@@ -61,6 +62,8 @@ model Address {
   postalCode   Int
   enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
   enterpriseId Int?
+  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId Int?
   users        User[]
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt

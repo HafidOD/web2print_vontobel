@@ -185,11 +185,11 @@ export default function EditAddressPage() {
             required
           />
 
-          <label
+          {/* <label
             htmlFor="users"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
-            Propiedad:
+            Marca:
           </label>
           <select
             name="enterpriseId"
@@ -198,13 +198,13 @@ export default function EditAddressPage() {
             className="w-full px-3 py-2 border shadow"
             required
           >
-            <option value="">Selecciona una propiedad</option>
+            <option value="">Selecciona una marca</option>
             {enterpriseOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
-          </select>
+          </select> */}
           <button className="px-4 py-2 mt-4 font-bold text-white bg-primaryBlue">
             {params.id ? "Actualizar" : "Crear"}
           </button>

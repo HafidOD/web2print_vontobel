@@ -148,7 +148,7 @@ export default function EditCategoryPage() {
             htmlFor="enterprises"
             className="block my-2 text-sm font-bold text-gray-700"
           >
-            Propiedades:
+            Marca:
           </label>
           <div className="flex flex-col space-y-2">
             {enterpriseOptions.map((option) => (

@@ -30,13 +30,13 @@ export async function PUT(request, { params }) {
         id: parseInt(params.id),
       },
       data: {
-        officeName: data.get('officeName'),
-        address: data.get('address'),
-        city: data.get('city'),
-        country: data.get('country'),
-        state: data.get('state'),
-        postalCode: parseInt(data.get('postalCode')),
-        enterpriseId: parseInt(data.get('enterpriseId'))
+        officeName: data.get("officeName"),
+        address: data.get("address"),
+        city: data.get("city"),
+        country: data.get("country"),
+        state: data.get("state"),
+        postalCode: parseInt(data.get("postalCode")),
+        // enterpriseId: parseInt(data.get('enterpriseId'))
       },
     });
 
