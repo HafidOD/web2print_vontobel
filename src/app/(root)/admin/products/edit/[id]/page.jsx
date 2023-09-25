@@ -10,7 +10,7 @@ export default function EditProductPage() {
     priceLocal: null,
     priceNacional: null,
     priceExt: null,
-    descriptionProduct: null,
+    descriptionProduct: "",
     stockProduct: null,
     unitsPackage: null,
     published: true,
@@ -26,18 +26,21 @@ export default function EditProductPage() {
   const [enterpriseOptions, setEnterpriseOptions] = useState([]);
   const handleChange = (e) => {
     if (e.target.type === "checkbox") {
-      console.log(e.target.checked);
+      // console.log(e.target.checked);
       if (e.target.checked) {
         // console.log(e.target.name);
         setProduct({
           ...product,
-          [e.target.name]: [...product[e.target.name], e.target.value],
+          [e.target.name]: [
+            ...product[e.target.name],
+            parseInt(e.target.value),
+          ],
         });
       } else {
         setProduct({
           ...product,
           [e.target.name]: product[e.target.name].filter(
-            (item) => item !== e.target.value
+            (item) => item !== parseInt(e.target.value)
           ),
         });
       }
@@ -52,7 +55,7 @@ export default function EditProductPage() {
     fetch(`/api/products/${params.id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // Extraer los IDs de las empresas y establecerlos como opciones
         const categories = [];
         data.product.categories.forEach((category) => {
@@ -329,7 +332,7 @@ export default function EditProductPage() {
                   type="checkbox"
                   value={option.value}
                   onChange={handleChange}
-                  // checked={user.enterprises.includes(option.value)}
+                  checked={product.categories.includes(option.value)}
                 />
                 <span>{option.label}</span>
               </label>

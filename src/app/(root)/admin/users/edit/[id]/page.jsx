@@ -31,7 +31,7 @@ export default function EditUserpage() {
       if (e.target.checked) {
         setUser({
           ...user,
-          [e.target.name]: [...user[e.target.name], e.target.value],
+          [e.target.name]: [...user[e.target.name], parseInt(e.target.value)],
         });
         // console.log(user.addresses);
       } else {
@@ -39,7 +39,7 @@ export default function EditUserpage() {
         setUser({
           ...user,
           [e.target.name]: user[e.target.name].filter(
-            (item) => item !== e.target.value
+            (item) => item !== parseInt(e.target.value)
           ),
         });
       }
@@ -74,12 +74,12 @@ export default function EditUserpage() {
             telefono: data.data.telefono,
             userName: data.data.userName,
             // enterprises: enterprises,
-            enterprises: [],
+            enterprises: enterprises,
             role: data.data.role, //1:admin, 2:user
             typePrice: data.data.typePrice, //1:local, 2:nacional, 3:extrangero
             currency: data.data.currency, //MXN, USD
             // addresses: addresses,
-            addresses: [],
+            addresses: addresses,
           });
         })
         .catch((error) => {
@@ -273,7 +273,7 @@ export default function EditUserpage() {
                   type="checkbox"
                   value={option.value}
                   onChange={handleChange}
-                  // checked={user.enterprises.includes(option.value)}
+                  checked={user.enterprises.includes(option.value)}
                 />
                 <span>{option.label}</span>
               </label>
@@ -350,8 +350,7 @@ export default function EditUserpage() {
                   type="checkbox"
                   value={option.value}
                   onChange={handleChange}
-                  // checked={user.addresses.includes(option.value)}
-                  // checked={user.addresses.indexOf(option.value) !== -1}
+                  checked={user.addresses.includes(option.value)}
                 />
                 <span>{option.label}</span>
               </label>

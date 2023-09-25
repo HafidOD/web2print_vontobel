@@ -37,6 +37,7 @@ function CategoryForm() {
         [e.target.name]: e.target.value,
       });
     }
+    // console.log(category);
   };
 
   useEffect(() => {

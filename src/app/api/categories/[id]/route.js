@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
       },
       include: {
         products: true,
-        enterprises: true
+        enterprises: true,
       },
     });
     return NextResponse.json({ category }, { status: 200 });
@@ -28,30 +28,38 @@ export async function PUT(request, { params }) {
   try {
     const data = await request.formData();
     // console.log(data);
-    const logo = data.get('imageCategory');
-    var pathImg = ""
+    const logo = data.get("imageCategory");
+    var pathImg = "";
     // //  console.log(logo);
-    if (logo){
-      const bytes = await logo.arrayBuffer()
-      const buffer = Buffer.from(bytes)
+    if (logo) {
+      const bytes = await logo.arrayBuffer();
+      const buffer = Buffer.from(bytes);
 
-      const logoPath = path.join(process.cwd(), 'public/images/categories', logo.name)
-      await writeFile(logoPath, buffer)
-      pathImg = `/images/categories/${logo.name}`
+      const logoPath = path.join(
+        process.cwd(),
+        "public/images/categories",
+        logo.name
+      );
+      await writeFile(logoPath, buffer);
+      pathImg = `/images/categories/${logo.name}`;
     } else {
-      pathImg = data.get('old_image')
+      pathImg = data.get("old_image");
     }
-    const enterpriseIds = data.get('enterprises').split(",").map(id => ({ id: parseInt(id) }));
+    const enterpriseIds = data
+      .get("enterprises")
+      .split(",")
+      .map((id) => ({ id: parseInt(id) }));
+    // console.log(enterpriseIds);
     const category = await prisma.category.update({
       where: {
         id: parseInt(params.id),
       },
       data: {
-        categoryName: data.get('categoryName'),
-        imageCategory: pathImg,
-        parentCategory: parseInt(data.get('parentCategory')),
+        categoryName: data.get("categoryName"),
+        // imageCategory: pathImg,
+        parentCategory: parseInt(data.get("parentCategory")),
         enterprises: {
-          connect: enterpriseIds,
+          set: enterpriseIds,
         },
       },
     });

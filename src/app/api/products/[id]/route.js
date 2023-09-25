@@ -27,19 +27,26 @@ export async function PUT(request, { params }) {
   try {
     const data = await request.formData();
     // console.log(data);
-    const logo = data.get('imageProduct');
-    var pathImg = ""
-    if (logo){
-      const bytes = await logo.arrayBuffer()
-      const buffer = Buffer.from(bytes)
+    const logo = data.get("imageProduct");
+    var pathImg = "";
+    if (logo) {
+      const bytes = await logo.arrayBuffer();
+      const buffer = Buffer.from(bytes);
 
-      const logoPath = path.join(process.cwd(), 'public/images/products', logo.name)
-      await writeFile(logoPath, buffer)
-      pathImg = `/images/products/${logo.name}`
+      const logoPath = path.join(
+        process.cwd(),
+        "public/images/products",
+        logo.name
+      );
+      await writeFile(logoPath, buffer);
+      pathImg = `/images/products/${logo.name}`;
     } else {
-      pathImg = data.get('old_image')
+      pathImg = data.get("old_image");
     }
-    const categoriesIds = data.get('categories').split(",").map(id => ({ id: parseInt(id) }));
+    const categoriesIds = data
+      .get("categories")
+      .split(",")
+      .map((id) => ({ id: parseInt(id) }));
     const booleanValue = data.get("published") === "true";
 
     const product = await prisma.product.update({
@@ -47,19 +54,19 @@ export async function PUT(request, { params }) {
         id: parseInt(params.id),
       },
       data: {
-        sku: data.get('sku'),
-        nameProduct: data.get('nameProduct'),
+        sku: data.get("sku"),
+        nameProduct: data.get("nameProduct"),
         imageProduct: pathImg,
-        priceLocal: parseInt(data.get('priceLocal')),
-        priceNacional: parseInt(data.get('priceNacional')),
-        priceExt: parseInt(data.get('priceExt')),
-        descriptionProduct: data.get('descriptionProduct'),
-        stockProduct: parseInt(data.get('stockProduct')),
-        unitsPackage: parseInt(data.get('unitsPackage')),
+        priceLocal: parseInt(data.get("priceLocal")),
+        priceNacional: parseInt(data.get("priceNacional")),
+        priceExt: parseInt(data.get("priceExt")),
+        descriptionProduct: data.get("descriptionProduct"),
+        stockProduct: parseInt(data.get("stockProduct")),
+        unitsPackage: parseInt(data.get("unitsPackage")),
         published: booleanValue,
-        enterpriseId: parseInt(data.get('enterpriseId')),
+        enterpriseId: parseInt(data.get("enterpriseId")),
         categories: {
-          connect: categoriesIds,
+          set: categoriesIds,
         },
       },
     });

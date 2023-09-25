@@ -59,11 +59,11 @@ export async function PUT(request, { params }) {
         role: parseInt(data.get("role")),
         currency: data.get("currency"),
         enterprises: {
-          connect: enterpriseIds,
+          set: enterpriseIds,
         },
 
         addresses: {
-          connect: addressIds,
+          set: addressIds,
         },
       },
       include: {

@@ -20,15 +20,19 @@ export default function EditCategoryPage() {
     if (e.target.type === "checkbox") {
       // console.log(e.target.checked);
       if (e.target.checked) {
+        console.log("agregado");
         setCategory({
           ...category,
-          [e.target.name]: [...category[e.target.name], e.target.value],
+          [e.target.name]: [
+            ...category[e.target.name],
+            parseInt(e.target.value),
+          ],
         });
       } else {
         setCategory({
           ...category,
           [e.target.name]: category[e.target.name].filter(
-            (item) => item !== e.target.value
+            (item) => item !== parseInt(e.target.value)
           ),
         });
       }
@@ -38,8 +42,10 @@ export default function EditCategoryPage() {
         [e.target.name]: e.target.value,
       });
     }
+    // console.log(category);
   };
   useEffect(() => {
+    console.log("reload");
     fetch("/api/categories/" + params.id)
       .then((response) => response.json())
       .then((data) => {
@@ -64,7 +70,6 @@ export default function EditCategoryPage() {
       .then((response) => response.json())
       .then((data) => {
         // console.log(data.enterprises);
-        // Extraer los IDs de las empresas y establecerlos como opciones
         const options = data.enterprises.map((enterprise) => ({
           value: enterprise.id,
           label: enterprise.enterpriseName, // Supongamos que el nombre de la empresa se llama 'name'
@@ -157,7 +162,7 @@ export default function EditCategoryPage() {
                   name="enterprises"
                   type="checkbox"
                   value={option.value}
-                  // checked={category.enterprises.includes(option.value)}
+                  checked={category.enterprises.includes(option.value)}
                   onChange={handleChange}
                 />
                 <span>{option.label}</span>
