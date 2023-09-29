@@ -30,32 +30,30 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     const data = await request.formData();
-    // console.log(data);
-    const logo = data.get('logo');
-    var pathImg = ""
-    //  console.log(logo);
-    if (logo){
-      const bytes = await logo.arrayBuffer()
-      const buffer = Buffer.from(bytes)
+    const logo = data.get("logo");
+    var pathImg = "";
+    if (logo) {
+      const bytes = await logo.arrayBuffer();
+      const buffer = Buffer.from(bytes);
 
-      const logoPath = path.join(process.cwd(), 'public/images/enterprises/logos', logo.name)
-      await writeFile(logoPath, buffer)
-      pathImg = `/images/enterprises/logos/${logo.name}`
+      const logoPath = path.join(
+        process.cwd(),
+        "public/images/enterprises/logos",
+        logo.name
+      );
+      await writeFile(logoPath, buffer);
+      pathImg = `/images/enterprises/logos/${logo.name}`;
     } else {
-      pathImg = data.get('old_logo')
+      pathImg = data.get("old_logo");
     }
     const enterprise = await prisma.enterprise.update({
       where: {
         id: parseInt(params.id),
       },
       data: {
-        enterpriseName: data.get('enterpriseName'),
-        logo: pathImg
+        enterpriseName: data.get("enterpriseName"),
+        logo: pathImg,
       },
-      // include: {
-      //   users: true,
-      //   addresses: true,
-      // },
     });
     // return NextResponse.json({ mensaje: "ok" }, { status: 200 });
     return NextResponse.json({ enterprise }, { status: 200 });

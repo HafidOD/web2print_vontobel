@@ -3,14 +3,6 @@ import prisma from "@/libs/prisma";
 import { writeFile } from "fs/promises";
 import path from "path";
 
-import { v2 as cloudinary } from "cloudinary";
-
-cloudinary.config({
-  cloud_name: "dfvesf8qn",
-  api_key: "118274489362436",
-  api_secret: "Ez68b5lfWNMmQMjd5jr8IGXcY5Y",
-});
-
 export async function GET(request) {
   try {
     const products = await prisma.product.findMany({
@@ -31,33 +23,21 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const data = await request.formData();
-    // console.log(data);
     const imageProduct = data.get("imageProduct");
-    //  console.log(data);
+    var pathImg = "";
     if (imageProduct) {
       const bytes = await imageProduct.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      // const logoPath = path.join(process.cwd(), 'public/images/products', imageProduct.name)
-      // await writeFile(logoPath, buffer)
-
-      var res = await new Promise((resolve, reject) => {
-        cloudinary.uploader
-          .upload_stream(
-            {
-              resource_type: "image",
-            },
-            async (err, result) => {
-              if (err) {
-                console.log(err);
-                reject(err);
-              }
-
-              resolve(result);
-            }
-          )
-          .end(buffer);
-      });
+      const logoPath = path.join(
+        process.cwd(),
+        "public/images/products",
+        imageProduct.name
+      );
+      await writeFile(logoPath, buffer);
+      pathImg = `/images/products/${logo.name}`;
+    } else {
+      pathImg = data.get("old_image");
     }
     const categoriesIds = data
       .get("categories")
@@ -70,7 +50,7 @@ export async function POST(request) {
       data: {
         sku: data.get("sku"),
         nameProduct: data.get("nameProduct"),
-        imageProduct: res.secure_url,
+        imageProduct: pathImg,
         priceLocal: parseInt(data.get("priceLocal")),
         priceNacional: parseInt(data.get("priceNacional")),
         priceExt: parseInt(data.get("priceExt")),
