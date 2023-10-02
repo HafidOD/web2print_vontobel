@@ -1,15 +1,18 @@
 import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
-const URL = process.env.NEXT_PUBLIC_API_URL;
+export const dynamic = "force-dynamic";
 
 export async function fetchEnterprisesAdmin() {
+  const URL = process.env.NEXT_PUBLIC_API_URL;
   const res = await fetch(`${URL}/enterprises/`, { cache: "no-cache" });
-  const data = await res.json();
-  // console.log(data);
+  if (res.ok) {
+    const data = await res.json();
+    // console.log(data);
 
-  return data.enterprises;
+    return data.enterprises;
+  }
+  return [];
 }
 export default async function AdminEnterprisesPage() {
   const enterprises = await fetchEnterprisesAdmin();

@@ -1,22 +1,23 @@
 import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
-import {
-  PencilSquareIcon,
-  TrashIcon,
-  PlusSmallIcon,
-} from "@heroicons/react/24/solid";
+import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-const URL = process.env.NEXT_PUBLIC_API_URL;
+export const dynamic = "force-dynamic";
 
 export async function fetchUsersAdmin() {
-  const res = await fetch(`${URL}/users/`, { cache: "no-store" });
-  const data = await res.json();
-  // console.log(data);
+  const URL = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${URL}/users/`);
+  if (res.ok) {
+    const data = await res.json();
+    // console.log(data);
 
-  return data.users;
+    return data.users;
+  }
+  return [];
 }
 export default async function AdminUsersPage() {
   const users = await fetchUsersAdmin();
+
   // console.log(users);
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-3/5 sm:px-0">

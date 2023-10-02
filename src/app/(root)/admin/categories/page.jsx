@@ -1,19 +1,18 @@
 import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
-import {
-  PencilSquareIcon,
-  TrashIcon,
-  PlusSmallIcon,
-} from "@heroicons/react/24/solid";
+import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
-const URL = process.env.NEXT_PUBLIC_API_URL;
+export const dynamic = "force-dynamic";
 
 export async function fetchCategoriesAdmin() {
-  const res = await fetch(`${URL}/categories/`, { cache: "no-store" });
-  const data = await res.json();
-  // console.log(data);
+  const URL = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${URL}/categories/`);
+  if (res.ok) {
+    const data = await res.json();
+    // console.log(data);
 
-  return data.categories;
+    return data.categories;
+  }
+  return [];
 }
 export default async function AdminCategoriesPage() {
   const categories = await fetchCategoriesAdmin();

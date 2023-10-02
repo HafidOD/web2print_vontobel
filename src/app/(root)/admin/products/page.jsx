@@ -1,22 +1,22 @@
 import ButtonsActionAdmin from "@/components/ButtonsActionAdmin";
-import {
-  PencilSquareIcon,
-  TrashIcon,
-  PlusSmallIcon,
-} from "@heroicons/react/24/solid";
+import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
-const URL = process.env.NEXT_PUBLIC_API_URL;
+export const dynamic = "force-dynamic";
 
 export async function fetchProductsAdmin() {
+  const URL = process.env.NEXT_PUBLIC_API_URL;
   const res = await fetch(`${URL}/products/`, { cache: "no-store" });
-  const data = await res.json();
-  // console.log(data);
+  if (res.ok) {
+    const data = await res.json();
+    // console.log(data);
 
-  return data.products;
+    return data.products;
+  }
+  return [];
 }
 export default async function AdminProductsPage() {
-  const products = await fetchProductsAdmin();
+  products = await fetchProductsAdmin();
+
   // console.log(products);
   return (
     <div className="w-full px-2 pt-8 m-auto md:w-3/5 sm:px-0">

@@ -34,7 +34,6 @@ export default function AdminPage() {
           <Card key={item.name} item={item} />
         ))}
       </div>
-      {/* <Enterpises enterprises={user.data.enterprises}></Enterpises> */}
     </div>
   );
 }
