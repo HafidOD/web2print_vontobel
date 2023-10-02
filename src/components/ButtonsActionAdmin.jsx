@@ -2,22 +2,20 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 
-const URL = process.env.NEXT_PUBLIC_API_URL;
-
 export default function ButtonsActionAdmin({ itemURL, id }) {
+  const URL = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   // console.log(itemURL, id);
-  const edit = () => {
-    alert(id + " " + itemURL);
-  };
   const remove = async () => {
     const res = await fetch(`${URL}/${itemURL}/${id}`, {
       method: "DELETE",
     });
-    // console.log(res);
+    console.log(res);
+    if (res.ok) {
+      router.push(`/admin/${itemURL}`);
+      router.refresh();
+    }
     // if (res.status === 204) {
-    router.push(`/admin/${itemURL}`);
-    router.refresh();
     // }
   };
   return (
