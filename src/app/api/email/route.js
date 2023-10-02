@@ -45,7 +45,7 @@ export async function POST(req) {
     };
     // return NextResponse({ mensaje: "ok" });
     const info = await transporter.sendMail(mailOptions);
-    // console.log("Email sent: " + info.response);
+    console.log("Email sent: " + info.response);
     return NextResponse.json(
       { message: "email enviado", sale: sale },
       { status: 200 }
