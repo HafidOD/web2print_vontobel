@@ -39,7 +39,7 @@ export async function POST(req) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: `${items.user.email}`,
+      to: `${items.user.email}, 'marriott@gruporegio.mx'`,
       subject: "Solicitud de pedido Web2Print",
       html: emailContent,
     };
