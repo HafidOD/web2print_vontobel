@@ -15,7 +15,7 @@ export async function fetchProductsAdmin() {
   return [];
 }
 export default async function AdminProductsPage() {
-  products = await fetchProductsAdmin();
+  const products = await fetchProductsAdmin();
 
   // console.log(products);
   return (
