@@ -35,7 +35,7 @@ export async function POST(request) {
         imageProduct.name
       );
       await writeFile(logoPath, buffer);
-      pathImg = `/images/products/${logo.name}`;
+      pathImg = `/images/products/${imageProduct.name}`;
     } else {
       pathImg = data.get("old_image");
     }
