@@ -26,6 +26,7 @@ export async function POST(req) {
     // );
     const currentDate = new Date().toLocaleDateString("es-MX");
     const emailContent = generateEmailContent(items, totalSale, currentDate);
+    console.log(emailContent);
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -38,16 +39,13 @@ export async function POST(req) {
 
     const mailOptions = {
       from: process.env.SMTP_USER,
-      // to: `${items.user.email}, hafid@tachuela.mx, lili@tachuela.mx, rocio@tachuela.mx`,
-      to: `hafid@tachuela.mx, lili@tachuela.mx`,
-      // cc: "",
-      subject: "test de envio de correo",
+      to: `${items.user.email}`,
+      subject: "Solicitud de pedido Web2Print",
       html: emailContent,
-      // text: `Detalles del pedido:\n\n${JSON.stringify(items)}`,
     };
-    // console.log(mailOptions);
+    // return NextResponse({ mensaje: "ok" });
     const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent: " + info.response);
+    // console.log("Email sent: " + info.response);
     return NextResponse.json(
       { message: "email enviado", sale: sale },
       { status: 200 }
@@ -60,12 +58,21 @@ export async function POST(req) {
 }
 
 function generateEmailContent(items, totalSale, currentDate) {
-  // console.log(items.user.name);
+  // console.log(items);
   // console.log(totalSale);
   // console.log(currentDate);
   let content = "<h1>Detalles del Pedido</h1>";
-  content += `<p>Pedido realizado por: ${items.user.name}</p>`;
+  content += `<p>Pedido para: ${items.user.property}</p>`;
+  content += `<p>Usuario: ${items.user.name}</p>`;
+  content += `<p>Teléfono: ${items.user.telefono}</p>`;
   content += `<p>Fecha de solicitud: ${currentDate}</p>`;
+  content += `<p>Dirección de envio: ${items.address.officeName}, ${
+    items.address.address
+  } ${items.address.city ? items.address.city : ""} ${
+    items.address.country ? items.address.country : ""
+  } ${items.address.state ? items.address.state : ""} ${
+    items.address.postalCode ? items.address.postalCode : ""
+  }</p>`;
   content += "<table>";
   content +=
     "<thead><tr><th style='padding:2px 10px'>Imagen</th><th style='padding:2px 10px'>Producto</th><th style='padding:2px 10px'>SKU</th><th style='padding:2px 10px'>Precio</th><th style='padding:2px 10px'>Cantidad</th><th style='padding:2px 10px'>Total</th><th style='padding:2px 10px'>Moneda</th></tr></thead>";

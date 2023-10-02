@@ -28,9 +28,11 @@ function PropertyForm() {
       // headers: { "Content-type": "multipart/form-data" },
     });
 
-    form.current.reset();
-    router.refresh();
-    router.push(`/admin/properties`);
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push(`/admin/properties`);
+    }
   };
 
   return (

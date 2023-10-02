@@ -42,9 +42,11 @@ function EnterpriseForm() {
       });
     }
 
-    form.current.reset();
-    router.refresh();
-    router.push(`/admin/enterprises`);
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push(`/admin/enterprises`);
+    }
   };
 
   return (
