@@ -26,7 +26,7 @@ export async function POST(req) {
     // );
     const currentDate = new Date().toLocaleDateString("es-MX");
     const emailContent = generateEmailContent(items, totalSale, currentDate);
-    console.log(emailContent);
+    // console.log(emailContent);
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -45,7 +45,7 @@ export async function POST(req) {
     };
     // return NextResponse({ mensaje: "ok" });
     const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent: " + info.response);
+    // console.log("Email sent: " + info.response);
     return NextResponse.json(
       { message: "email enviado", sale: sale },
       { status: 200 }

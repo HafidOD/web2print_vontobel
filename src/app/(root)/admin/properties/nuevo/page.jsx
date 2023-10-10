@@ -33,6 +33,12 @@ function PropertyForm() {
       router.refresh();
       router.push(`/admin/properties`);
     }
+    if (res.status == 500) {
+      toast.error("A ocurrido un error en el servidor");
+    }
+    if (res.status == 400) {
+      toast.error("El nombre de la propuedad ya existe");
+    }
   };
 
   return (

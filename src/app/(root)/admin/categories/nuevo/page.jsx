@@ -69,23 +69,23 @@ function CategoryForm() {
       formData.append("imageCategory", file);
     }
 
-    if (!params.id) {
-      const res = await fetch("/api/categories", {
-        method: "POST",
-        body: formData,
-        // headers: { "Content-type": "multipart/form-data" },
-      });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+    const res = await fetch("/api/categories", {
+      method: "POST",
+      body: formData,
+      // headers: { "Content-type": "multipart/form-data" },
+    });
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/categories");
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push("/admin/categories");
+    }
+    if (res.status == 500) {
+      toast.error("A ocurrido un error en el servidor");
+    }
+    if (res.status == 400) {
+      toast.error("El nombre de la categoria ya existe");
+    }
   };
 
   return (

@@ -114,22 +114,22 @@ function UserForm() {
     formData.append("currency", user.currency);
     formData.append("addresses", user.addresses);
 
-    if (!params.id) {
-      const res = await fetch("/api/users", {
-        method: "POST",
-        body: formData,
-      });
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    }
+    const res = await fetch("/api/users", {
+      method: "POST",
+      body: formData,
+    });
 
-    form.current.reset();
-    router.refresh();
-    router.push("/admin/users");
+    if (res.ok) {
+      form.current.reset();
+      router.refresh();
+      router.push("/admin/users");
+    }
+    if (res.status == 500) {
+      toast.error("A ocurrido un error en el servidor");
+    }
+    if (res.status == 400) {
+      toast.error("El email ya esta en uso");
+    }
   };
 
   return (
