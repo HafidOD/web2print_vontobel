@@ -80,7 +80,11 @@ export default function NavbarAdmin() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="relative flex justify-center ml-3">
                   <button
-                    onClick={() => signOut()}
+                    onClick={() =>
+                      signOut({ redirect: false }).then(() => {
+                        router.push("https://web2print.gruporegio.mx/");
+                      })
+                    }
                     type="button"
                     className="p-1 bg-white rounded-full text-primaryBlue focus:outline-none"
                   >

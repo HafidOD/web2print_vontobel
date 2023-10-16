@@ -26,9 +26,12 @@ export default function Navbar() {
 
   function logout() {
     removeAll();
-    signOut({
-      callbackUrl: "https://web2print.gruporegio.mx/",
+    signOut({ redirect: false }).then(() => {
+      router.push("https://web2print.gruporegio.mx/");
     });
+    // signOut({
+    //   callbackUrl: "https://web2print.gruporegio.mx/",
+    // });
   }
 
   return (
