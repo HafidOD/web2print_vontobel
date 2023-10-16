@@ -82,7 +82,8 @@ export default function NavbarAdmin() {
                   <button
                     onClick={() =>
                       signOut({ redirect: false }).then(() => {
-                        router.push("https://web2print.gruporegio.mx/");
+                        window.location.href =
+                          "https://web2print.gruporegio.mx/";
                       })
                     }
                     type="button"
