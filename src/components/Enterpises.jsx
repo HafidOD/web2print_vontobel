@@ -17,7 +17,7 @@ export default function Enterpises({ enterprises }) {
           >
             <div className="w-full bg-white rounded-sm shadow-lg lg:max-w-sm">
               <img
-                className="object-contain w-full h-48"
+                className="object-contain w-full h-48 p-4"
                 src={enterprise.logo}
                 alt={enterprise.enterpriseName}
               />
