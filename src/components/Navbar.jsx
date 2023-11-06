@@ -69,7 +69,10 @@ export default function Navbar({ lang, paramslang }) {
                       />
                     </a>
                   ) : (
-                    <a href="/en/dashboard">
+                    <a
+                      href="/en/dashboard"
+                      className="flex items-center font-bold"
+                    >
                       en
                       <ChevronRightIcon
                         className="w-4 h-4"
@@ -136,7 +139,10 @@ export default function Navbar({ lang, paramslang }) {
                       />
                     </a>
                   ) : (
-                    <a href="/en/dashboard">
+                    <a
+                      href="/en/dashboard"
+                      className="flex items-center font-bold"
+                    >
                       en
                       <ChevronRightIcon
                         className="w-4 h-4"

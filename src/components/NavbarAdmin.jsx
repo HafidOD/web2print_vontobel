@@ -6,6 +6,7 @@ import {
   Bars3Icon,
   ArrowRightOnRectangleIcon,
   XMarkIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 
@@ -55,6 +56,25 @@ export default function NavbarAdmin({ lang, langparam }) {
                     <Bars3Icon className="block w-6 h-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
+                <div className="relative block px-3 py-1 ml-3 bg-white rounded-full md:hidden text-primaryBlue">
+                  {langparam === "en" ? (
+                    <a href="/es/admin" className="flex items-center font-bold">
+                      es
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ) : (
+                    <a href="/en/admin" className="flex items-center font-bold">
+                      en
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  )}
+                </div>
               </div>
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
@@ -90,6 +110,25 @@ export default function NavbarAdmin({ lang, langparam }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="relative hidden px-3 py-1 ml-3 bg-white rounded-full md:block text-primaryBlue">
+                  {langparam === "en" ? (
+                    <a href="/es/admin" className="flex items-center font-bold">
+                      es
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ) : (
+                    <a href="/en/admin" className="flex items-center font-bold">
+                      en
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  )}
+                </div>
                 <div className="relative flex justify-center ml-3">
                   <button
                     onClick={() =>
