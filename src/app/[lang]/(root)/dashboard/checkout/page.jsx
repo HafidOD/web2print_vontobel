@@ -29,7 +29,7 @@ const GeneratePDF = async ({ params }) => {
       </div>
       <div className="w-full px-2 py-5 m-auto space-y-5 md:w-2/5 sm:px-0">
         <div className="flex justify-center mb-4">
-          <ExButt user={user} paramslang={lang}></ExButt>
+          <ExButt user={user} lang={params.lang} paramslang={lang}></ExButt>
         </div>
       </div>
     </div>

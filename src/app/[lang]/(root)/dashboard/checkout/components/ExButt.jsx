@@ -4,7 +4,7 @@ import useAddress from "@/app/hooks/use-address";
 import useCart from "@/app/hooks/use-cart";
 import { useState } from "react";
 
-export default function ExButt({ user, paramslang }) {
+export default function ExButt({ user, lang, paramslang }) {
   const [loading, setLoading] = useState(false);
   // console.log(user);
   const items = useCart((state) => state.items);
@@ -29,7 +29,7 @@ export default function ExButt({ user, paramslang }) {
         const data = await response.json();
         // Redirigir a la página de agradecimiento
         // console.log(data);
-        window.location.href = `/${paramslang}/dashboard/thankyou?saleId=${data.sale.id}`;
+        window.location.href = `/${lang}/dashboard/thankyou?saleId=${data.sale.id}`;
       } else {
         console.error("Error al enviar el correo.");
         setLoading(false);
@@ -49,7 +49,7 @@ export default function ExButt({ user, paramslang }) {
       disabled={loading}
     >
       {loading
-        ? "Relizando pedido..."
+        ? `${paramslang.products["placing-order"]}`
         : `${paramslang.products["place-order"]}`}
     </button>
   );
