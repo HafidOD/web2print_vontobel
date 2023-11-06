@@ -1,0 +1,120 @@
+{
+  "login": {
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "login": "Iniciar sesión",
+    "authenticating": "Autenticando"
+  },
+  "navbar": {
+    "home": "Inicio",
+    "brands": "Marcas",
+    "dashboard": {
+      "orders": "Pedidos"
+    },
+    "admin": {
+      "properties": "Propiedades",
+      "addresses": "Direcciones",
+      "users": "Usuarios",
+      "items": "Productos",
+      "divisions": "Divisiones"
+    }
+  },
+  "dashboard": {
+    "welcome": "¡Bienvenido",
+    "our": "a nuestra",
+    "inventory-management": "plataforma de gestión de inventario!",
+    "simplify-inventory": "Simplifica y controla tu inventario.",
+    "what-would-you-like": "¿Qué deseas realizar hoy?",
+    "inventory-shipment": "Envío de inventarios"
+  },
+  "products": {
+    "select-items": "Selecciona los productos",
+    "add-to-card": "Agregar",
+    "view-cart": "Ver Carrito",
+    "item-added": "Producto agregado",
+    "product-already-cart": "Este producto ya está en el carrito",
+    "increase-number-items": "Aumenta el número de productos",
+    "pieces-unit": "piezas por unidad",
+    "purchase-summary": "Resumen de compra",
+    "proceed-checkout": "Finalizar pedido",
+    "order-Summary": "Resumen de compra",
+    "place-order": "Realizar pedido",
+    "local-price": "Precio Local",
+    "national-price": "Precio Nacional",
+    "foreign-price": "Precio Extranjero",
+    "product-description": "Descripción del producto",
+    "stock": "Stock",
+    "units-package": "Unidades por paquete",
+    "visibility": "Visibilidad",
+    "published": "Publicado",
+    "draft": "Borrador",
+    "select-brand": "Selecciona una marca",
+    "image": "Imagen"
+  },
+  "addresses": {
+    "no-address": "No haz seleccionado una Dirección",
+    "select-address": "Seleccionar dirección",
+    "select-shipping-address": "Selecciona la dirección de envío",
+    "another-address": "Otra dirección",
+    "advisors-shipping-address": "Uno de nuestros asesores te contactará para confirmar tu dirección de envío",
+    "shipping-address": "Direccion de envio",
+    "company": "Empresa",
+    "address": "Dirección",
+    "city": "Ciudad",
+    "state": "Estado",
+    "country": "País",
+    "office": "Oficina",
+    "address-name": "Nombre de la dirección",
+    "zip-code": "Código postal"
+  },
+  "order": {
+    "thank-request": "¡Gracias por tu solicitud!",
+    "send-email-confirmation": "Te enviaremos una confirmación por correo electrónico para un seguimiento personalizado con tu asesor",
+    "order-id": "Tu ID de pedido es",
+    "questions": "Dudas",
+    "previous-orders": "Pedidos anteriores",
+    "order": "Pedido",
+    "date": "Fecha",
+    "items": "Productos",
+    "total": "Total",
+    "order-details": "Detalles del pedido",
+    "download-pdf": "Descargar PDF",
+    "loading": "Descargando"
+  },
+  "admin": {
+    "new": "Nuevo",
+    "create": "Crear",
+    "edit": "Editar",
+    "save": "Guardar",
+    "refresh": "Actualizar",
+    "property-name": "Nombre de la propiedad",
+    "brand-name": "Nombre de la marca",
+    "logo": "Logo",
+    "properties": "Propiedades",
+    "addresses": "Direcciones",
+    "users": "Usuarios",
+    "items": "Productos",
+    "divisions": "Divisiones",
+    "select-property": "Selecciona una propiedad"
+  },
+  "email-template": {
+    "web2Print-purchase-order": "Solicitud de pedido Web2Print",
+    "order-details": "Detalle del pedido",
+    "order-for": "pedido para",
+    "user": "Usuario",
+    "request-date": "Fecha de solicitud"
+  },
+  "error": {
+    "sku-unique": "El sku tiene que ser único",
+    "invalid-email-password": "Correo o contraseña invalido",
+    "unique-key": "Error de clave única: El valor ya existe en la base de datos",
+    "sku-already-assigned": "El SKU ya está asignado a otro producto",
+    "error-server": "A ocurrido un error en el servidor",
+    "error-retrieving-companies": "Error al obtener las empresas",
+    "category-name-exists": "El nombre de la categoría ya existe",
+    "brand-name-exists": "El nombre de la marca ya existe",
+    "property-name-exists": "El nombre de la propiedad ya existe",
+    "email-use": "El email ya está en uso",
+    "address-already-created": "La dirección ya está creada"
+  }
+}

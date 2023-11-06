@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
   pages: {
-    signIn: "/",
+    signIn: "/en/",
   },
   session: {
     strategy: "jwt",
@@ -55,6 +55,10 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    // console.log(baseUrl);
+    // redirect(url, baseUrl) {
+    //   return "http://localhost:3000/en/dashboard";
+    // },
     session: ({ session, token }) => {
       // console.log(session, token);
       return {

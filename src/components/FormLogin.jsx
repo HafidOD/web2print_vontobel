@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-export default function FormLogin() {
+export default function FormLogin({ lang, paramslang }) {
+  // console.log(lang);
   const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
@@ -22,16 +24,16 @@ export default function FormLogin() {
         redirect: false,
         email: formValues.email,
         password: formValues.password,
-        callbackUrl: "/login",
+        callbackUrl: `/${paramslang}/dashboard`,
       });
 
       // console.log(res);
       if (!res?.error) {
         // setLoading(false);
-        router.push("/dashboard");
+        router.push(`/${paramslang}/dashboard`);
       } else {
         setLoading(false);
-        toast.error("Correo o contraseña invalido");
+        toast.error(lang.error["invalid-email-password"]);
         // setError("Correo o contraseña ");
       }
     } catch (error) {
@@ -53,9 +55,6 @@ export default function FormLogin() {
           <p className="py-4 mb-6 text-center bg-red-300 rounded">{error}</p>
         )}
         <form className="space-y-6" onSubmit={onSubmit}>
-          {/* <h3 className="text-xl font-medium text-center text-primaryBlue">
-            Iniciar Sesión
-          </h3> */}
           <div>
             {/* <label for="email" class="text-sm font-medium">Correo Electrónico</label> */}
             <input
@@ -65,7 +64,7 @@ export default function FormLogin() {
               value={formValues.email}
               onChange={handleChange}
               className="block w-full p-4 border border-primaryBlue bg-gray-50 sm:text-sm focus:outline-none placeholder:text-primaryBlue placeholder:font-bold"
-              placeholder="Correo electrónico"
+              placeholder={lang.login.email}
               required={true}
             ></input>
           </div>
@@ -77,7 +76,7 @@ export default function FormLogin() {
               id="password"
               value={formValues.password}
               onChange={handleChange}
-              placeholder="Contraseña"
+              placeholder={lang.login.password}
               className="block w-full p-4 border border-primaryBlue bg-gray-50 sm:text-sm focus:outline-none placeholder:text-primaryBlue placeholder:font-bold"
               required={true}
             ></input>
@@ -89,11 +88,9 @@ export default function FormLogin() {
             disabled={loading}
           >
             {loading ? (
-              "Autenticando..."
+              <span>{lang.login.authenticating}...</span>
             ) : (
-              <span
-                dangerouslySetInnerHTML={{ __html: "<b>Iniciar</b> Sesión" }}
-              />
+              <span>{lang.login.login}</span>
             )}
           </button>
         </form>

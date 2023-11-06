@@ -9,22 +9,34 @@ import {
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 
-const navigation = [
-  { name: "Inicio", href: "/admin" },
-  { name: "Propiedades", href: "/admin/properties" },
-  { name: "Marcas", href: "/admin/enterprises" },
-  { name: "Direcciones", href: "/admin/addresses" },
-  { name: "Usuarios", href: "/admin/users" },
-  { name: "Divisiones", href: "/admin/categories" },
-  { name: "Productos", href: "/admin/products" },
-  { name: "Dashboard", href: "/dashboard" },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavbarAdmin() {
+export default function NavbarAdmin({ lang, langparam }) {
+  // console.log(lang);
+  const navigation = [
+    { name: `${lang.navbar.home}`, href: `/${langparam}/admin` },
+    {
+      name: `${lang.navbar.admin.properties}`,
+      href: `/${langparam}/admin/properties`,
+    },
+    { name: `${lang.navbar.brands}`, href: `/${langparam}/admin/enterprises` },
+    {
+      name: `${lang.navbar.admin.addresses}`,
+      href: `/${langparam}/admin/addresses`,
+    },
+    { name: `${lang.navbar.admin.users}`, href: `/${langparam}/admin/users` },
+    {
+      name: `${lang.navbar.admin.divisions}`,
+      href: `/${langparam}/admin/categories`,
+    },
+    {
+      name: `${lang.navbar.admin.items}`,
+      href: `/${langparam}/admin/products`,
+    },
+    { name: "Dashboard", href: `/${langparam}/dashboard` },
+  ];
   return (
     <Disclosure as="nav" className="bg-primaryBlue">
       {({ open }) => (

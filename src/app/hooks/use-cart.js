@@ -1,6 +1,7 @@
 import { toast } from "react-hot-toast";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+// import { getDictionary } from "@/utils/dictionary";
 
 const useCart = create(
   persist(
@@ -11,13 +12,13 @@ const useCart = create(
         const existingItem = currentItems.find((item) => item.id === data.id);
 
         if (existingItem) {
-          return toast("El producto ya esta en el carrito", {
+          return toast("This product is already in your cart", {
             icon: "⚠️",
           });
         }
 
         set({ items: [...get().items, data] });
-        toast.success("Producto agregado");
+        toast.success("Item added");
       },
 
       updateItem: (id, quantity) => {
@@ -38,7 +39,7 @@ const useCart = create(
 
       removeItem: (id) => {
         set({ items: [...get().items.filter((item) => item.id !== id)] });
-        toast.success("Producto eliminado");
+        toast.success("Item eliminated");
       },
 
       removeAll: () => set({ items: [] }),

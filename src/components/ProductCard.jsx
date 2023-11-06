@@ -8,7 +8,13 @@ import { useState } from "react";
 
 // import ButtonProduct from "./ButtonProduct";
 
-export default function ProductCard({ product, typePrice, currency }) {
+export default function ProductCard({
+  product,
+  typePrice,
+  currency,
+  paramslang,
+}) {
+  // console.log(paramslang);
   const prices = { 1: "priceLocal", 2: "priceNacional", 3: "priceExt" };
   const priceProduct = product[prices[typePrice]];
   const cart = useCart();
@@ -39,7 +45,7 @@ export default function ProductCard({ product, typePrice, currency }) {
       data.total = counter * data.price;
       cart.addItem(data);
     } else {
-      toast.error("Aumenta el numero de productos");
+      toast.error(paramslang.products["increase-number-items"]);
     }
   };
   // console.log(product[prices[typePrice]]);
@@ -68,7 +74,7 @@ export default function ProductCard({ product, typePrice, currency }) {
               ${priceProduct} {currency}
             </p>
             <p className="text-xs leading-normal text-secondGray md:text-xs">
-              {product.unitsPackage} piezas por paquete
+              {product.unitsPackage} {paramslang.products["pieces-unit"]}
             </p>
           </div>
         </div>
@@ -104,7 +110,7 @@ export default function ProductCard({ product, typePrice, currency }) {
             className="px-4 py-2 text-xs text-blue-100 rounded shadow bg-primaryBlue md:text-sm"
             onClick={onAddToCart}
           >
-            Agregar
+            {paramslang.products["add-to-card"]}
           </button>
         </div>
       </div>

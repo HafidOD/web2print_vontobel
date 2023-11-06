@@ -1,6 +1,5 @@
 // "use client"
 import ToastProvider from "@/providers/toast-providers";
-
 // import { Inter } from 'next/font/google'
 // import { useRouter } from 'next/navigation';
 // import { useEffect, useState } from "react";
@@ -13,7 +12,7 @@ export const metadata = {
   description: "Simplifica y controla tu inventario",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params }) {
   // const [userData, setUserData] = useState({});
   // const router = useRouter();
   // useEffect(() => {
@@ -41,7 +40,7 @@ export default function RootLayout({ children }) {
   //     console.log(err);
   //   }
   // },[])
-
+  // console.log(params.lang);
   return (
     <html lang="es">
       <body className="min-h-screen ">

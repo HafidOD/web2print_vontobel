@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 // import { useState } from "react";
 
-export default function Enterpises({ enterprises }) {
+export default function Enterpises({ enterprises, paramslang }) {
   return (
     <div className="grid gap-3 lg:grid-cols-3 justify-items-center">
       {/* <p>enterprise id = { enterprise }</p> */}
       {enterprises.map((enterprise) => {
         return (
           <Link
-            href={"/dashboard/" + enterprise.id}
+            href={`/${paramslang}/dashboard/${enterprise.id}`}
             className="w-full"
             key={enterprise.id}
           >

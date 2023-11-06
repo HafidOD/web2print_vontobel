@@ -20,17 +20,21 @@ export async function GET(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
+  // console.log(params);
   try {
     const data = await request.formData();
-    console.log(data);
+    // console.log(data);
 
     const property = await prisma.property.update({
+      where: {
+        id: parseInt(params.id),
+      },
       data: {
         propertyName: data.get("propertyName"),
       },
     });
     // return NextResponse.json({ mensaje: "ok" }, { status: 200 });
-    return NextResponse.json({ enterprise }, { status: 200 });
+    return NextResponse.json({ property }, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

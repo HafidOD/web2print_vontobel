@@ -2,7 +2,7 @@
 import useAddress from "@/app/hooks/use-address";
 import { useEffect, useState } from "react";
 
-export default function SummaryAddress() {
+export default function SummaryAddress({ paramslang }) {
   const [isMounted, setIsMounted] = useState(false);
   const address = useAddress((state) => state.address);
   useEffect(() => {
@@ -21,23 +21,26 @@ export default function SummaryAddress() {
   return (
     <div>
       {Object.keys(address).length === 0 ? (
-        <p className=" text-primaryBlue">No haz seleccionado dirección</p>
+        <p className=" text-primaryBlue">
+          {paramslang.addresses["no-address"]}
+        </p>
       ) : (
         <div>
           <p className=" text-primaryBlue">
-            <b>Empresa:</b> {address.officeName}
+            <b>{paramslang.addresses.company}:</b> {address.officeName}
           </p>
           <p className=" text-primaryBlue">
-            <b>Dirección:</b> {address.address}, CP.{address.postalCode}.
+            <b>{paramslang.addresses.address}:</b> {address.address}, CP.
+            {address.postalCode}.
           </p>
           <p className=" text-primaryBlue">
-            <b>Ciudad:</b> {address.city}.
+            <b>{paramslang.addresses.city}:</b> {address.city}.
           </p>
           <p className=" text-primaryBlue">
-            <b>Estado:</b> {address.state}.
+            <b>{paramslang.addresses.state}:</b> {address.state}.
           </p>
           <p className=" text-primaryBlue">
-            <b>País:</b> {address.country}.
+            <b>{paramslang.addresses.country}:</b> {address.country}.
           </p>
         </div>
       )}

@@ -12,16 +12,19 @@ import IconCart from "./IconCart";
 import useCart from "@/app/hooks/use-cart";
 import { signOut } from "next-auth/react";
 
-const navigation = [
-  { name: "Marcas", href: "/dashboard" },
-  { name: "Pedidos", href: "/dashboard/pedidos" },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({ lang, paramslang }) {
+  // console.log(lang);
+  const navigation = [
+    { name: `${lang.navbar.brands}`, href: `/${paramslang}/dashboard` },
+    {
+      name: `${lang.navbar.dashboard.orders}`,
+      href: `/${paramslang}/dashboard/pedidos`,
+    },
+  ];
   const removeAll = useCart((state) => state.removeAll);
 
   function logout() {

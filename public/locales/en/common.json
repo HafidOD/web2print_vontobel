@@ -1,0 +1,109 @@
+{
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Log in",
+    "authenticating": "Authenticating"
+  },
+  "navbar": {
+    "home": "Home",
+    "brands": "Brands",
+    "dashboard": {
+      "orders": "Orders"
+    },
+    "admin": {
+      "properties": "Properties",
+      "adresses": "Addresses",
+      "users": "Users",
+      "items": "Items",
+      "divisions": "Divisions",
+      "select-property": "Select property"
+    }
+  },
+  "dashboard": {
+    "welcome-dashboard": "Welcome to our inventory management platform",
+    "simplify-inventory": "Simplify and manage your inventory.",
+    "what-would-you-like": "What would you like to do today?",
+    "inventory-shipment": "Inventory shipment"
+  },
+  "products": {
+    "select-items": "Select item",
+    "add-to-card": "Add to cart",
+    "view-cart": "View cart",
+    "item-added": "Item added",
+    "product-already-cart": "This product is already in your cart",
+    "increase-number-items": "Increase the number of items",
+    "purchase-summary": "Purchase summary",
+    "proceed-checkout": "Proceed to checkout",
+    "order-Summary": "Order Summary",
+    "place-order": "Place Order",
+    "local-price": "Local Price",
+    "national-price": "National Price",
+    "foreign-price": "Foreign Price",
+    "product-description": "Product description",
+    "stock": "Stock",
+    "units-package": "Units per package",
+    "visibility": "Visibility",
+    "published": "Published",
+    "draft": "Draft",
+    "select-brand": "Select a brand",
+    "image": "Image"
+  },
+  "addresses": {
+    "select-address": "Select an address",
+    "select-shipping-address": "Select shipping address",
+    "another-address": "Another address",
+    "advisors-shipping-address": "One of our advisors will reach out to you to verify your shipping address",
+    "shipping-address": "Shipping Address",
+    "company": "Company",
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "country": "Country",
+    "office": "Oficina",
+    "address-name": "Address name",
+    "zip-code": "ZIP code"
+  },
+  "order": {
+    "thank-request": "Thank you for your request!",
+    "send-email-confirmation": "We will send you an email confirmation for personalized assistance and tracking",
+    "order-id": "Your Order ID is",
+    "questions": "Questions",
+    "previous-orders": "Previous orders",
+    "order": "Order",
+    "date": "Date",
+    "items": "Items",
+    "total": "Total",
+    "download-pdf": "Download PDF"
+  },
+  "admin": {
+    "new": "New",
+    "create": "Create",
+    "edit": "Edit",
+    "save": "Save",
+    "refresh": "Refresh",
+    "property-name": "Property name",
+    "brand-name": "Brand name",
+    "logo": "Logo"
+  },
+  "email-template": {
+    "web2Print-purchase-order": "Web2Print purchase order",
+    "order-details": "Order Details",
+    "order-for": "Order for",
+    "user": "User",
+    "request-date": "Request Date"
+  },
+  "error": {
+    "sku-unique": "The SKU must be unique",
+    "invalid-email-password": "Invalid email or password",
+    "unique-key": "Unique key error: The value already exists in the database",
+    "sku-already-assigned": "The SKU is already assigned to another product",
+    "error-server": "An error has occurred on the server",
+    "error-retrieving-companies": "Error while retrieving the companies",
+    "category-name-exists": "The category name already exists",
+    "brand-name-exists": "This brand name already exists",
+    "property-name-exists": "This property name already exists",
+    "email-use": "This email is already in use",
+    "address-already-created": "This address is already created"
+  }
+}

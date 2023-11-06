@@ -3,7 +3,7 @@ import useCart from "@/app/hooks/use-cart";
 import { useEffect, useState } from "react";
 import SummaryListProducts from "@/components/SummaryListProducts";
 
-export default function SummaryProducts() {
+export default function SummaryProducts({ paramslang }) {
   const [isMounted, setIsMounted] = useState(false);
   // const cart = useCart();
   const items = useCart((state) => state.items);
