@@ -28,6 +28,8 @@
     "inventory-shipment": "Inventory shipment"
   },
   "products": {
+    "brand": "Brand",
+    "category": "category",
     "select-items": "Select items",
     "add-to-card": "Add",
     "view-cart": "View cart",
@@ -50,7 +52,10 @@
     "published": "Published",
     "draft": "Draft",
     "select-brand": "Select a brand",
-    "image": "Image"
+    "image": "Image",
+    "local": "Local",
+    "nacional": "National",
+    "foreign": "Foreign"
   },
   "addresses": {
     "no-address": "No address selected",

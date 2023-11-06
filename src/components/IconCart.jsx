@@ -4,7 +4,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import userCart from "@/app/hooks/use-cart";
 import { useEffect, useState } from "react";
 
-export default function IconCart() {
+export default function IconCart({ paramslang }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function IconCart() {
   }
   return (
     <Link
-      href={`/dashboard/cart`}
+      href={`/${paramslang}/dashboard/cart`}
       className="flow-root px-3 py-1 ml-4 bg-white rounded-full lg:ml-6"
     >
       <div className="flex items-center group">

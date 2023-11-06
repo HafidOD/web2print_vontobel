@@ -29,6 +29,9 @@ const lang = {
     "select-option": "Select a option",
     "select-currency": "select currency",
     "address-already-created": "This address is already created",
+    local: "Local",
+    national: "National",
+    foreign: "Foreign",
   },
   es: {
     property: "Propiedad",
@@ -55,6 +58,9 @@ const lang = {
     "select-option": "Selecciona una opción",
     "select-currency": "Selecciona la divisa",
     "address-already-created": "This address is already created",
+    local: "Local",
+    national: "Nacional",
+    foreign: "Extranjero",
   },
 };
 
@@ -372,9 +378,9 @@ export default function EditUserpage({ params }) {
           >
             <option value="">{lang[params.lang]["select-option"]}</option>
 
-            <option value="1">Local</option>
-            <option value="2">Nacional</option>
-            <option value="3">Extranjero</option>
+            <option value="1">{lang[params.lang]["local"]}</option>
+            <option value="2">{lang[params.lang]["national"]}</option>
+            <option value="3">{lang[params.lang]["foreign"]}</option>
           </select>
 
           <label

@@ -28,6 +28,8 @@
     "inventory-shipment": "Envío de inventarios"
   },
   "products": {
+    "brand": "Marca",
+    "category": "Categoría",
     "select-items": "Selecciona los productos",
     "add-to-card": "Agregar",
     "view-cart": "Ver Carrito",
@@ -50,7 +52,10 @@
     "published": "Publicado",
     "draft": "Borrador",
     "select-brand": "Selecciona una marca",
-    "image": "Imagen"
+    "image": "Imagen",
+    "local": "Local",
+    "nacional": "Nacional",
+    "foreign": "Foreign"
   },
   "addresses": {
     "no-address": "No haz seleccionado una Dirección",

@@ -3,11 +3,12 @@ import prisma from "@/libs/prisma";
 
 export async function GET(request, { params }) {
   // console.log(params.userId);
+  // console.log(params);
   const custom = {
     id: 0,
-    officeName: "Otra Dirección",
+    officeName: "Another address",
     address:
-      "Uno de nuestros asesores te contactara para confirmar tu dirección de envió",
+      "One of our advisors will reach out to you to verify your shipping address",
   };
   try {
     const addresses = await prisma.address.findMany({

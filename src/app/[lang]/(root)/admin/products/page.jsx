@@ -60,25 +60,28 @@ export default async function AdminProductsPage({ params }) {
                     SKU: {product.sku}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
-                    Precio Local: ${product.priceLocal}, Precio Nacional: $
-                    {product.priceNacional}, Precio Extranjero: $
-                    {product.priceExt}
+                    {lang.products["local-price"]}: ${product.priceLocal},
+                    {lang.products["national-price"]}: ${product.priceNacional},
+                    {lang.products["foreign-price"]}: ${product.priceExt}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
-                    Empresa: {product.enterpriseId}
+                    {lang.products["brand"]}: {product.enterpriseId}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
-                    Categoria:{" "}
+                    {lang.products["category"]}:{" "}
                     {product.categories.map(
                       (category) => category.categoryName
                     )}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
-                    Stock: {product.stockProduct}, Unidades por caja:{" "}
-                    {product.unitsPackage}
+                    Stock: {product.stockProduct},{" "}
+                    {lang.products["units-package"]}: {product.unitsPackage}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
-                    Visible: {product.published ? "Publicado" : "Borrador"}
+                    {lang.products["visibility"]}:{" "}
+                    {product.published
+                      ? lang.products["published"]
+                      : lang.products["draft"]}
                   </p>
                 </div>
               </div>

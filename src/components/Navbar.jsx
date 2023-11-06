@@ -85,7 +85,7 @@ export default function Navbar({ lang, paramslang }) {
 
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
-                  <Link href="/dashboard/">
+                  <Link href={`/${paramslang}/dashboard/`}>
                     <Image
                       className=""
                       src="/images/logos/logo_regio_white.png"
@@ -118,7 +118,7 @@ export default function Navbar({ lang, paramslang }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <IconCart></IconCart>
+                <IconCart paramslang={paramslang}></IconCart>
                 {/* <div className="relative ml-3">
                       <img
                         className="w-8 h-8 rounded-full"

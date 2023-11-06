@@ -78,7 +78,7 @@ export default function NavbarAdmin({ lang, langparam }) {
               </div>
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
-                  <Link href="/admin">
+                  <Link href={`/${langparam}/admin`}>
                     <Image
                       className=""
                       src="/images/logos/logo_regio_white.png"
@@ -134,7 +134,7 @@ export default function NavbarAdmin({ lang, langparam }) {
                     onClick={() =>
                       signOut({ redirect: false }).then(() => {
                         window.location.href =
-                          "https://web2print.gruporegio.mx/";
+                          "https://web2print.gruporegio.mx/en/";
                       })
                     }
                     type="button"
