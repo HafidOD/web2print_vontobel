@@ -4,12 +4,12 @@ import prisma from "@/libs/prisma";
 export async function GET(request, { params }) {
   // console.log(params.userId);
   // console.log(params);
-  const custom = {
-    id: 0,
-    officeName: "Another address",
-    address:
-      "One of our advisors will reach out to you to verify your shipping address",
-  };
+  // const custom = {
+  //   id: 0,
+  //   officeName: "Another address",
+  //   address:
+  //     "One of our advisors will reach out to you to verify your shipping address",
+  // };
   try {
     const addresses = await prisma.address.findMany({
       where: {
@@ -28,7 +28,7 @@ export async function GET(request, { params }) {
         },
       },
     });
-    addresses.push(custom);
+    // addresses.push(custom);
     return NextResponse.json({ addresses }, { status: 200 });
   } catch (error) {
     return NextResponse.json(

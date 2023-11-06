@@ -18,11 +18,20 @@ export async function fetchSingleAddresses(enterpriseId, userId) {
 
   return data.addresses;
 }
+
 export default async function AddressPage({ params }) {
   const lang = await getDictionary(params.lang);
+
+  const custom = {
+    id: 0,
+    officeName: `${lang.addresses["another-address"]}`,
+    address: `${lang.addresses["advisors-shipping-address"]}`,
+  };
   const { user } = await getServerSession(authOptions);
 
   const addresses = await fetchSingleAddresses(params.enterpriseId, user.id);
+  // console.log(addresses);
+  addresses.push(custom);
   // console.log(user);
   // if (user.role === 1) {
   // } else {

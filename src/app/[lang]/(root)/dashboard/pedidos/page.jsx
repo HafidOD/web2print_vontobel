@@ -26,7 +26,9 @@ export default async function pagePedidos({ params }) {
         </h3>
       </div>
       <div className="mt-5 bg-white rounded-lg shadow-lg">
-        {sales.length === 0 && <p className="p-6">No hay Pedidos anteriores</p>}
+        {sales.length === 0 && (
+          <p className="p-6">{lang.order["no-previous-orders"]}</p>
+        )}
 
         <ul role="list" className="px-3 divide-y divide-gray-300">
           {sales.map((sale) => (

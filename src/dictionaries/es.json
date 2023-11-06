@@ -79,6 +79,7 @@
     "order-id": "Tu ID de pedido es",
     "questions": "Dudas",
     "previous-orders": "Pedidos anteriores",
+    "no-previous-orders": "No hay pedidos recientes",
     "order": "Pedido",
     "date": "Fecha",
     "items": "Productos",

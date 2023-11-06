@@ -79,6 +79,7 @@
     "order-id": "Your Order ID is",
     "questions": "Questions",
     "previous-orders": "Previous orders",
+    "no-previous-orders": "No previous orders",
     "order": "Order",
     "date": "Date",
     "items": "Items",
