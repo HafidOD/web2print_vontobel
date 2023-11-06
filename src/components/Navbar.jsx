@@ -6,6 +6,7 @@ import {
   Bars3Icon,
   ArrowRightOnRectangleIcon,
   XMarkIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import IconCart from "./IconCart";
 
@@ -30,7 +31,7 @@ export default function Navbar({ lang, paramslang }) {
   function logout() {
     removeAll();
     signOut({ redirect: false }).then(() => {
-      window.location.href = "https://web2print.gruporegio.mx/";
+      window.location.href = "https://web2print.gruporegio.mx/en/";
     });
     // signOut({
     //   callbackUrl: "https://web2print.gruporegio.mx/",
@@ -55,7 +56,30 @@ export default function Navbar({ lang, paramslang }) {
                     <Bars3Icon className="block w-6 h-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
+                <div className="relative block px-3 py-1 ml-3 bg-white rounded-full md:hidden text-primaryBlue">
+                  {paramslang === "en" ? (
+                    <a
+                      href="/es/dashboard"
+                      className="flex items-center font-bold"
+                    >
+                      es
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ) : (
+                    <a href="/en/dashboard">
+                      en
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  )}
+                </div>
               </div>
+
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
                   <Link href="/dashboard/">
@@ -69,6 +93,7 @@ export default function Navbar({ lang, paramslang }) {
                     />
                   </Link>
                 </div>
+
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -98,6 +123,29 @@ export default function Navbar({ lang, paramslang }) {
                         alt=""
                       ></img>
                 </div> */}
+                <div className="relative hidden px-3 py-1 ml-3 bg-white rounded-full md:block text-primaryBlue">
+                  {paramslang === "en" ? (
+                    <a
+                      href="/es/dashboard"
+                      className="flex items-center font-bold"
+                    >
+                      es
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ) : (
+                    <a href="/en/dashboard">
+                      en
+                      <ChevronRightIcon
+                        className="w-4 h-4"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  )}
+                </div>
+
                 <div className="relative flex justify-center ml-3">
                   <button
                     onClick={logout}
