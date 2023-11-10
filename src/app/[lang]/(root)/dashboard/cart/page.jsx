@@ -8,10 +8,12 @@ const lang = {
   en: {
     "purchase-summary": "Purchase summary",
     "select-address": "Select an address",
+    "no-products": "There are no products in the cart",
   },
   es: {
     "purchase-summary": "Resumen de compra",
     "select-address": "Seleccionar dirección",
+    "no-products": "No hay productos en el carrito",
   },
 };
 
@@ -43,7 +45,7 @@ export default function CheckoutPage({ params }) {
       </div>
       <div className="p-4 mt-5 bg-white rounded-lg shadow-lg">
         {items.length === 0 && (
-          <p className="mb-2">No hay productos en el carrito</p>
+          <p className="mb-2">{lang[params.lang]["no-products"]}</p>
         )}
         <ul role="list" className="divide-y divide-gray-100">
           {items.map((product) => (

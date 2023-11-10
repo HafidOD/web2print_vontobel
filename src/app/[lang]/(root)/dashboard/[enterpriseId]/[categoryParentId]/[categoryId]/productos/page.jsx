@@ -34,7 +34,7 @@ export default async function ProductPageCategory({ params }) {
           </h3>
           {products.length === 0 && (
             <p className="px-4 py-6 bg-white rounded-lg">
-              No hay productos disponibles
+              {lang.products["no-products"]}
             </p>
           )}
           {/* <ProductCard products={products}></ProductCard> */}

@@ -55,7 +55,9 @@
     "image": "Image",
     "local": "Local",
     "nacional": "National",
-    "foreign": "Foreign"
+    "foreign": "Foreign",
+    "no-products": "No products available",
+    "no-products-cart": "There are no products in the cart"
   },
   "addresses": {
     "no-address": "No address selected",
@@ -71,7 +73,8 @@
     "country": "Country",
     "office": "Oficina",
     "address-name": "Address name",
-    "zip-code": "ZIP code"
+    "zip-code": "ZIP code",
+    "no-addresses": "No addresses available"
   },
   "order": {
     "thank-request": "Thank you for your request!",
@@ -107,12 +110,31 @@
     "select-property": "Select property",
     "no-properties": "No properties have been added yet"
   },
-  "email-template": {
+  "pdf": {
     "web2Print-purchase-order": "Web2Print purchase order",
     "order-details": "Order Details",
     "order-for": "Order for",
     "user": "User",
-    "request-date": "Request Date"
+    "request-date": "Request Date",
+    "supplier": "SUPPLIER",
+    "proforma": "Order Summary",
+    "elaborated": "Contact name",
+    "date": "Request Date",
+    "request-inf": "Request information",
+    "hotel": "Property name",
+    "location": "Location",
+    "shipping": "Shipping address",
+    "address": "Address",
+    "personalized": "Personalized",
+    "contact": "Contact",
+    "phone": "Phone number",
+    "item": "Item",
+    "quantity": "Qty",
+    "UP": "UP",
+    "total": "Total",
+    "amounts-expressed": "Amounts expressed in Mexican pesos",
+    "delivery-service": "Delivery service for hotels outside of Mexico has an extra cost.",
+    "certified-supplier": "Supplier certified by"
   },
   "error": {
     "sku-unique": "The SKU must be unique",

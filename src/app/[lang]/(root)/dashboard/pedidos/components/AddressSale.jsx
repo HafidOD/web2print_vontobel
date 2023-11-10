@@ -20,18 +20,29 @@ export default function AddressSale({ address, lang }) {
         <b>{lang.addresses.company}:</b> {address.officeName}
       </p>
       <p className="text-primaryBlue">
-        <b>{lang.addresses.address}:</b> {address.address}, CP.
-        {address.postalCode}.
+        <b>{lang.addresses.address}:</b> {address.address}
+        {address.postalCode && (
+          <span>
+            , CP.
+            {address.postalCode}.
+          </span>
+        )}
       </p>
-      <p className="text-primaryBlue">
-        <b>{lang.addresses.city}:</b> {address.city}.
-      </p>
-      <p className="text-primaryBlue">
-        <b>{lang.addresses.state}:</b> {address.state}.
-      </p>
-      <p className="text-primaryBlue">
-        <b>{lang.addresses.country}:</b> {address.country}.
-      </p>
+      {address.city && (
+        <p className="text-primaryBlue">
+          <b>{lang.addresses.city}:</b> {address.city}.
+        </p>
+      )}
+      {address.state && (
+        <p className="text-primaryBlue">
+          <b>{lang.addresses.state}:</b> {address.state}.
+        </p>
+      )}
+      {address.country && (
+        <p className="text-primaryBlue">
+          <b>{lang.addresses.country}:</b> {address.country}.
+        </p>
+      )}
     </div>
   );
 }

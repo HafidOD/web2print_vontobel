@@ -8,6 +8,13 @@ export async function GET(request, { params }) {
       where: {
         id: parseInt(params.id),
       },
+      include: {
+        user: {
+          include: {
+            property: true,
+          },
+        },
+      },
     });
     return NextResponse.json({ sale }, { status: 200 });
   } catch (error) {
