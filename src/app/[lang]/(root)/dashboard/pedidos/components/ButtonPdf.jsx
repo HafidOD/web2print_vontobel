@@ -6,8 +6,7 @@ export default function ButtonPdf({ sale, items, address, lang }) {
   // console.log(sale);
   return (
     <>
-      {/* <div>hola</div> */}
-      {/* <PDFDownloadLink
+      <PDFDownloadLink
         document={
           <SalePdf
             sale={sale}
@@ -24,8 +23,8 @@ export default function ButtonPdf({ sale, items, address, lang }) {
             ? `${lang.order["loading"]}...`
             : `${lang.order["download-pdf"]}`
         }
-      </PDFDownloadLink> */}
-      <SalePdf sale={sale} items={items.items} address={address} lang={lang} />
+      </PDFDownloadLink>
+      {/* <SalePdf sale={sale} items={items.items} address={address} lang={lang} /> */}
     </>
   );
 }

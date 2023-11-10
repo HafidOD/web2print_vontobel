@@ -417,7 +417,7 @@ const SalePdf = ({ sale, items, address, lang }) => {
   });
 
   return (
-    <PDFViewer style={{ width: "100%", height: "500px" }}>
+    // <PDFViewer style={{ width: "100%", height: "500px" }}>
       <Document>
         <Page size="A4" style={styles.page}>
           <View style={styles.tabletotal}>
@@ -543,9 +543,6 @@ const SalePdf = ({ sale, items, address, lang }) => {
               </View>
             </View>
           </View>
-          {/* <Text style={styles.parrafo}>
-            {lang.addresses.address}: {address.officeName}
-          </Text> */}
           <Text>{"\n"}</Text>
           <View style={styles.table}>
             <View style={styles.tableRow}>
@@ -609,13 +606,6 @@ const SalePdf = ({ sale, items, address, lang }) => {
                 <View style={styles.tableColHeader20}>
                   <Text>{producto.sku}</Text>
                 </View>
-                {/* <View style={styles.tableCol}>
-                  <Text style={styles.productName}>{producto.nameProduct}</Text>
-                  <Image
-                    src={producto.imageProduct}
-                    style={styles.productImage}
-                  />
-                </View> */}
                 <View style={styles.tableColHeader40}>
                   <Text>{producto.nameProduct}</Text>
                 </View>
@@ -727,7 +717,7 @@ const SalePdf = ({ sale, items, address, lang }) => {
           </View>
         </Page>
       </Document>
-    </PDFViewer>
+    {/* </PDFViewer> */}
   );
 };
 
