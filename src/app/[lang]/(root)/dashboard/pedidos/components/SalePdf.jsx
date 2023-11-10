@@ -418,306 +418,270 @@ const SalePdf = ({ sale, items, address, lang }) => {
 
   return (
     // <PDFViewer style={{ width: "100%", height: "500px" }}>
-      <Document>
-        <Page size="A4" style={styles.page}>
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.tabletotal}>
+          <View style={styles.tableHeaderRow}>
+            <View style={styles.tableHeader70none}>
+              <Image
+                src={"/images/logos/logo_grupo_regio-300.png"}
+                style={styles.image}
+                alt="logo grupo regio"
+              />
+            </View>
+
+            <View style={styles.tableHeader30none}>
+              <Text style={Object.assign({}, styles.center, styles.parrafo)}>
+                {lang.pdf.supplier}
+              </Text>
+              <Text>Pixel Press SA de CV</Text>
+              <Text>RFC: PPR 970715158</Text>
+              <Text>Av. Andrés Q. Roo Mz 66 Lt 2-05</Text>
+              <Text>SM 98, Cancún, Q. Roo, México</Text>
+            </View>
+          </View>
+        </View>
+        <Text>{"\n"}</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader80}>
+              <Text>{lang.pdf.proforma}</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader20, styles.center)}
+            >
+              <Text>N° {sale.id}</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader15}>
+              <Text>{lang.pdf.elaborated}:</Text>
+            </View>
+            <View style={styles.tableColHeader40}>
+              <Text>{sale.user.userName}</Text>
+            </View>
+            <View style={styles.tableColHeader25}>
+              <Text>{lang.pdf.date}:</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader20, styles.center)}
+            >
+              <Text>{fecha}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.parrafo}>
+          <Text>{lang.pdf["request-inf"]}:</Text>
+        </View>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader15}>
+              <Text>{lang.pdf.hotel}:</Text>
+            </View>
+            <View style={styles.tableColHeader65}>
+              <Text>{sale.user.property.propertyName}</Text>
+            </View>
+            <View style={styles.tableColHeader10}>
+              <Text>{lang.pdf.location}:</Text>
+            </View>
+            <View style={styles.tableColHeader10}>
+              {sale.user.typePrice == 1 && <Text>QROO</Text>}
+              {sale.user.typePrice == 2 && <Text>NAL</Text>}
+              {sale.user.typePrice == 3 && <Text>EXW</Text>}
+            </View>
+          </View>
+        </View>
+        <Text style={styles.parrafo}>{lang.pdf.shipping}:</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader15}>
+              <Text>{lang.pdf.address}:</Text>
+            </View>
+            <View style={styles.tableColHeader85}>
+              {address.city &&
+              address.city &&
+              address.state &&
+              address.country &&
+              address.postalCode ? (
+                <Text style={styles.address}>
+                  {address.address}, {address.city}, {address.state},{" "}
+                  {address.country}, CP. {address.postalCode}
+                </Text>
+              ) : (
+                <Text style={styles.address}>{lang.pdf.personalized}</Text>
+              )}
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader15}>
+              <Text>{lang.pdf.contact}:</Text>
+            </View>
+            <View style={styles.tableColHeader40}>
+              <Text>{sale.user.userName}</Text>
+            </View>
+            <View style={styles.tableColHeader15}>
+              <Text>{lang.pdf.phone}:</Text>
+            </View>
+            <View style={styles.tableColHeader30}>
+              <Text>{sale.user.telefono}</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader15}>
+              <Text>Email:</Text>
+            </View>
+            <View style={styles.tableColHeader85}>
+              <Text>{sale.user.email}</Text>
+            </View>
+          </View>
+        </View>
+        <Text>{"\n"}</Text>
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View
+              style={Object.assign({}, styles.tableColHeader20, styles.center)}
+            >
+              <Text>SKU</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader40, styles.center)}
+            >
+              <Text>{lang.pdf.item}</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader10, styles.center)}
+            >
+              <Text>UOM</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader10, styles.center)}
+            >
+              <Text>{lang.pdf.quantity}</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader10, styles.center)}
+            >
+              <Text>{lang.pdf.UP}</Text>
+            </View>
+            <View
+              style={Object.assign({}, styles.tableColHeader10, styles.center)}
+            >
+              <Text>{lang.pdf.total}</Text>
+            </View>
+          </View>
+          {items.map((producto) => (
+            <View key={producto.id} style={styles.tableRow}>
+              <View style={styles.tableColHeader20}>
+                <Text>{producto.sku}</Text>
+              </View>
+              <View style={styles.tableColHeader40}>
+                <Text>{producto.nameProduct}</Text>
+              </View>
+              <View style={styles.tableColHeader10}>
+                <Text>CS {producto.unitsPackage}</Text>
+              </View>
+              <View
+                style={Object.assign({}, styles.tableColHeader10, styles.right)}
+              >
+                <Text>{producto.quantity}</Text>
+              </View>
+              <View style={styles.tableColHeader10}>
+                <Text>${producto.price}</Text>
+              </View>
+              <View style={styles.tableColHeader10}>
+                <Text>${producto.price * producto.quantity}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+        <Text>{"\n"}</Text>
+        <View style={styles.tabletotal}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableColHeader70}>
+              <Text>{lang.pdf["amounts-expressed"]}</Text>
+              <Text>{lang.pdf["delivery-service"]}</Text>
+            </View>
+            <View style={styles.tableColHeadernone}>
+              <Text> </Text>
+            </View>
+            <View style={styles.table20}>
+              <View style={styles.tableRow}>
+                <View style={styles.tableColHeader50}>
+                  <Text>Sub total</Text>
+                </View>
+                <View style={styles.tableColHeader50}>
+                  <Text>${subtotal}</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableColHeader50}>
+                  <Text>IVA</Text>
+                </View>
+                <View style={styles.tableColHeader50}>
+                  <Text>${montoIVA}</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableColHeader50}>
+                  <Text>Total</Text>
+                </View>
+                <View style={styles.tableColHeader50}>
+                  <Text>${sale.totalSale}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.footer}>
           <View style={styles.tabletotal}>
             <View style={styles.tableHeaderRow}>
-              <View style={styles.tableHeader70none}>
+              <View style={styles.tableHeader10qr}>
                 <Image
-                  src={"/images/logos/logo_grupo_regio-300.png"}
-                  style={styles.image}
-                  alt="logo grupo regio"
+                  src={"/images/logos/qr.png"}
+                  style={styles.imagecala}
+                  alt="logo cala"
                 />
               </View>
-
-              <View style={styles.tableHeader30none}>
-                <Text style={Object.assign({}, styles.center, styles.parrafo)}>
-                  {lang.pdf.supplier}
-                </Text>
-                <Text>Pixel Press SA de CV</Text>
-                <Text>RFC: PPR 970715158</Text>
-                <Text>Av. Andrés Q. Roo Mz 66 Lt 2-05</Text>
-                <Text>SM 98, Cancún, Q. Roo, México</Text>
+              <View style={styles.tableColHeader90}></View>
+            </View>
+            <View style={styles.tableHeaderRow}>
+              <View style={styles.tableHeader100}>
+                <Text>{"\n"}</Text>
+                <Text>CANCÚN | MIAMI | PUNTA CANA</Text>
+                <Text>{"\n"}</Text>
+              </View>
+            </View>
+            <View style={styles.tableHeaderRow}>
+              <View style={styles.tableHeader35}>
+                <Text>d: Av. Andrés Quintana Roo, SM 98, M 66 L 2-05,</Text>
+                <Text>Cancún, Quintana Roo 77537, México</Text>
+              </View>
+              <View style={styles.tableHeader15}>
+                <Text>t: (998) 881 8100</Text>
+              </View>
+              <View style={styles.tableHeader15}>
+                <Text>w: gruporegio.mx</Text>
+              </View>
+              <View style={styles.tableHeader20}>
+                <Image
+                  src={"/images/logos/Logo-CALA.png"}
+                  style={styles.imagecala}
+                  alt="logo cala"
+                />
+              </View>
+              <View style={styles.tableHeader15}>
+                <Image
+                  src={"/images/logos/fsc.png"}
+                  style={styles.imagecala}
+                  alt="logo cala"
+                />
               </View>
             </View>
           </View>
-          <Text>{"\n"}</Text>
-          <View style={styles.table}>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader80}>
-                <Text>{lang.pdf.proforma}</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader20,
-                  styles.center
-                )}
-              >
-                <Text>N° {sale.id}</Text>
-              </View>
-            </View>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader15}>
-                <Text>{lang.pdf.elaborated}:</Text>
-              </View>
-              <View style={styles.tableColHeader40}>
-                <Text>{sale.user.userName}</Text>
-              </View>
-              <View style={styles.tableColHeader25}>
-                <Text>{lang.pdf.date}:</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader20,
-                  styles.center
-                )}
-              >
-                <Text>{fecha}</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.parrafo}>
-            <Text>{lang.pdf["request-inf"]}:</Text>
-          </View>
-          <View style={styles.table}>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader15}>
-                <Text>{lang.pdf.hotel}:</Text>
-              </View>
-              <View style={styles.tableColHeader65}>
-                <Text>{sale.user.property.propertyName}</Text>
-              </View>
-              <View style={styles.tableColHeader10}>
-                <Text>{lang.pdf.location}:</Text>
-              </View>
-              <View style={styles.tableColHeader10}>
-                {sale.user.typePrice == 1 && <Text>QROO</Text>}
-                {sale.user.typePrice == 2 && <Text>NAL</Text>}
-                {sale.user.typePrice == 3 && <Text>EXW</Text>}
-              </View>
-            </View>
-          </View>
-          <Text style={styles.parrafo}>{lang.pdf.shipping}:</Text>
-          <View style={styles.table}>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader15}>
-                <Text>{lang.pdf.address}:</Text>
-              </View>
-              <View style={styles.tableColHeader85}>
-                {address.city &&
-                address.city &&
-                address.state &&
-                address.country &&
-                address.postalCode ? (
-                  <Text style={styles.address}>
-                    {address.address}, {address.city}, {address.state},{" "}
-                    {address.country}, CP. {address.postalCode}
-                  </Text>
-                ) : (
-                  <Text style={styles.address}>{lang.pdf.personalized}</Text>
-                )}
-              </View>
-            </View>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader15}>
-                <Text>{lang.pdf.contact}:</Text>
-              </View>
-              <View style={styles.tableColHeader40}>
-                <Text>{sale.user.userName}</Text>
-              </View>
-              <View style={styles.tableColHeader15}>
-                <Text>{lang.pdf.phone}:</Text>
-              </View>
-              <View style={styles.tableColHeader30}>
-                <Text>{sale.user.telefono}</Text>
-              </View>
-            </View>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader15}>
-                <Text>Email:</Text>
-              </View>
-              <View style={styles.tableColHeader85}>
-                <Text>{sale.user.email}</Text>
-              </View>
-            </View>
-          </View>
-          <Text>{"\n"}</Text>
-          <View style={styles.table}>
-            <View style={styles.tableRow}>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader20,
-                  styles.center
-                )}
-              >
-                <Text>SKU</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader40,
-                  styles.center
-                )}
-              >
-                <Text>{lang.pdf.item}</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader10,
-                  styles.center
-                )}
-              >
-                <Text>UOM</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader10,
-                  styles.center
-                )}
-              >
-                <Text>{lang.pdf.quantity}</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader10,
-                  styles.center
-                )}
-              >
-                <Text>{lang.pdf.UP}</Text>
-              </View>
-              <View
-                style={Object.assign(
-                  {},
-                  styles.tableColHeader10,
-                  styles.center
-                )}
-              >
-                <Text>{lang.pdf.total}</Text>
-              </View>
-            </View>
-            {items.map((producto) => (
-              <View key={producto.id} style={styles.tableRow}>
-                <View style={styles.tableColHeader20}>
-                  <Text>{producto.sku}</Text>
-                </View>
-                <View style={styles.tableColHeader40}>
-                  <Text>{producto.nameProduct}</Text>
-                </View>
-                <View style={styles.tableColHeader10}>
-                  <Text>CS {producto.unitsPackage}</Text>
-                </View>
-                <View
-                  style={Object.assign(
-                    {},
-                    styles.tableColHeader10,
-                    styles.right
-                  )}
-                >
-                  <Text>{producto.quantity}</Text>
-                </View>
-                <View style={styles.tableColHeader10}>
-                  <Text>${producto.price}</Text>
-                </View>
-                <View style={styles.tableColHeader10}>
-                  <Text>${producto.price * producto.quantity}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
-          <Text>{"\n"}</Text>
-          <View style={styles.tabletotal}>
-            <View style={styles.tableRow}>
-              <View style={styles.tableColHeader70}>
-                <Text>{lang.pdf["amounts-expressed"]}</Text>
-                <Text>{lang.pdf["delivery-service"]}</Text>
-              </View>
-              <View style={styles.tableColHeadernone}>
-                <Text> </Text>
-              </View>
-              <View style={styles.table20}>
-                <View style={styles.tableRow}>
-                  <View style={styles.tableColHeader50}>
-                    <Text>Sub total</Text>
-                  </View>
-                  <View style={styles.tableColHeader50}>
-                    <Text>${subtotal}</Text>
-                  </View>
-                </View>
-                <View style={styles.tableRow}>
-                  <View style={styles.tableColHeader50}>
-                    <Text>IVA</Text>
-                  </View>
-                  <View style={styles.tableColHeader50}>
-                    <Text>${montoIVA}</Text>
-                  </View>
-                </View>
-                <View style={styles.tableRow}>
-                  <View style={styles.tableColHeader50}>
-                    <Text>Total</Text>
-                  </View>
-                  <View style={styles.tableColHeader50}>
-                    <Text>${sale.totalSale}</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.footer}>
-            <View style={styles.tabletotal}>
-              <View style={styles.tableHeaderRow}>
-                <View style={styles.tableHeader10qr}>
-                  <Image
-                    src={"/images/logos/qr.png"}
-                    style={styles.imagecala}
-                    alt="logo cala"
-                  />
-                </View>
-                <View style={styles.tableColHeader90}></View>
-              </View>
-              <View style={styles.tableHeaderRow}>
-                <View style={styles.tableHeader100}>
-                  <Text>{"\n"}</Text>
-                  <Text>CANCÚN | MIAMI | PUNTA CANA</Text>
-                  <Text>{"\n"}</Text>
-                </View>
-              </View>
-              <View style={styles.tableHeaderRow}>
-                <View style={styles.tableHeader35}>
-                  <Text>d: Av. Andrés Quintana Roo, SM 98, M 66 L 2-05,</Text>
-                  <Text>Cancún, Quintana Roo 77537, México</Text>
-                </View>
-                <View style={styles.tableHeader15}>
-                  <Text>t: (998) 881 8100</Text>
-                </View>
-                <View style={styles.tableHeader15}>
-                  <Text>w: gruporegio.mx</Text>
-                </View>
-                <View style={styles.tableHeader20}>
-                  <Image
-                    src={"/images/logos/Logo-CALA.png"}
-                    style={styles.imagecala}
-                    alt="logo cala"
-                  />
-                </View>
-                <View style={styles.tableHeader15}>
-                  <Image
-                    src={"/images/logos/fsc.png"}
-                    style={styles.imagecala}
-                    alt="logo cala"
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-        </Page>
-      </Document>
-    {/* </PDFViewer> */}
+        </View>
+      </Page>
+    </Document>
+    // </PDFViewer>
   );
 };
 
