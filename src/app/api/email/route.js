@@ -87,7 +87,7 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
   // Calcula el subtotal
   let subtotal = totalSale - montoIVA;
   let content = `<table style='width: 100%; border-collapse: collapse'><thead><tr><th style='width: 100%; border: none; padding: 8px'><img src='${process.env.NEXT_URL_BASE}/images/logos/logo_grupo_regio-300.png' alt='' width='140' /></th></tr></thead></table><br />`;
-  content += `<p>Hola, ${items.user.name}<br>Gracias por tu solicitud, daremos seguimiento.</p>`;
+  content += `<p>Hola, ${items.user.name}, ${lang.order["thank-request"]}<br>${lang.order["email-confirmation"]}</p>`;
   content += `<table style="width: 100%; border-collapse: collapse">
       <thead>
         <tr>
@@ -162,12 +162,25 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
   content += `<table style="width: 100%; border-collapse: collapse">
       <tbody>
         <tr>
-          <td style="width: 15%; border: solid 1px; padding: 8px">${lang.pdf.hotel}:</td>
+          <td style="width: 15%; border: solid 1px; padding: 8px">${
+            lang.pdf.hotel
+          }:</td>
           <td style="width: 60%; border: solid 1px; padding: 8px">
             ${items.user.property}
           </td>
-          <td style="width: 10%; border: solid 1px; padding: 8px">${lang.pdf.location}</td>
-          <td style="width: 15%; border: solid 1px; padding: 8px">${items.user.typePrice}</td>
+          <td style="width: 10%; border: solid 1px; padding: 8px">${
+            lang.pdf.location
+          }</td>
+          <td style="width: 15%; border: solid 1px; padding: 8px">${
+            items.user.typePrice === 1
+              ? "QROO"
+              : items.user.typePrice === 2
+              ? "NAL"
+              : items.user.typePrice === 3
+              ? "EXW"
+              : ""
+          }</td>
+
         </tr>
       </tbody>
     </table>`;

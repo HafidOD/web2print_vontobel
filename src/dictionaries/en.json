@@ -79,6 +79,7 @@
   "order": {
     "thank-request": "Thank you for your request!",
     "send-email-confirmation": "We will send you an email confirmation for personalized assistance and tracking",
+    "email-confirmation": "Your request has been received and is being processed. Here are the details of your order",
     "order-id": "Your Order ID is",
     "questions": "Questions",
     "previous-orders": "Previous orders",
