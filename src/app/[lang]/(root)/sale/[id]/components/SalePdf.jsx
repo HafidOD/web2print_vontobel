@@ -512,11 +512,13 @@ const SalePdf = ({ sale, items, address, lang }) => {
                 address.country &&
                 address.postalCode ? (
                   <Text style={styles.address}>
-                    {address.address}, {address.city}, {address.state},{" "}
-                    {address.country}, CP. {address.postalCode}
+                    {address.officeName}: {address.address}, {address.city},{" "}
+                    {address.state}, {address.country}, CP. {address.postalCode}
                   </Text>
                 ) : (
-                  <Text style={styles.address}>{lang.pdf.personalized}</Text>
+                  <Text style={styles.address}>
+                    {address.officeName}: {address.address}
+                  </Text>
                 )}
               </View>
             </View>

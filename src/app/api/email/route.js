@@ -180,7 +180,7 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
           </td>
           <td style="width: 85%; border: solid 1px; padding: 8px">${
             items.address.officeName
-          }, ${items.address.address} ${
+          }: ${items.address.address} ${
     items.address.city ? items.address.city : ""
   } ${items.address.country ? items.address.country : ""} ${
     items.address.state ? items.address.state : ""
@@ -274,9 +274,9 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
       </thead>
       <tbody>`;
   items.items.forEach((producto) => {
-    content += `<tr><td style='padding:2px 10px;border: solid 1px;'>${producto.sku}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.nameProduct}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.unitsPackage}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.price}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.quantity}</td><td style='padding:2px 10px;border: solid 1px;'>$${producto.total}</td></tr></tbody></table>`;
+    content += `<tr><td style='padding:2px 10px;border: solid 1px;'>${producto.sku}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.nameProduct}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.unitsPackage}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.price}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.quantity}</td><td style='padding:2px 10px;border: solid 1px;'>$${producto.total}</td></tr>`;
   });
-  content += `<br />
+  content += `</tbody></table><br />
     <table style="width: 100%; border-collapse: collapse">
       <tbody>
         <tr>
