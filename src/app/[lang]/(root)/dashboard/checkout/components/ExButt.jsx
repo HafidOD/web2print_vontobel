@@ -20,7 +20,7 @@ export default function ExButt({ user, lang, paramslang }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ items, user: user, address }),
+        body: JSON.stringify({ items, user: user, address, lang }),
       });
       // console.log(response);
 
@@ -28,9 +28,10 @@ export default function ExButt({ user, lang, paramslang }) {
       if (response.ok) {
         const data = await response.json();
         // Redirigir a la página de agradecimiento
-        // console.log(data);
+        console.log(data);
         window.location.href = `/${lang}/dashboard/thankyou?saleId=${data.sale.id}`;
       } else {
+        console.log(error);
         console.error("Error al enviar el correo.");
         setLoading(false);
       }

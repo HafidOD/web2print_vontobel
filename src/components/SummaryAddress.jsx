@@ -40,17 +40,17 @@ export default function SummaryAddress({ paramslang }) {
           </p>
           {address.city && (
             <p className="text-primaryBlue">
-              <b>{lang.addresses.city}:</b> {address.city}.
+              <b>{paramslang.addresses.city}:</b> {address.city}.
             </p>
           )}
           {address.state && (
             <p className="text-primaryBlue">
-              <b>{lang.addresses.state}:</b> {address.state}.
+              <b>{paramslang.addresses.state}:</b> {address.state}.
             </p>
           )}
           {address.country && (
             <p className="text-primaryBlue">
-              <b>{lang.addresses.country}:</b> {address.country}.
+              <b>{paramslang.addresses.country}:</b> {address.country}.
             </p>
           )}
         </div>
