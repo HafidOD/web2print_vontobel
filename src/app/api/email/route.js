@@ -59,7 +59,7 @@ export async function POST(req) {
       var mailOptions = {
         from: `"Web2Print" <${process.env.SMTP_USER}>`,
         // to: `hafid@tachuela.mx`,
-        to: `${items.user.email}, 'paloma.berumen@marriott.com' ,'marriott@gruporegio.mx'`,
+        to: `${items.user.email}, 'paloma.berumen@marriott.com', 'hafid@tachuela.mx' ,'marriott@gruporegio.mx'`,
         subject: "Solicitud de pedido Web2Print",
         html: emailContent,
       };
