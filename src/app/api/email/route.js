@@ -48,7 +48,7 @@ export async function POST(req) {
       },
     });
     if (items.user.email != "masteruser@marriott.com") {
-      const mailOptions = {
+      var mailOptions = {
         from: `"Web2Print" <${process.env.SMTP_USER}>`,
         // to: `hafid@tachuela.mx`,
         to: `${items.user.email}, 'marriott@gruporegio.mx'`,
@@ -57,7 +57,7 @@ export async function POST(req) {
       };
     } else {
       {
-        const mailOptions = {
+        var mailOptions = {
           from: `"Web2Print" <${process.env.SMTP_USER}>`,
           to: `hafid@tachuela.mx`,
           // to: `${items.user.email}, 'paloma.berumen@marriott.com' ,'marriott@gruporegio.mx'`,
