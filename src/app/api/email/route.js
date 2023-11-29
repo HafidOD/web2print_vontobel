@@ -47,14 +47,25 @@ export async function POST(req) {
         pass: process.env.SMTP_PASS,
       },
     });
-
-    const mailOptions = {
-      from: `"Web2Print" <${process.env.SMTP_USER}>`,
-      // to: `hafid@tachuela.mx`,
-      to: `${items.user.email}, 'marriott@gruporegio.mx'`,
-      subject: "Solicitud de pedido Web2Print",
-      html: emailContent,
-    };
+    if (items.user.email != "masteruser@marriott.com") {
+      const mailOptions = {
+        from: `"Web2Print" <${process.env.SMTP_USER}>`,
+        // to: `hafid@tachuela.mx`,
+        to: `${items.user.email}, 'marriott@gruporegio.mx'`,
+        subject: "Solicitud de pedido Web2Print",
+        html: emailContent,
+      };
+    } else {
+      {
+        const mailOptions = {
+          from: `"Web2Print" <${process.env.SMTP_USER}>`,
+          // to: `hafid@tachuela.mx`,
+          to: `${items.user.email}, 'hafid@tachuela.mx' ,'marriott@gruporegio.mx'`,
+          subject: "Solicitud de pedido Web2Print",
+          html: emailContent,
+        };
+      }
+    }
     // return NextResponse.json({
     //   menssage:
     //     "<h1>Detalles del Pedido</h1><p>Pedido para: Marriott Los Cabos</p><p>Usuario: Hafidj</p><p>Teléfono: 9981538039</p><p>Fecha de solicitud: 10/11/2023</p><p>Dirección de envio: Bonvoy Cancúnf, Conocida Cancún México Quintana Roo 77500</p><table><thead><tr><th style='padding:2px 10px'>Imagen</th><th style='padding:2px 10px'>Producto</th><th style='padding:2px 10px'>SKU</th><th style='padding:2px 10px'>Precio</th><th style='padding:2px 10px'>Cantidad</th><th style='padding:2px 10px'>Total</th><th style='padding:2px 10px'>Moneda</th></tr></thead><tbody><tr><td style='padding:2px 10px'><img src=http://localhost:3000https://res.cloudinary.com/dfvesf8qn/image/upload/v1695402289/j2uid2xc83unc40gr9tv.png width=\"100\" alt=Advanced Check In Card></td><td style='padding:2px 10px'>Advanced Check In Card</td><td style='padding:2px 10px'>STR-STA-ABB</td><td style='padding:2px 10px'>114</td><td style='padding:2px 10px'>1</td><td style='padding:2px 10px'>$114</td><td style='padding:2px 10px'>MXN</td></tr><tr><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px",
