@@ -96,7 +96,7 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
   // Calcula el subtotal
   let subtotal = totalSale - montoIVA;
   let content = `<table style='width: 100%; border-collapse: collapse'><thead><tr><th style='width: 100%; border: none; padding: 8px'><img src='${process.env.NEXT_URL_BASE}/images/logos/logo_grupo_regio-300.png' alt='' width='140' /></th></tr></thead></table><br />`;
-  content += `<p>Hola, ${items.user.name}, ${lang.order["thank-request"]}<br>${lang.order["email-confirmation"]}</p>`;
+  content += `<p>${lang.order.hello}, ${items.user.name}, ${lang.order["thank-request"]}<br>${lang.order["email-confirmation"]}</p>`;
   content += `<table style="width: 100%; border-collapse: collapse">
       <thead>
         <tr>

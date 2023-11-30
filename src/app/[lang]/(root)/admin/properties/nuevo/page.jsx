@@ -41,7 +41,7 @@ function PropertyForm({ params }) {
     const formData = new FormData();
     formData.append("propertyName", property.propertyName);
 
-    const res = await fetch("/api/propertieergeras", {
+    const res = await fetch("/api/properties", {
       method: "POST",
       body: formData,
       // headers: { "Content-type": "multipart/form-data" },

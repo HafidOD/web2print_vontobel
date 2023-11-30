@@ -77,6 +77,7 @@
     "no-addresses": "No addresses available"
   },
   "order": {
+    "hello": "Hello",
     "thank-request": "Thank you for your request!",
     "send-email-confirmation": "We will send you an email confirmation for personalized assistance and tracking",
     "email-confirmation": "Your request has been received and is being processed. Here are the details of your order",
