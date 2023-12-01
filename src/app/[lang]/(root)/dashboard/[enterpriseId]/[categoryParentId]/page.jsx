@@ -1,8 +1,9 @@
 import Categories from "@/components/Categories";
+export const dynamic = "force-dynamic";
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
 export async function fetchCategories(id, parentId) {
-  const res = await fetch(`${URL}/${id}/${parentId}/`,{ cache: 'no-store' });
+  const res = await fetch(`${URL}/${id}/${parentId}/`);
   const data = await res.json();
   // console.log(data);
   return data.categories;
