@@ -16,7 +16,7 @@ export default function Categories({ categories, params }) {
             className="w-full"
             key={category.id}
           >
-            <div className="w-full bg-white rounded-lg shadow-md lg:max-w-sm border-l-6">
+            <div className="flex items-center justify-center w-full h-full bg-white rounded-lg shadow-md lg:max-w-sm border-l-6">
               {/* <img
                 className="object-contain w-full h-48"
                 src={category.imageCategory}
