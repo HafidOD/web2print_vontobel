@@ -8,17 +8,11 @@ datasource db {
   relationMode = "prisma"
 }
 
-enum Role {
-  USER
-  SUPERUSER
-  ADMIN
-}
-
 model Property {
-  id Int @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   propertyName String
-  users User[]
-  addresses Address[]
+  users        User[]
+  addresses    Address[]
 }
 
 model User {
@@ -27,66 +21,66 @@ model User {
   password    String
   telefono    String?
   userName    String
-  propertyId Int?
-  property Property? @relation(fields: [propertyId], references: [id])
-  enterprises Enterprise[]
-  addresses   Address[]
+  propertyId  Int?
   role        Int          @default(1)
-  sales       Sale[]
   typePrice   Int
   currency    String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  property    Property?    @relation(fields: [propertyId], references: [id])
+  enterprises Enterprise[]
+  addresses   Address[]
+  sales       Sale[]
 }
 
 model Enterprise {
   id             Int        @id @default(autoincrement())
   enterpriseName String     @unique
   logo           String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
   users          User[]
   products       Product[]
   addresses      Address[]
   categories     Category[]
   sale           Sale[]
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
 }
 
 model Address {
-  id           Int        @id @default(autoincrement())
-  officeName   String     @unique
+  id           Int         @id @default(autoincrement())
+  officeName   String      @unique
   address      String
   city         String
   country      String
   state        String
   postalCode   Int
-  enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
   enterpriseId Int?
-  property   Property? @relation(fields: [propertyId], references: [id])
-  propertyId Int?
+  propertyId   Int?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
+  property     Property?   @relation(fields: [propertyId], references: [id])
   users        User[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
 }
 
 model Product {
   id                 Int        @id @default(autoincrement())
   sku                String     @unique
-  nameProduct        String     @unique
+  nameProduct        String     
   imageProduct       String?
-  priceLocal         Float
-  priceNacional      Float?
-  priceExt           Float?
+  priceLocal         Float      @db.Float
+  priceNacional      Float?     @db.Float
+  priceExt           Float?     @db.Float
   descriptionProduct String?
   stockProduct       Int?
   unitsPackage       Int
-  categories         Category[]
   published          Boolean    @default(false)
   enterpriseId       Int
-  enterprise         Enterprise @relation(fields: [enterpriseId], references: [id])
-  sales              Sale[]
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
+  categories         Category[]
+  enterprise         Enterprise @relation(fields: [enterpriseId], references: [id])
+  sales              Sale[]
 }
 
 model Category {
@@ -94,23 +88,68 @@ model Category {
   categoryName   String       @unique
   imageCategory  String?
   parentCategory Int
-  products       Product[]
-  enterprises    Enterprise[]
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+  products       Product[]
+  enterprises    Enterprise[]
 }
 
 model Sale {
   id            Int         @id @default(autoincrement())
   userId        Int
   totalSale     Float
-  products      Product[]
   data          Json
   address       Json
   enterpriseInt Int?
-  enterprise    Enterprise? @relation(fields: [enterpriseInt], references: [id])
-  user          User        @relation(fields: [userId], references: [id])
   date          DateTime
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  products      Product[]
+  enterprise    Enterprise? @relation(fields: [enterpriseInt], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
+}
+
+model AddressToUser {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_AddressToUser_AB_unique")
+  @@index([B], map: "_AddressToUser_B_index")
+  @@map("_AddressToUser")
+}
+
+model CategoryToEnterprise {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_CategoryToEnterprise_AB_unique")
+  @@index([B], map: "_CategoryToEnterprise_B_index")
+  @@map("_CategoryToEnterprise")
+}
+
+model CategoryToProduct {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_CategoryToProduct_AB_unique")
+  @@index([B], map: "_CategoryToProduct_B_index")
+  @@map("_CategoryToProduct")
+}
+
+model EnterpriseToUser {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_EnterpriseToUser_AB_unique")
+  @@index([B], map: "_EnterpriseToUser_B_index")
+  @@map("_EnterpriseToUser")
+}
+
+model ProductToSale {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_ProductToSale_AB_unique")
+  @@index([B], map: "_ProductToSale_B_index")
+  @@map("_ProductToSale")
 }
