@@ -50,8 +50,8 @@ export async function POST(req) {
     // if (items.user.email != "masteruser@marriott.com") {
     const mailOptions = {
       from: `"Web2Print" <${process.env.SMTP_USER}>`,
-      // to: `hafid@tachuela.mx`,
-      to: `${items.user.email}, marriott@gruporegio.mx, paloma.berumen@marriott.com, Asenath.araque@marriott.com, Amanda.k.perez@marriott.com, carlos.olguin@marriott.com, hafid@tachuela.mx`,
+      to: `hafid@tachuela.mx`,
+      // to: `${items.user.email}, marriott@gruporegio.mx`,
       subject: "Solicitud de pedido Web2Print",
       html: emailContent,
     };
@@ -303,7 +303,9 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
       <tbody>
         <tr>
           <td style="width: 70%; border: solid 1px; padding: 8px">
-            ${lang.pdf["amounts-expressed"]}<br />
+            ${lang.pdf["amounts-expressed"]} ${
+    items.user.typePrice === 3 ? lang.pdf.dollars : lang.pdf["mexican-pesos"]
+  }<br />
             ${lang.pdf["delivery-service"]}
           </td>
           <td style="width: 10%; border: none; padding: 8px"></td>

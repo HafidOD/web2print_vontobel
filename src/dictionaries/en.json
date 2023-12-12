@@ -134,7 +134,9 @@
     "quantity": "Qty",
     "UP": "UP",
     "total": "Total",
-    "amounts-expressed": "Amounts expressed in Mexican pesos",
+    "amounts-expressed": "Amounts expressed in",
+    "mexican-pesos": "Mexican pesos",
+    "dollars": "dollars",
     "delivery-service": "Delivery service for hotels outside of Mexico has an extra cost.",
     "certified-supplier": "Supplier certified by"
   },

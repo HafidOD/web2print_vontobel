@@ -62,7 +62,9 @@ export default async function AdminProductsPage({ params }) {
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
                     {lang.products["local-price"]}: ${product.priceLocal},
                     {lang.products["national-price"]}: ${product.priceNacional},
-                    {lang.products["foreign-price"]}: ${product.priceExt}
+                    {lang.products["foreign-price"]}: $
+                    {Math.round(product.priceLocal / 18.5)}
+                    {/* {lang.products["foreign-price"]}: ${product.priceExt} */}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500 truncate">
                     {lang.products["brand"]}: {product.enterpriseId}

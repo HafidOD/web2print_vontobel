@@ -14,8 +14,10 @@ export default function ProductCard({
   currency,
   paramslang,
 }) {
-  // console.log(paramslang);
-  const prices = { 1: "priceLocal", 2: "priceNacional", 3: "priceExt" };
+  product.priceExtE = Math.round(product.priceLocal / 18.5);
+
+  // console.log(product);
+  const prices = { 1: "priceLocal", 2: "priceNacional", 3: "priceExtE" };
   const priceProduct = product[prices[typePrice]];
   const cart = useCart();
   const data = {

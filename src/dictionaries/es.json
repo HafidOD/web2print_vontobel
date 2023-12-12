@@ -131,7 +131,9 @@
     "quantity": "Cant",
     "UP": "PU",
     "total": "Importe",
-    "amounts-expressed": "Todas las cifras se expresan en pesos mexicanos",
+    "amounts-expressed": "Todas las cifras se expresan en",
+    "mexican-pesos": "pesos Mexicanos",
+    "dollars": "dolares",
     "delivery-service": "El servicio de entrega para hoteles fuera de México tiene un costo extra",
     "certified-supplier": "Proveedor certificado por"
   },
