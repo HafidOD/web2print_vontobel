@@ -600,7 +600,12 @@ const SalePdf = ({ sale, items, address, lang }) => {
         <View style={styles.tabletotal}>
           <View style={styles.tableRow}>
             <View style={styles.tableColHeader70}>
-              <Text>{lang.pdf["amounts-expressed"]}</Text>
+              <Text>
+                {lang.pdf["amounts-expressed"]}{" "}
+                {sale.user.typePrice === 3
+                  ? lang.pdf.dollars
+                  : lang.pdf["mexican-pesos"]}
+              </Text>
               <Text>{lang.pdf["delivery-service"]}</Text>
             </View>
             <View style={styles.tableColHeadernone}>
