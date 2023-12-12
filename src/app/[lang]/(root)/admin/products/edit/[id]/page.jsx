@@ -183,7 +183,7 @@ export default function EditProductPage({ params }) {
     formData.append("nameProduct", product.nameProduct);
     formData.append("priceLocal", product.priceLocal);
     formData.append("priceNacional", product.priceNacional);
-    formData.append("priceExt", product.priceExt);
+    // formData.append("priceExt", product.priceExt);
     formData.append("descriptionProduct", product.descriptionProduct);
     formData.append("stockProduct", product.stockProduct);
     formData.append("unitsPackage", product.unitsPackage);
@@ -286,7 +286,7 @@ export default function EditProductPage({ params }) {
             value={product.priceNacional}
             className="w-full px-3 py-2 border shadow appearance-none"
           />
-          <label
+          {/* <label
             htmlFor="priceExt"
             className="block my-2 text-sm font-bold text-primaryBlue"
           >
@@ -295,11 +295,10 @@ export default function EditProductPage({ params }) {
           <input
             name="priceExt"
             type="text"
-            // placeholder="Marr"
             onChange={handleChange}
             value={product.priceExt}
             className="w-full px-3 py-2 border shadow appearance-none"
-          />
+          /> */}
           <label
             htmlFor="descriptionProduct"
             className="block my-2 text-sm font-bold text-primaryBlue"

@@ -53,7 +53,7 @@ export async function POST(request) {
         imageProduct: pathImg,
         priceLocal: parseFloat(data.get("priceLocal")),
         priceNacional: parseFloat(data.get("priceNacional")),
-        priceExt: parseFloat(data.get("priceExt")),
+        // priceExt: parseFloat(data.get("priceExt")),
         descriptionProduct: data.get("descriptionProduct"),
         stockProduct: parseInt(data.get("stockProduct")),
         unitsPackage: parseInt(data.get("unitsPackage")),
