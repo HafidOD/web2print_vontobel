@@ -34,6 +34,7 @@ const lang = {
     foreign: "Foreign",
     login: "Log In",
     "user-register": "User registration request",
+    send: "Send",
   },
   es: {
     property: "Propiedad",
@@ -65,34 +66,31 @@ const lang = {
     foreign: "Extranjero",
     login: "Iniciar Sesión",
     "user-register": "Solicitud de alta de usuario",
+    send: "Enviar",
   },
 };
 
 export default function PageRegister({ params }) {
   const [user, setUser] = useState({
     email: "",
-    password: "",
     telefono: "",
     userName: "",
     propertyId: null,
     enterprises: [],
-    role: null, //1:admin, 2:user
     typePrice: null, //1:local, 2:nacional, 3:extrangero
-    currency: "", //MXN, USD
-    addresses: [],
   });
 
+  const [loading, setLoading] = useState(false);
   const form = useRef(null);
   const router = useRouter();
 
   const [enterpriseOptions, setEnterpriseOptions] = useState([]);
-  const [addressOptions, setAddressOptions] = useState([]);
   const [propertyOptions, setPropertyOptions] = useState([]);
 
   const handleChange = (e) => {
     // console.log(e.target.type);
     if (e.target.type === "checkbox") {
-      console.log(e.target.checked);
+      // console.log(e.target.checked);
       if (e.target.checked) {
         setUser({
           ...user,
@@ -123,7 +121,7 @@ export default function PageRegister({ params }) {
         // console.log(data.enterprises);
         // Extraer los IDs de las empresas y establecerlos como opciones
         const options = data.properties.map((property) => ({
-          value: property.id,
+          value: property.propertyName,
           label: property.propertyName, // Supongamos que el nombre de la empresa se llama 'name'
         }));
         setPropertyOptions(options);
@@ -138,7 +136,7 @@ export default function PageRegister({ params }) {
         // console.log(data.enterprises);
         // Extraer los IDs de las empresas y establecerlos como opciones
         const options = data.enterprises.map((enterprise) => ({
-          value: enterprise.id,
+          value: enterprise.enterpriseName,
           label: enterprise.enterpriseName, // Supongamos que el nombre de la empresa se llama 'name'
         }));
         setEnterpriseOptions(options);
@@ -146,40 +144,22 @@ export default function PageRegister({ params }) {
       .catch((error) => {
         console.error(lang[params.lang]["error-retrieving-companies"], error);
       });
-
-    // Hacer una solicitud fetch para obtener las direcciones
-    fetch("/api/addresses")
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data.addresses);
-        // Mapear los datos de las direcciones para obtener opciones
-        const options = data.addresses.map((address) => ({
-          value: address.id,
-          label: address.officeName, // Supongamos que el nombre de la dirección se llama 'name'
-        }));
-        setAddressOptions(options);
-      })
-      .catch((error) => {
-        console.error(lang[params.lang]["error-retrieving-addresses"], error);
-      });
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("email", user.email);
-    formData.append("password", user.password);
     formData.append("telefono", user.telefono);
     formData.append("userName", user.userName);
-    formData.append("propertyId", user.propertyId);
+    formData.append("property", user.propertyId);
     formData.append("enterprises", user.enterprises);
-    formData.append("role", user.role);
     formData.append("typePrice", user.typePrice);
-    formData.append("currency", user.currency);
-    formData.append("addresses", user.addresses);
 
-    const res = await fetch("/api/create/users", {
+    const res = await fetch("/api/email/newuser", {
       method: "POST",
       body: formData,
     });
@@ -187,13 +167,15 @@ export default function PageRegister({ params }) {
     if (res.ok) {
       form.current.reset();
       router.refresh();
-      // router.push(`/${params.lang}/admin/users`);
+      router.push(`/${params.lang}/register/send`);
     }
     if (res.status == 500 || res.status == 405) {
       toast.error(lang[params.lang]["error-server"]);
+      setLoading(false);
     }
     if (res.status == 400) {
       toast.error(lang[params.lang]["email-use"]);
+      setLoading(false);
     }
   };
 
@@ -287,21 +269,6 @@ export default function PageRegister({ params }) {
               required
             />
             <label
-              htmlFor="password"
-              className="block my-2 text-sm font-bold text-primaryBlue"
-            >
-              {lang[params.lang]["password"]}:
-            </label>
-            <input
-              name="password"
-              type="password"
-              placeholder={lang[params.lang]["password"]}
-              onChange={handleChange}
-              value={user.password}
-              className="w-full px-3 py-2 border shadow appearance-none"
-              required
-            />
-            <label
               htmlFor="telefono"
               className="block my-2 text-sm font-bold text-primaryBlue"
             >
@@ -341,25 +308,6 @@ export default function PageRegister({ params }) {
               ))}
             </div>
 
-            {/* <label
-              htmlFor="role"
-              className="block my-2 text-sm font-bold text-primaryBlue"
-            >
-              {lang[params.lang]["role"]}
-            </label>
-            <select
-              name="role"
-              onChange={handleChange}
-              value={user.role}
-              className="w-full px-3 py-2 border shadow"
-              required
-            >
-              <option value="">{lang[params.lang]["select-type-user"]}</option>
-
-              <option value="2">USER</option>
-              <option value="1">ADMIN</option>
-            </select> */}
-
             <label
               htmlFor="typePrice"
               className="block my-2 text-sm font-bold text-primaryBlue"
@@ -375,57 +323,17 @@ export default function PageRegister({ params }) {
             >
               <option value="">{lang[params.lang]["select-option"]}</option>
 
-              <option value="1">{lang[params.lang]["local"]}</option>
-              <option value="2">{lang[params.lang]["national"]}</option>
-              <option value="3">{lang[params.lang]["foreign"]}</option>
+              <option value="LOCAL">{lang[params.lang]["local"]}</option>
+              <option value="NACIONAL">{lang[params.lang]["national"]}</option>
+              <option value="EXTRANJERO">{lang[params.lang]["foreign"]}</option>
             </select>
 
-            <label
-              htmlFor="currency"
-              className="block my-2 text-sm font-bold text-primaryBlue"
+            <button
+              className="px-4 py-2 mt-5 font-bold text-white bg-primaryBlue"
+              disabled={loading}
+              style={{ backgroundColor: `${loading ? "#ccc" : "#193761"}` }}
             >
-              {lang[params.lang]["currency"]}:
-            </label>
-            <select
-              name="currency"
-              onChange={handleChange}
-              value={user.currency}
-              className="w-full px-3 py-2 border shadow"
-              required
-            >
-              <option value="">{lang[params.lang]["select-currency"]}</option>
-
-              <option value="MXN">MXN</option>
-              <option value="USD">USD</option>
-            </select>
-
-            <label
-              htmlFor="addresses"
-              className="block my-2 text-sm font-bold text-primaryBlue"
-            >
-              {lang[params.lang]["address"]}:
-            </label>
-            <div className="flex flex-col space-y-2">
-              {addressOptions.map((option) => (
-                <label
-                  key={option.value}
-                  className="flex items-center space-x-2"
-                >
-                  <input
-                    name="addresses"
-                    type="checkbox"
-                    value={option.value}
-                    onChange={handleChange}
-
-                    // checked={user.addresses.includes(option.value)}
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
-
-            <button className="px-4 py-2 mt-5 font-bold text-white bg-primaryBlue">
-              {lang[params.lang]["create"]}
+              {lang[params.lang]["send"]}
             </button>
           </form>
         </div>
