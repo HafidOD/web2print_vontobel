@@ -13,7 +13,7 @@ export default function Enterpises({ enterprises, paramslang }) {
         return (
           <Link
             href={`/${paramslang}/dashboard/${enterprise.id}/2`}
-            className="w-1/3 px-4"
+            className="w-full px-4 lg:w-1/3"
             key={enterprise.id}
           >
             <div className="w-full bg-white rounded-sm shadow-lg lg:max-w-sm">
