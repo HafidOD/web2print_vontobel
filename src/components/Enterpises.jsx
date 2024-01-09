@@ -7,13 +7,13 @@ import Link from "next/link";
 export default function Enterpises({ enterprises, paramslang }) {
   return (
     // <div className="grid gap-3 lg:grid-cols-3 justify-items-center">
-    <div className="flex flex-wrap justify-center gap-3 justify-items-center">
+    <div className="flex flex-wrap justify-center justify-items-center">
       {/* <p>enterprise id = { enterprise }</p> */}
       {enterprises.map((enterprise) => {
         return (
           <Link
             href={`/${paramslang}/dashboard/${enterprise.id}/2`}
-            className="w-1/3"
+            className="w-1/3 px-4"
             key={enterprise.id}
           >
             <div className="w-full bg-white rounded-sm shadow-lg lg:max-w-sm">
