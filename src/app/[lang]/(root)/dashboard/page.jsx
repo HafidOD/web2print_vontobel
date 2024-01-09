@@ -27,14 +27,10 @@ export default async function DashboardPage({ params }) {
         <h3 className="text-3xl font-medium text-center text-primaryBlue">
           {lang.dashboard.welcome}
           <span className="font-bold"> {session.user.property} </span>
-          {lang.dashboard.our}
         </h3>
         <h3 className="mb-5 text-3xl font-bold text-center text-primaryBlue">
           {lang.dashboard["inventory-management"]}
         </h3>
-        <p className="text-xl text-right text-secondGray">
-          - {lang.dashboard["simplify-inventory"]}
-        </p>
       </section>
       <section className="mt-16 md:mt-20">
         <Enterpises

@@ -16,6 +16,7 @@ export default function ProductCard({
 }) {
   product.priceExtE = Math.round(product.priceLocal / 18.5);
 
+  // console.log(product.descriptionProduct == "null");
   // console.log(product);
   const prices = { 1: "priceLocal", 2: "priceNacional", 3: "priceExtE" };
   const priceProduct = product[prices[typePrice]];
@@ -72,6 +73,9 @@ export default function ProductCard({
             {product.nameProduct}
           </h4>
           <div>
+            <p className="text-xs leading-normal text-secondGray md:text-sm">
+              {product.descriptionProduct}
+            </p>
             <p className="text-xs leading-normal text-secondGray md:text-sm">
               ${priceProduct} {currency}
             </p>

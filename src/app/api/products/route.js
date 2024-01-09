@@ -6,6 +6,8 @@ import path from "path";
 export async function GET(request) {
   try {
     const products = await prisma.product.findMany({
+      // skip: 5,
+      // take: 5,
       include: {
         enterprise: true,
         categories: true,

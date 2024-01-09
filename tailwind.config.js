@@ -6,9 +6,9 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      sans: ["Helvetica", "Arial", "sans-serif"],
-    },
+    // fontFamily: {
+    //   arial: ["Arial", "Helvetica", "sans-serif"],
+    // },
     extend: {
       colors: {
         primaryBlue: "#193761",

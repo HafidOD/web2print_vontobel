@@ -38,3 +38,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1,
+h2,
+h3 {
+  font-family: "Times New Roman", Times, serif;
+}

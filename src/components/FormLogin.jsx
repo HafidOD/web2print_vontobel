@@ -81,18 +81,23 @@ export default function FormLogin({ lang, paramslang }) {
               required={true}
             ></input>
           </div>
-          <button
-            type="submit"
-            style={{ backgroundColor: `${loading ? "#ccc" : "#193761"}` }}
-            className="w-full text-white bg-[#193761] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-md px-5 py-2.5 text-center"
-            disabled={loading}
-          >
-            {loading ? (
-              <span>{lang.login.authenticating}...</span>
-            ) : (
-              <span>{lang.login.login}</span>
-            )}
-          </button>
+          <div>
+            <button
+              type="submit"
+              style={{ backgroundColor: `${loading ? "#ccc" : "#193761"}` }}
+              className="w-full text-white bg-[#193761] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-md px-5 py-2.5 text-center"
+              disabled={loading}
+            >
+              {loading ? (
+                <span>{lang.login.authenticating}...</span>
+              ) : (
+                <span>{lang.login.login}</span>
+              )}
+            </button>
+            <a href={`/${paramslang}/register`} className="text-primaryBlue">
+              {lang.login.register}
+            </a>
+          </div>
         </form>
       </div>
     </div>

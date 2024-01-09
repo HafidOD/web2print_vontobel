@@ -3,7 +3,8 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "login": "Iniciar sesión",
-    "authenticating": "Autenticando"
+    "authenticating": "Autenticando",
+    "register": "Registro"
   },
   "navbar": {
     "home": "Inicio",
@@ -20,7 +21,7 @@
     }
   },
   "dashboard": {
-    "welcome": "¡Bienvenido",
+    "welcome": "¡Bienvenido a la página",
     "our": "a nuestra",
     "inventory-management": "plataforma de gestión de inventario!",
     "simplify-inventory": "Simplifica y controla tu inventario.",
@@ -63,7 +64,7 @@
     "no-address": "No haz seleccionado una Dirección",
     "select-address": "Seleccionar dirección",
     "select-shipping-address": "Selecciona la dirección de envío",
-    "another-address": "Otra dirección",
+    "another-address": "Dirección de envío personalizada",
     "advisors-shipping-address": "Uno de nuestros asesores te contactará para confirmar tu dirección de envío",
     "shipping-address": "Direccion de envio",
     "company": "Empresa",

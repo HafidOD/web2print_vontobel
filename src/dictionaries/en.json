@@ -3,7 +3,8 @@
     "email": "Email",
     "password": "Password",
     "login": "Log in",
-    "authenticating": "Authenticating"
+    "authenticating": "Authenticating",
+    "register": "Register"
   },
   "navbar": {
     "home": "Home",
@@ -20,9 +21,9 @@
     }
   },
   "dashboard": {
-    "welcome": "Welcome",
+    "welcome": "Welcome to the",
     "our": "to our",
-    "inventory-management": "inventory management platform!",
+    "inventory-management": "ordering page.",
     "simplify-inventory": "Simplify and manage your inventory.",
     "what-would-you-like": "What would you like to do today?",
     "inventory-shipment": "Inventory shipment"
@@ -63,7 +64,7 @@
     "no-address": "No address selected",
     "select-address": "Select an address",
     "select-shipping-address": "Select shipping address",
-    "another-address": "Another address",
+    "another-address": "Personalized shipping address",
     "advisors-shipping-address": "One of our advisors will reach out to you to verify your shipping address",
     "shipping-address": "Shipping Address",
     "company": "Company",
