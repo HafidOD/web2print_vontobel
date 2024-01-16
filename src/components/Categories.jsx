@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
-import { createContext, useContext, useState } from "react";
+// import { createContext, useContext, useState } from "react";
 
 export default function Categories({ categories, params }) {
   // console.log(params);

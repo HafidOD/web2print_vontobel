@@ -10,7 +10,11 @@ export async function GET(request, { params }) {
         id: parseInt(params.id),
       },
       include: {
-        enterprises: true,
+        enterprises: {
+          include: {
+            categories: true,
+          },
+        },
         addresses: true,
         property: true,
       },
