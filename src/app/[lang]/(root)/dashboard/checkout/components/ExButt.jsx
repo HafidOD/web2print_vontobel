@@ -28,7 +28,7 @@ export default function ExButt({ user, lang, paramslang }) {
       if (response.ok) {
         const data = await response.json();
         // Redirigir a la página de agradecimiento
-        console.log(data);
+        // console.log(data);
         window.location.href = `/${lang}/dashboard/thankyou?saleId=${data.sale.id}`;
       } else {
         console.log(error);

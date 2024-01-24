@@ -26,6 +26,7 @@ export default async function AddressPage({ params }) {
     id: 0,
     officeName: `${lang.addresses["another-address"]}`,
     address: `${lang.addresses["advisors-shipping-address"]}`,
+    price: 0,
   };
   const { user } = await getServerSession(authOptions);
 

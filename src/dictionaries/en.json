@@ -75,7 +75,8 @@
     "office": "Oficina",
     "address-name": "Address name",
     "zip-code": "ZIP code",
-    "no-addresses": "No addresses available"
+    "no-addresses": "No addresses available",
+    "shipping cost": "Shipping cost"
   },
   "order": {
     "hello": "Hello",

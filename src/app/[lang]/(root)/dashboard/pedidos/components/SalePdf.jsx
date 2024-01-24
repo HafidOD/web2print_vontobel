@@ -11,6 +11,7 @@ import {
 import { format } from "date-fns";
 const SalePdf = ({ sale, items, address, lang }) => {
   const fecha = format(new Date(sale.date), "dd/MM/yyyy");
+  // console.log(address.price);
   // console.log(fecha);
   // Tasa de IVA (porcentaje)
   const tasaIVA = 16; // Cambia esto según la tasa de IVA de pais
@@ -499,7 +500,6 @@ const SalePdf = ({ sale, items, address, lang }) => {
             </View>
             <View style={styles.tableColHeader85}>
               {address.city &&
-              address.city &&
               address.state &&
               address.country &&
               address.postalCode ? (
@@ -595,6 +595,22 @@ const SalePdf = ({ sale, items, address, lang }) => {
               </View>
             </View>
           ))}
+          {address.price && (
+            <View style={styles.tableRow}>
+              <View style={styles.tableColHeader20}></View>
+              <View style={styles.tableColHeader40}>
+                <Text>{lang.addresses["shipping cost"]}</Text>
+              </View>
+              <View style={styles.tableColHeader10}></View>
+              <View
+                style={Object.assign({}, styles.tableColHeader10, styles.right)}
+              ></View>
+              <View style={styles.tableColHeader10}></View>
+              <View style={styles.tableColHeader10}>
+                <Text>${address.price}</Text>
+              </View>
+            </View>
+          )}
         </View>
         <Text>{"\n"}</Text>
         <View style={styles.tabletotal}>

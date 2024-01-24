@@ -20,7 +20,7 @@ export default async function DashboardPage({ params }) {
   const lang = await getDictionary(params.lang);
   // console.log(lang);
   const user = await fetchUser(session.user.id);
-  console.log(user.data.enterprises);
+  // console.log(user.data.enterprises);
   // console.log(user);
   return (
     <div className="w-full px-2 py-16 m-auto md:w-3/5 sm:px-0">

@@ -11,6 +11,7 @@ datasource db {
 model Property {
   id           Int       @id @default(autoincrement())
   propertyName String
+  email        String
   users        User[]
   addresses    Address[]
 }
@@ -55,9 +56,10 @@ model Address {
   state        String
   postalCode   Int
   enterpriseId Int?
-  propertyId   Int?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
+  propertyId   Int?
+  price        Int?
   enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
   property     Property?   @relation(fields: [propertyId], references: [id])
   users        User[]
@@ -66,11 +68,11 @@ model Address {
 model Product {
   id                 Int        @id @default(autoincrement())
   sku                String     @unique
-  nameProduct        String     
+  nameProduct        String     @unique
   imageProduct       String?
-  priceLocal         Float      @db.Float
-  priceNacional      Float?     @db.Float
-  priceExt           Float?     @db.Float
+  priceLocal         Float
+  priceNacional      Float?
+  priceExt           Float?
   descriptionProduct String?
   stockProduct       Int?
   unitsPackage       Int

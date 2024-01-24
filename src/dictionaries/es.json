@@ -75,7 +75,8 @@
     "office": "Oficina",
     "address-name": "Nombre de la dirección",
     "zip-code": "Código postal",
-    "no-addresses": "No hay direcciones disponibles"
+    "no-addresses": "No hay direcciones disponibles",
+    "shipping cost": "Costo de envió"
   },
   "order": {
     "hello": "Hola",

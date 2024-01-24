@@ -631,6 +631,26 @@ const SalePdf = ({ sale, items, address, lang }) => {
                 </View>
               </View>
             ))}
+            {address.price && (
+              <View style={styles.tableRow}>
+                <View style={styles.tableColHeader20}></View>
+                <View style={styles.tableColHeader40}>
+                  <Text>{lang.addresses["shipping cost"]}</Text>
+                </View>
+                <View style={styles.tableColHeader10}></View>
+                <View
+                  style={Object.assign(
+                    {},
+                    styles.tableColHeader10,
+                    styles.right
+                  )}
+                ></View>
+                <View style={styles.tableColHeader10}></View>
+                <View style={styles.tableColHeader10}>
+                  <Text>${address.price}</Text>
+                </View>
+              </View>
+            )}
           </View>
           <Text>{"\n"}</Text>
           <View style={styles.tabletotal}>

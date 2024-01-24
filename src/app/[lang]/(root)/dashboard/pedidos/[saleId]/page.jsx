@@ -1,6 +1,7 @@
 import AddressSale from "../components/AddressSale";
 import ProductSale from "../components/ProductSale";
 import ButtonPdf from "../components/ButtonPdf";
+import { TruckIcon } from "@heroicons/react/24/solid";
 import { getDictionary } from "@/utils/dictionary";
 
 const URL = process.env.NEXT_PUBLIC_API_URL;
@@ -21,8 +22,8 @@ export default async function SingleSale({ params }) {
   const address = JSON.parse(sale.address);
   const currency = items.items[0].currency;
   // console.log(items.items);
-  // console.log(address);
-  // console.log(sale);
+  console.log(address);
+  console.log(address.price);
   return (
     <div>
       <div>
@@ -36,6 +37,30 @@ export default async function SingleSale({ params }) {
               {items.items.map((item) => (
                 <ProductSale key={item.id} product={item}></ProductSale>
               ))}
+              {address.price != 0 && (
+                <li className="flex items-center justify-between py-4 gap-x-6">
+                  <div className="flex items-center gap-x-4">
+                    <div className="px-2">
+                      {/* w-12 h-12 img */}
+                      <TruckIcon className="w-8 h-8" aria-hidden="true" />
+                    </div>
+                    <div className="flex-auto min-w-0">
+                      <p className="text-xs font-semibold leading-tight md:text-sm text-primaryBlue">
+                        {lang.addresses["shipping cost"]}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="justify-center sm:flex sm:flex-col sm:items-end ">
+                    <div className="flex">
+                      <div className="flex items-center justify-center ml-3">
+                        <p className="text-xs md:text-sm">
+                          ${address.price} USD
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              )}
             </ul>
             <div className="pt-2 border-t-2 border-t-gray-200">
               <p className="text-end">

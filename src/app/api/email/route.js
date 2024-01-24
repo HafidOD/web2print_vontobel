@@ -5,18 +5,25 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  // console.log(items);
-  // console.log(items.lang);
+  // console.log(items.user);
+  const property = await prisma.property.findFirst({
+    where: {
+      propertyName: items.user.property,
+    },
+  });
+  // console.log(property.email);
   try {
     const totalSale = items.items.reduce((total, item) => {
       return total + item.total;
     }, 0);
-    // console.log(items.user.id);
+    // console.log(totalSale);
+    const totalFinal = totalSale + items.address.price;
+    console.log(totalFinal);
     // console.log(items.items[0].enterpriseId);
     const sale = await prisma.sale.create({
       data: {
         userId: items.user.id,
-        totalSale: totalSale,
+        totalSale: totalFinal,
         data: JSON.stringify(items),
         address: JSON.stringify(items.address),
         enterpriseInt: items.items[0].enterpriseId,
@@ -32,7 +39,7 @@ export async function POST(req) {
     const currentDate = new Date().toLocaleDateString("es-MX");
     const emailContent = generateEmailContent(
       items,
-      totalSale,
+      totalFinal,
       currentDate,
       sale.id,
       lang
@@ -52,10 +59,11 @@ export async function POST(req) {
       from: `"Web2Print" <${process.env.SMTP_USER}>`,
       // to: `hafid@tachuela.mx`,
       // to: `${items.user.email}, marriott@gruporegio.mx, paloma.berumen@marriott.com, Asenath.araque@marriott.com, Amanda.k.perez@marriott.com, carlos.olguin@marriott.com, hafid@tachuela.mx`,
-      to: `${items.user.email}, marriott@gruporegio.mx`,
+      to: `${items.user.email}, ${property.email}`,
       subject: "Solicitud de pedido Web2Print",
       html: emailContent,
     };
+    // console.log(mailOptions);
     // } else {
     //   var mailOptions = {
     //     from: `"Web2Print" <${process.env.SMTP_USER}>`,
@@ -65,10 +73,7 @@ export async function POST(req) {
     //     html: emailContent,
     //   };
     // }
-    // return NextResponse.json({
-    //   menssage:
-    //     "<h1>Detalles del Pedido</h1><p>Pedido para: Marriott Los Cabos</p><p>Usuario: Hafidj</p><p>Teléfono: 9981538039</p><p>Fecha de solicitud: 10/11/2023</p><p>Dirección de envio: Bonvoy Cancúnf, Conocida Cancún México Quintana Roo 77500</p><table><thead><tr><th style='padding:2px 10px'>Imagen</th><th style='padding:2px 10px'>Producto</th><th style='padding:2px 10px'>SKU</th><th style='padding:2px 10px'>Precio</th><th style='padding:2px 10px'>Cantidad</th><th style='padding:2px 10px'>Total</th><th style='padding:2px 10px'>Moneda</th></tr></thead><tbody><tr><td style='padding:2px 10px'><img src=http://localhost:3000https://res.cloudinary.com/dfvesf8qn/image/upload/v1695402289/j2uid2xc83unc40gr9tv.png width=\"100\" alt=Advanced Check In Card></td><td style='padding:2px 10px'>Advanced Check In Card</td><td style='padding:2px 10px'>STR-STA-ABB</td><td style='padding:2px 10px'>114</td><td style='padding:2px 10px'>1</td><td style='padding:2px 10px'>$114</td><td style='padding:2px 10px'>MXN</td></tr><tr><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px 10px'></td><td style='padding:2px",
-    // });
+    // return NextResponse.json({ message: "ok" });
     const info = await transporter.sendMail(mailOptions);
     // console.log("Email sent: " + info.response);
     return NextResponse.json(
@@ -299,6 +304,15 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
   items.items.forEach((producto) => {
     content += `<tr><td style='padding:2px 10px;border: solid 1px;'>${producto.sku}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.nameProduct}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.unitsPackage}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.price}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.quantity}</td><td style='padding:2px 10px;border: solid 1px;'>$${producto.total}</td></tr>`;
   });
+  // ${items.address.country ? items.address.country : ""}
+  // item.address.price != 0 ?
+  // content += ${items.address.price != 0}
+
+  content +=
+    items.address.price != 0
+      ? `<tr><td style='padding:2px 10px;border: solid 1px;'></td><td style='padding:2px 10px;border: solid 1px;'>Envio</td><td style='padding:2px 10px;border: solid 1px;'></td><td style='padding:2px 10px;border: solid 1px;'></td><td style='padding:2px 10px;border: solid 1px;'></td><td style='padding:2px 10px;border: solid 1px;'>$${items.address.price}</td></tr>`
+      : "";
+
   content += `</tbody></table><br />
     <table style="width: 100%; border-collapse: collapse">
       <tbody>
