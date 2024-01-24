@@ -1,10 +1,13 @@
-import FormLogin from "@/components/FormLogin";
+import FormLoginGeneric from "@/components/FormLoginGeneric";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/auth";
 import { redirect } from "next/navigation";
+import { getDictionary } from "@/utils/dictionary";
 
-export default async function Home() {
+export default async function Home({ params }) {
+  // console.log(params);
+  const lang = await getDictionary(params.lang);
   const session = await getServerSession(authOptions);
   if (session) {
     redirect("/dashboard");
@@ -21,7 +24,7 @@ export default async function Home() {
           priority
         />
       </div>
-      <FormLogin></FormLogin>
+      <FormLoginGeneric lang={lang} paramslang={params.lang}></FormLoginGeneric>
       <div className="">
         <Image
           className=""

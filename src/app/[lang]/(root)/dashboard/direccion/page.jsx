@@ -32,7 +32,11 @@ export default async function AddressPage({ params }) {
 
   const addresses = await fetchSingleAddresses(params.enterpriseId, user.id);
   // console.log(addresses);
-  addresses.push(custom);
+  console.log(user.property);
+  if (user.property != "Vontobel") {
+    addresses.push(custom);
+  }
+
   // console.log(user);
   // if (user.role === 1) {
   // } else {
