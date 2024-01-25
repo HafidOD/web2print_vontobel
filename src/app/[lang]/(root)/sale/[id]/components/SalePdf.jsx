@@ -735,11 +735,15 @@ const SalePdf = ({ sale, items, address, lang }) => {
                   <Text>w: gruporegio.mx</Text>
                 </View>
                 <View style={styles.tableHeader20}>
-                  <Image
-                    src={"/images/logos/Logo-CALA.png"}
-                    style={styles.imagecala}
-                    alt="logo cala"
-                  />
+                  {sale.user.property.propertyName == "Vontobel" ? (
+                    ""
+                  ) : (
+                    <Image
+                      src={"/images/logos/Logo-CALA.png"}
+                      style={styles.imagecala}
+                      alt="logo cala"
+                    />
+                  )}
                 </View>
                 <View style={styles.tableHeader15}>
                   <Image

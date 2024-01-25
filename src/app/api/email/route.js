@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  // console.log(items.items);
+  console.log(items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -81,7 +81,10 @@ export async function POST(req) {
     //     html: emailContent,
     //   };
     // }
-    // return NextResponse.json({ message: "ok", sale, property }, {status:500});
+    return NextResponse.json(
+      { message: "ok", sale, property },
+      { status: 500 }
+    );
     const info = await transporter.sendMail(mailOptions);
     // console.log("Email sent: " + info.response);
     return NextResponse.json(
@@ -413,10 +416,16 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
             w: gruporegio.mx
           </th>
           <th style="width: 20%; border: none; padding: 8px">
-            <img src="${process.env.NEXT_URL_BASE}/images/logos/Logo-CALA.png" alt="" width="120" />
+          ${
+            items.user.property == "Vontobel"
+              ? ""
+              : `<img src="${process.env.NEXT_URL_BASE}/images/logos/Logo-CALA.png" alt="" width="120" />`
+          }
           </th>
           <th style="width: 15%; border: none; padding: 8px">
-            <img src="${process.env.NEXT_URL_BASE}/images/logos/fsc.png" alt="" width="80" />
+            <img src="${
+              process.env.NEXT_URL_BASE
+            }/images/logos/fsc.png" alt="" width="80" />
           </th>
         </tr>
       </thead>

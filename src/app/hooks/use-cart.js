@@ -10,11 +10,16 @@ const useCart = create(
       addItem: (data) => {
         const currentItems = get().items;
         const existingItem = currentItems.find((item) => item.id === data.id);
-
+        // console.log(data);
+        // console.log(currentItems);
+        // console.log(existingItem.quantity + data.quantity);
         if (existingItem) {
-          return toast("This product is already in your cart", {
-            icon: "⚠️",
-          });
+          existingItem.quantity = existingItem.quantity + data.quantity;
+          set(get().items.find((item) => item.id === existingItem.id));
+          return toast.success("Item added");
+          // return toast("This product is already in your cart", {
+          //   icon: "⚠️",
+          // });
         }
 
         set({ items: [...get().items, data] });
@@ -35,6 +40,7 @@ const useCart = create(
 
         // console.log(newItems);
         set({ items: newItems });
+        // console.log(get().items);
       },
 
       removeItem: (id) => {
