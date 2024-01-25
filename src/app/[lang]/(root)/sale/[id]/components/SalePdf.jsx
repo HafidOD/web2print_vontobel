@@ -624,10 +624,14 @@ const SalePdf = ({ sale, items, address, lang }) => {
                   <Text>{producto.quantity}</Text>
                 </View>
                 <View style={styles.tableColHeader10}>
-                  <Text>${producto.price}</Text>
+                  <Text>{producto.price != 0 ? "$" + producto.price : ""}</Text>
                 </View>
                 <View style={styles.tableColHeader10}>
-                  <Text>${producto.price * producto.quantity}</Text>
+                  <Text>
+                    {producto.price != 0
+                      ? "$" + producto.price * producto.quantity
+                      : ""}
+                  </Text>
                 </View>
               </View>
             ))}

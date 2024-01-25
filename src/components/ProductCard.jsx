@@ -76,9 +76,11 @@ export default function ProductCard({
             <p className="text-xs leading-normal text-secondGray md:text-sm">
               {product.descriptionProduct}
             </p>
-            <p className="text-xs leading-normal text-secondGray md:text-sm">
-              ${priceProduct} {currency}
-            </p>
+            {priceProduct != 0 && (
+              <p className="text-xs leading-normal text-secondGray md:text-sm">
+                ${priceProduct} {currency}
+              </p>
+            )}
             <p className="text-xs leading-normal text-secondGray md:text-sm">
               Stock: {product.stockProduct}
             </p>

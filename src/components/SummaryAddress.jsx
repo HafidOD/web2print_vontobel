@@ -17,7 +17,7 @@ export default function SummaryAddress({ paramslang }) {
   // } else {
   //   console.log("El objeto no está vacío");
   // }
-  // console.log(address);
+  console.log(address);
   return (
     <div>
       {Object.keys(address).length === 0 ? (
@@ -51,6 +51,15 @@ export default function SummaryAddress({ paramslang }) {
           {address.country && (
             <p className="text-primaryBlue">
               <b>{paramslang.addresses.country}:</b> {address.country}.
+            </p>
+          )}
+          {address.price != 0 && (
+            <p className="text-primaryBlue">
+              <br />
+              <b>
+                {paramslang.addresses["each-shipping"]} ${address.price}{" "}
+                {paramslang.addresses["each-shipping2"]}
+              </b>
             </p>
           )}
         </div>

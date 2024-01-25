@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  // console.log(items.user);
+  console.log(items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -44,7 +44,7 @@ export async function POST(req) {
       sale.id,
       lang
     );
-    // console.log(emailContent);
+    console.log(emailContent);
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -302,7 +302,19 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
       </thead>
       <tbody>`;
   items.items.forEach((producto) => {
-    content += `<tr><td style='padding:2px 10px;border: solid 1px;'>${producto.sku}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.nameProduct}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.unitsPackage}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.price}</td><td style='padding:2px 10px;border: solid 1px;'>${producto.quantity}</td><td style='padding:2px 10px;border: solid 1px;'>$${producto.total}</td></tr>`;
+    content += `<tr><td style='padding:2px 10px;border: solid 1px;'>${
+      producto.sku
+    }</td><td style='padding:2px 10px;border: solid 1px;'>${
+      producto.nameProduct
+    }</td><td style='padding:2px 10px;border: solid 1px;'>${
+      producto.unitsPackage
+    }</td><td style='padding:2px 10px;border: solid 1px;'>${
+      producto.quantity
+    }</td><td style='padding:2px 10px;border: solid 1px;'>${
+      producto.price != 0 ? producto.price : ""
+    }</td><td style='padding:2px 10px;border: solid 1px;'>$${
+      producto.total != 0 ? producto.total : ""
+    }</td></tr>`;
   });
   // ${items.address.country ? items.address.country : ""}
   // item.address.price != 0 ?

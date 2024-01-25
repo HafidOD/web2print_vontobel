@@ -11,7 +11,7 @@ export default async function Home({ params }) {
   // console.log(lang);
   // console.log(session);
   if (session) {
-    redirect("/en/dashboard");
+    redirect(`/${params.lang}/dashboard`);
   }
   return (
     <main className="flex-col items-center min-h-screen justify-evenly bg-[url('/images/layout/Triangulos.png')] bg-no-repeat bg-right-bottom bg-[length:350px] bg-fixed">

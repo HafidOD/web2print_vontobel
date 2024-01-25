@@ -76,7 +76,9 @@
     "address-name": "Nombre de la dirección",
     "zip-code": "Código postal",
     "no-addresses": "No hay direcciones disponibles",
-    "shipping cost": "Costo de envió"
+    "shipping cost": "Costo de envió",
+    "each-shipping": "¿Ya cargaste todos tus productos? Cada solicitud de envío tiene un costo de",
+    "each-shipping2": "dolares."
   },
   "order": {
     "hello": "Hola",

@@ -22,8 +22,8 @@ export default async function SingleSale({ params }) {
   const address = JSON.parse(sale.address);
   const currency = items.items[0].currency;
   // console.log(items.items);
-  console.log(address);
-  console.log(address.price);
+  // console.log(address);
+  // console.log(address.price);
   return (
     <div>
       <div>

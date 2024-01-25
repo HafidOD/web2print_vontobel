@@ -23,9 +23,11 @@ export default function ProductList({ product }) {
           <p className="text-xs font-semibold leading-tight md:text-sm text-primaryBlue">
             {product.nameProduct}
           </p>
-          <p className="mt-1 text-xs leading-5 truncate text-secondGray">
-            ${product.price} {product.currency}
-          </p>
+          {product.price != 0 && (
+            <p className="mt-1 text-xs leading-5 truncate text-secondGray">
+              ${product.price} {product.currency}
+            </p>
+          )}
         </div>
       </div>
       <div className="justify-center sm:flex sm:flex-col sm:items-end ">
@@ -35,9 +37,11 @@ export default function ProductList({ product }) {
             productId={product.id}
           ></ButtonCheckout>
           <div className="flex items-center justify-center ml-3">
-            <p className="text-xs md:text-sm">
-              ${product.quantity * product.price} {product.currency}
-            </p>
+            {product.price != 0 && (
+              <p className="text-xs md:text-sm">
+                ${product.quantity * product.price} {product.currency}
+              </p>
+            )}
           </div>
           <div className="flex items-center justify-center ml-3 ">
             <button className="text-sm text-red-800" onClick={onRemove}>

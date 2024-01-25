@@ -76,7 +76,9 @@
     "address-name": "Address name",
     "zip-code": "ZIP code",
     "no-addresses": "No addresses available",
-    "shipping cost": "Shipping cost"
+    "shipping cost": "Shipping cost",
+    "each-shipping": "Have you selected all your products? Each shipping request has a cost of",
+    "each-shipping2": "dollars."
   },
   "order": {
     "hello": "Hello",

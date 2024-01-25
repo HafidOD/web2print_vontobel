@@ -55,9 +55,11 @@ export default function CheckoutPage({ params }) {
         </ul>
         {items.length !== 0 && (
           <div className="pt-2 border-t-2 border-t-gray-200">
-            <p className="text-end">
-              Total: ${totalPrice} {items[0].currency}
-            </p>
+            {totalPrice != 0 && (
+              <p className="text-end">
+                Total: ${totalPrice} {items[0].currency}
+              </p>
+            )}
           </div>
         )}
       </div>
