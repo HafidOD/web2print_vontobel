@@ -95,7 +95,8 @@
     "total": "Total",
     "order-details": "Detalles del pedido",
     "download-pdf": "Descargar PDF",
-    "loading": "Descargando"
+    "loading": "Descargando",
+    "subject-email": "Solicitud de pedido Web2Print"
   },
   "admin": {
     "new": "Nuevo",

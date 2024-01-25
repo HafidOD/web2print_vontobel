@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  console.log(items);
+  // console.log(items.lang);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -40,6 +40,7 @@ export async function POST(req) {
     });
     const lang = await getDictionary(items.lang);
     // console.log(lang);
+    // console.log(lang.order["subject-email"]);
     // const currentDate = new Date("2023-08-07 17:51:38.035").toLocaleDateString(
     //   "es-MX"
     // );
@@ -68,7 +69,7 @@ export async function POST(req) {
       // to: `hafid@tachuela.mx`,
       // to: `${items.user.email}, marriott@gruporegio.mx, paloma.berumen@marriott.com, Asenath.araque@marriott.com, Amanda.k.perez@marriott.com, carlos.olguin@marriott.com, hafid@tachuela.mx`,
       to: `${items.user.email}, ${property.email}`,
-      subject: "Solicitud de pedido Web2Print",
+      subject: lang.order["subject-email"],
       html: emailContent,
     };
     // console.log(mailOptions);
@@ -81,10 +82,10 @@ export async function POST(req) {
     //     html: emailContent,
     //   };
     // }
-    return NextResponse.json(
-      { message: "ok", sale, property },
-      { status: 500 }
-    );
+    // return NextResponse.json(
+    //   { message: "ok", sale, property },
+    //   { status: 500 }
+    // );
     const info = await transporter.sendMail(mailOptions);
     // console.log("Email sent: " + info.response);
     return NextResponse.json(
