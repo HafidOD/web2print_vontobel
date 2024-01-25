@@ -23,13 +23,15 @@ export default function ExButt({ user, lang, paramslang }) {
         body: JSON.stringify({ items, user: user, address, lang }),
       });
       // console.log(response);
-
-      // console.log(response);
+      // const data = await response.json();
+      // console.log(data.property.email);
+      // const primerCorreo = data.property.email.split(",")[0].trim();
+      // console.log(primerCorreo);
       if (response.ok) {
         const data = await response.json();
         // Redirigir a la página de agradecimiento
-        // console.log(data);
-        window.location.href = `/${lang}/dashboard/thankyou?saleId=${data.sale.id}`;
+        const primaryEmail = data.property.email.split(",")[0].trim();
+        window.location.href = `/${lang}/dashboard/thankyou?saleId=${data.sale.id}&email=${primaryEmail}`;
       } else {
         console.log(error);
         console.error("Error al enviar el correo.");

@@ -12,6 +12,7 @@ import { format } from "date-fns";
 const SalePdf = ({ sale, items, address, lang }) => {
   const fecha = format(new Date(sale.date), "dd/MM/yyyy");
   // console.log(sale);
+  // console.log(sale.user.property);
   // Tasa de IVA (porcentaje)
   const tasaIVA = 16; // Cambia esto según la tasa de IVA de pais
 
@@ -666,7 +667,11 @@ const SalePdf = ({ sale, items, address, lang }) => {
                     ? lang.pdf.dollars
                     : lang.pdf["mexican-pesos"]}
                 </Text>
-                <Text>{lang.pdf["delivery-service"]}</Text>
+                {sale.user.property.propertyName == "Vontobel" ? (
+                  ""
+                ) : (
+                  <Text>{lang.pdf["delivery-service"]}</Text>
+                )}
               </View>
               <View style={styles.tableColHeadernone}>
                 <Text> </Text>

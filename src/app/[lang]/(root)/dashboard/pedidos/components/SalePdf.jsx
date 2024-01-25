@@ -626,7 +626,11 @@ const SalePdf = ({ sale, items, address, lang }) => {
                   ? lang.pdf.dollars
                   : lang.pdf["mexican-pesos"]}
               </Text>
-              <Text>{lang.pdf["delivery-service"]}</Text>
+              {sale.user.property.propertyName == "Vontobel" ? (
+                ""
+              ) : (
+                <Text>{lang.pdf["delivery-service"]}</Text>
+              )}
             </View>
             <View style={styles.tableColHeadernone}>
               <Text> </Text>

@@ -29,7 +29,8 @@ export default function ThankyouPage({ params }) {
   // console.log(params.lang);
   const searchParams = useSearchParams();
   const saleId = searchParams.get("saleId");
-
+  const primaryEmail = searchParams.get("email");
+  console.log(primaryEmail);
   // const cart = useCart();
   const removeAll = useCart((state) => state.removeAll);
   const removeAddress = useAddress((state) => state.removeAddress);
@@ -77,7 +78,7 @@ export default function ThankyouPage({ params }) {
             </b>
           </p>
           <p className="text-center text-gray-600">
-            {lang[params.lang]["questions"]}: marriott@gruporegio.mx
+            {lang[params.lang]["questions"]}: {primaryEmail}
           </p>
           <Link
             href={`/${params.lang}/dashboard`}

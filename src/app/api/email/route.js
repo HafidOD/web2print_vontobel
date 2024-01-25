@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  console.log(items.items);
+  // console.log(items.items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -81,11 +81,11 @@ export async function POST(req) {
     //     html: emailContent,
     //   };
     // }
-    // return NextResponse.json({ message: "ok" });
+    // return NextResponse.json({ message: "ok", sale, property }, {status:500});
     const info = await transporter.sendMail(mailOptions);
     // console.log("Email sent: " + info.response);
     return NextResponse.json(
-      { message: "email enviado", sale: sale },
+      { message: "email enviado", sale, property },
       { status: 200 }
     );
   } catch (error) {
@@ -341,7 +341,8 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
             ${lang.pdf["amounts-expressed"]} ${
     items.user.typePrice === 3 ? lang.pdf.dollars : lang.pdf["mexican-pesos"]
   }<br />
-            ${lang.pdf["delivery-service"]}
+  ${items.user.property == "Vontobel" ? "" : lang.pdf["delivery-service"]}
+            
           </td>
           <td style="width: 10%; border: none; padding: 8px"></td>
           <td style="width: 20%; border: none; padding: 0">
