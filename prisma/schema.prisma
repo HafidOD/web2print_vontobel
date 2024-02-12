@@ -56,10 +56,7 @@ model Address {
   country      String?
   state        String?
   postalCode   Int?
-<<<<<<< HEAD
-=======
   price        Int?
->>>>>>> 0701fdd7d32e05271d3ab2a462de85ff1959fe10
   enterpriseId Int?
   propertyId   Int?
   createdAt    DateTime    @default(now())
@@ -75,15 +72,9 @@ model Product {
   nameProduct        String
   imageProduct       String?
   imageProduct2      String?
-<<<<<<< HEAD
-  priceLocal         Float
-  priceNacional      Float?
-  priceExt           Float?
-=======
   priceLocal         Float      @db.Float
   priceNacional      Float?     @db.Float
   priceExt           Float?     @db.Float
->>>>>>> 0701fdd7d32e05271d3ab2a462de85ff1959fe10
   descriptionProduct String?
   stockProduct       Int?
   unitsPackage       Int
