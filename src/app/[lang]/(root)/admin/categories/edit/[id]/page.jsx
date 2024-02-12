@@ -52,7 +52,7 @@ export default function EditCategoryPage({ params }) {
     if (e.target.type === "checkbox") {
       // console.log(e.target.checked);
       if (e.target.checked) {
-        console.log("agregado");
+        // console.log("agregado");
         setCategory({
           ...category,
           [e.target.name]: [
@@ -77,7 +77,7 @@ export default function EditCategoryPage({ params }) {
     // console.log(category);
   };
   useEffect(() => {
-    console.log("reload");
+    // console.log("reload");
     fetch("/api/categories/" + params.id)
       .then((response) => response.json())
       .then((data) => {
@@ -92,7 +92,7 @@ export default function EditCategoryPage({ params }) {
           old_image: data.category.imageCategory,
           enterprises: enterprises,
         });
-        // console.log(enterprise.logo);
+        console.log(category);
       })
       .catch((error) => {
         console.error("Error al obtener la division:", error);
@@ -184,7 +184,7 @@ export default function EditCategoryPage({ params }) {
             <option value="">{lang[params.lang]["select-category"]}</option>
 
             <option value="2">{lang[params.lang]["inventories"]}</option>
-            {/* <option value="1">Impresiones</option> */}
+            <option value="1">Impresiones</option>
           </select>
 
           <label

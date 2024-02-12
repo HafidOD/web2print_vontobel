@@ -12,9 +12,12 @@ const useCart = create(
         const existingItem = currentItems.find((item) => item.id === data.id);
         // console.log(data);
         // console.log(currentItems);
-        // console.log(existingItem.quantity + data.quantity);
+        // console.log(typeof existingItem.quantity);
+        // console.log(typeof existingItem.quantity);
         if (existingItem) {
-          existingItem.quantity = existingItem.quantity + data.quantity;
+          existingItem.quantity =
+            parseInt(existingItem.quantity) + parseInt(data.quantity);
+          // existingItem.quantity = existingItem.quantity + data.quantity;
           set(get().items.find((item) => item.id === existingItem.id));
           return toast.success("Item added");
           // return toast("This product is already in your cart", {

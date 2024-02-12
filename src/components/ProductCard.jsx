@@ -118,7 +118,7 @@ export default function ProductCard({
         </div>
         <div className="flex justify-center w-full pt-2 md:pt-4">
           <button
-            className="px-4 py-2 text-xs text-blue-100 rounded shadow bg-primaryBlue md:text-sm"
+            className="px-4 py-2 text-xs text-white rounded shadow bg-primaryBlue md:text-sm"
             onClick={onAddToCart}
           >
             {paramslang.products["add-to-card"]}

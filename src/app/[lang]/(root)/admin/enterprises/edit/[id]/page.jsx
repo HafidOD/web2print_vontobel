@@ -33,27 +33,57 @@ export default function EditEnterprisePage({ params }) {
 
   const [enterprise, setEnterprise] = useState({
     enterpriseName: "",
+    enterpriseParentCat: [],
     old_logo: "",
   });
   const [file, setFile] = useState(null);
 
   const handleChange = (e) => {
-    setEnterprise({
-      ...enterprise,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.type === "checkbox") {
+      // console.log(e.target.checked);
+      if (e.target.checked) {
+        // console.log("agregado");
+        setEnterprise({
+          ...enterprise,
+          [e.target.name]: [...enterprise[e.target.name], e.target.value],
+        });
+      } else {
+        setEnterprise({
+          ...enterprise,
+          [e.target.name]: enterprise[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
+        });
+      }
+      // console.log(enterprise.enterpriseParentCat);
+    } else {
+      setEnterprise({
+        ...enterprise,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   useEffect(() => {
     fetch("/api/enterprises/" + params.id)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.data);
+        // console.log(data.data.categoryParent);
+        let categoryParent = "";
+        if (data.data.categoryParent != null) {
+          categoryParent = data.data.categoryParent.split(",");
+        }
+
+        // data.data.categoryParent.forEach((cat) => {
+
+        //   // categoryParent.push(cat.id);
+        // });
         setEnterprise({
           enterpriseName: data.data.enterpriseName,
+          enterpriseParentCat: categoryParent,
           old_logo: data.data.logo,
         });
-        // console.log(enterprise.logo);
+        // console.log(enterprise);
       })
       .catch((error) => {
         console.error(lang[params.lang]["error-retrieving-companies"], error);
@@ -65,6 +95,7 @@ export default function EditEnterprisePage({ params }) {
 
     const formData = new FormData();
     formData.append("enterpriseName", enterprise.enterpriseName);
+    formData.append("enterpriseParentCat", enterprise.enterpriseParentCat);
     formData.append("old_logo", enterprise.old_logo);
 
     if (file) {
@@ -113,6 +144,36 @@ export default function EditEnterprisePage({ params }) {
             autoFocus
             required
           />
+
+          <label
+            htmlFor="enterpriseParentCat"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            Categorias padre:
+          </label>
+
+          <div className="flex flex-col space-y-2">
+            <label className="flex items-center space-x-2">
+              <input
+                name="enterpriseParentCat"
+                type="checkbox"
+                value="1"
+                onChange={handleChange}
+                checked={enterprise.enterpriseParentCat.includes("1")}
+              />
+              <span>impresion</span>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                name="enterpriseParentCat"
+                type="checkbox"
+                value="2"
+                onChange={handleChange}
+                checked={enterprise.enterpriseParentCat.includes("2")}
+              />
+              <span>inventario</span>
+            </label>
+          </div>
 
           <label
             htmlFor="productImage"

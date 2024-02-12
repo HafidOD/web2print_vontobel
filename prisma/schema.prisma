@@ -37,6 +37,7 @@ model User {
 model Enterprise {
   id             Int        @id @default(autoincrement())
   enterpriseName String     @unique
+  categoryParent String?
   logo           String?
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
@@ -51,10 +52,10 @@ model Address {
   id           Int         @id @default(autoincrement())
   officeName   String      @unique
   address      String
-  city         String
-  country      String
-  state        String
-  postalCode   Int
+  city         String?
+  country      String?
+  state        String?
+  postalCode   Int?
   enterpriseId Int?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
@@ -70,6 +71,7 @@ model Product {
   sku                String     @unique
   nameProduct        String     @unique
   imageProduct       String?
+  imageProduct2      String?
   priceLocal         Float
   priceNacional      Float?
   priceExt           Float?

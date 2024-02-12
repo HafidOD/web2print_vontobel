@@ -161,7 +161,7 @@ function CategoryForm({ params }) {
             <option value="">{lang[params.lang]["select-category"]}</option>
 
             <option value="2">{lang[params.lang]["inventories"]}</option>
-            {/* <option value="1">Impresiones</option> */}
+            <option value="1">Impresiones</option>
           </select>
 
           <label

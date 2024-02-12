@@ -24,16 +24,35 @@ const lang = {
 function EnterpriseForm({ params }) {
   const [enterprise, setEnterprise] = useState({
     enterpriseName: "",
+    enterpriseParentCat: [],
   });
   const [file, setFile] = useState(null);
   const form = useRef(null);
   const router = useRouter();
 
   const handleChange = (e) => {
-    setEnterprise({
-      ...enterprise,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.type === "checkbox") {
+      console.log(e.target.checked);
+      if (e.target.checked) {
+        console.log(e.target.name);
+        setEnterprise({
+          ...enterprise,
+          [e.target.name]: [...enterprise[e.target.name], e.target.value],
+        });
+      } else {
+        setEnterprise({
+          ...enterprise,
+          [e.target.name]: enterprise[e.target.name].filter(
+            (item) => item !== e.target.value
+          ),
+        });
+      }
+    } else {
+      setEnterprise({
+        ...enterprise,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -41,16 +60,19 @@ function EnterpriseForm({ params }) {
 
     const formData = new FormData();
     formData.append("enterpriseName", enterprise.enterpriseName);
+    formData.append("enterpriseParentCat", enterprise.enterpriseParentCat);
 
     if (file) {
       formData.append("logo", file);
     }
-
+    // console.log(formData);
+    // return;
     const res = await fetch("/api/enterprises", {
       method: "POST",
       body: formData,
       // headers: { "Content-type": "multipart/form-data" },
     });
+    // return;
     if (res.ok) {
       form.current.reset();
       router.refresh();
@@ -88,6 +110,36 @@ function EnterpriseForm({ params }) {
             autoFocus
             required
           />
+
+          <label
+            htmlFor="enterpriseParentCat"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            Categorias padre:
+          </label>
+
+          <div className="flex flex-col space-y-2">
+            <label className="flex items-center space-x-2">
+              <input
+                name="enterpriseParentCat"
+                type="checkbox"
+                value={1}
+                onChange={handleChange}
+                // checked={user.enterprises.includes(option.value)}
+              />
+              <span>impresion</span>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                name="enterpriseParentCat"
+                type="checkbox"
+                value={2}
+                onChange={handleChange}
+                // checked={user.enterprises.includes(option.value)}
+              />
+              <span>inventario</span>
+            </label>
+          </div>
 
           <label
             htmlFor="productImage"

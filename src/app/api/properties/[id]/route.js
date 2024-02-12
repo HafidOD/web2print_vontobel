@@ -31,6 +31,7 @@ export async function PUT(request, { params }) {
       },
       data: {
         propertyName: data.get("propertyName"),
+        email: data.get("propertyEmail"),
       },
     });
     // return NextResponse.json({ mensaje: "ok" }, { status: 200 });

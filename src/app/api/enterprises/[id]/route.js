@@ -52,6 +52,7 @@ export async function PUT(request, { params }) {
       },
       data: {
         enterpriseName: data.get("enterpriseName"),
+        categoryParent: data.get("enterpriseParentCat"),
         logo: pathImg,
       },
     });

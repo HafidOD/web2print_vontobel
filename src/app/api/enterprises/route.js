@@ -26,6 +26,8 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const data = await request.formData();
+    console.log(data);
+    // console.log(enterpriseIds);
     const logo = data.get("logo");
     var pathImg = "";
     if (logo) {
@@ -42,9 +44,11 @@ export async function POST(request) {
     } else {
       pathImg = data.get("old_logo");
     }
+    // return NextResponse.json({ mensaje: "ok" }, { status: 500 });
     const enterprise = await prisma.enterprise.create({
       data: {
         enterpriseName: data.get("enterpriseName"),
+        categoryParent: data.get("enterpriseParentCat"),
         logo: pathImg,
       },
     });

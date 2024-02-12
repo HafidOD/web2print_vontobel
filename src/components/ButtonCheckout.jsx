@@ -48,7 +48,7 @@ export default function ButtonCheckout({ quantity, productId }) {
         <div className="">
           <input
             type="number"
-            className="w-12 px-4 py-2 text-xs font-bold outline-none md:py-4 md:text-base text-primaryBlue"
+            className="px-3 py-2 text-xs font-bold outline-none w-14 md:py-4 md:text-base text-primaryBlue"
             value={counter}
             readOnly
           />

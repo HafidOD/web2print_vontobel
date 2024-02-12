@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  // console.log(items.lang);
+  console.log(items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -14,6 +14,7 @@ export async function POST(req) {
   // console.log(property.email);
   try {
     const totalSale = items.items.reduce((total, item) => {
+      console.log(item);
       return total + item.total;
     }, 0);
     // console.log(totalSale);
@@ -327,6 +328,28 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
     }</td><td style='padding:2px 10px;border: solid 1px;'>${
       producto.total != 0 ? "$" + producto.total : ""
     }</td></tr>`;
+    if (
+      producto.categories.some(
+        (categoria) => categoria.categoryName === "Tarjetas"
+      )
+    ) {
+      content += `<tr>
+        <td style='padding:2px 10px;border: solid 1px;'>
+          Información de tarjeta
+        </td>
+        <td style='padding:2px 10px;border: solid 1px;'>
+          <p style='margin:0;'>${producto.formData.cardName}</p>
+          <p style='margin:0;'>${producto.formData.position}</p>
+          <p style='margin:0;'>${producto.formData.position2}</p>
+          <p style='margin:0;'>${producto.formData.position3}</p>
+          <p style='margin:0;'>${producto.formData.cardEmail}</p>
+          <p style='margin:0;'>${producto.formData.cardPhone}</p>
+          <p style='margin:0;'>${producto.formData.cardPhone2}</p>
+          <p style='margin:0;'>${producto.formData.cardAddress} ${producto.formData.cardCP}</p>
+          <p style='margin:0;'>${producto.formData.cardComments}</p>
+        </td>
+      </tr>`;
+    }
   });
   // ${items.address.country ? items.address.country : ""}
   // item.address.price != 0 ?

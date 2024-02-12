@@ -11,7 +11,12 @@ export default function Categories({ categories, params }) {
       {categories.map((category) => {
         return (
           <Link
-            href={`${params.categoryParentId}/${category.id}/productos`}
+            href={
+              params.categoryParentId == 1
+                ? `${params.categoryParentId}/${category.id}/${params.categoryParentId}`
+                : `${params.categoryParentId}/${category.id}/${params.categoryParentId}`
+            }
+            // href={`${params.categoryParentId}/${category.id}/productos`}
             // href={category.id}
             className="w-full"
             key={category.id}

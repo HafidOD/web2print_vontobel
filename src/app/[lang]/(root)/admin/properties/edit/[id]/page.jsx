@@ -6,20 +6,20 @@ import { toast } from "react-hot-toast";
 
 const lang = {
   en: {
-    create: "Create",
     refresh: "Refresh",
     "property-name": "Property name",
     "brand-name": "Brand name",
     "property-name-exists": "This property name already exists",
     "error-server": "An error has occurred on the server",
+    "property-email": "Emails",
   },
   es: {
-    create: "Crear",
     refresh: "Actualizar",
     "property-name": "Nombre de la propiedad",
     "brand-name": "Nombre de la marca",
     "property-name-exists": "El nombre de la propiedad ya existe",
     "error-server": "A ocurrido un error en el servidor",
+    "property-email": "Emails de envio",
   },
 };
 
@@ -29,6 +29,7 @@ export default function EditPropertyPage({ params }) {
 
   const [property, setProperty] = useState({
     propertyName: "",
+    propertyEmail: "",
   });
 
   const handleChange = (e) => {
@@ -45,6 +46,7 @@ export default function EditPropertyPage({ params }) {
         // console.log(data.data);
         setProperty({
           propertyName: data.data.propertyName,
+          propertyEmail: data.data.email,
         });
         // console.log(enterprise.logo);
       })
@@ -58,6 +60,7 @@ export default function EditPropertyPage({ params }) {
 
     const formData = new FormData();
     formData.append("propertyName", property.propertyName);
+    formData.append("propertyEmail", property.propertyEmail);
 
     const res = await fetch(`/api/properties/${params.id}`, {
       method: "PUT",
@@ -92,6 +95,21 @@ export default function EditPropertyPage({ params }) {
             onChange={handleChange}
             value={property.propertyName}
             className="w-full px-3 py-2 border shadow appearance-none"
+            autoFocus
+            required
+          />
+          <label
+            htmlFor="enterpriseEmail"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            {lang[params.lang]["property-email"]}:
+          </label>
+          <input
+            name="propertyEmail"
+            type="text"
+            onChange={handleChange}
+            value={property.propertyEmail}
+            className="w-full px-3 py-2 border shadow appearance-none "
             autoFocus
             required
           />

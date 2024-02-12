@@ -21,6 +21,7 @@ export async function POST(request) {
     const property = await prisma.property.create({
       data: {
         propertyName: data.get("propertyName"),
+        email: data.get("propertyEmail"),
       },
     });
     // return NextResponse.json({ mensaje: "ok" }, { status: 200 });

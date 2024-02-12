@@ -10,6 +10,7 @@ const lang = {
     "brand-name": "Brand name",
     "property-name-exists": "This property name already exists",
     "error-server": "An error has occurred on the server",
+    "property-email": "Emails",
   },
   es: {
     create: "Crear",
@@ -17,6 +18,7 @@ const lang = {
     "brand-name": "Nombre de la marca",
     "property-name-exists": "El nombre de la propiedad ya existe",
     "error-server": "A ocurrido un error en el servidor",
+    "property-email": "Emails de envio",
   },
 };
 
@@ -24,6 +26,7 @@ function PropertyForm({ params }) {
   // console.log(params);
   const [property, setProperty] = useState({
     propertyName: "",
+    propertyEmail: "",
   });
   const form = useRef(null);
   const router = useRouter();
@@ -40,6 +43,7 @@ function PropertyForm({ params }) {
 
     const formData = new FormData();
     formData.append("propertyName", property.propertyName);
+    formData.append("propertyEmail", property.propertyEmail);
 
     const res = await fetch("/api/properties", {
       method: "POST",
@@ -79,6 +83,21 @@ function PropertyForm({ params }) {
             type="text"
             onChange={handleChange}
             value={property.propertyName}
+            className="w-full px-3 py-2 border shadow appearance-none "
+            autoFocus
+            required
+          />
+          <label
+            htmlFor="enterpriseEmail"
+            className="block my-2 text-sm font-bold text-primaryBlue"
+          >
+            {lang[params.lang]["property-email"]}:
+          </label>
+          <input
+            name="propertyEmail"
+            type="text"
+            onChange={handleChange}
+            value={property.propertyEmail}
             className="w-full px-3 py-2 border shadow appearance-none "
             autoFocus
             required
