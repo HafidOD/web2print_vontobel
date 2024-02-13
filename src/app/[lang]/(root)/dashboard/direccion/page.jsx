@@ -22,20 +22,20 @@ export async function fetchSingleAddresses(enterpriseId, userId) {
 export default async function AddressPage({ params }) {
   const lang = await getDictionary(params.lang);
 
-  const custom = {
-    id: 0,
-    officeName: `${lang.addresses["another-address"]}`,
-    address: `${lang.addresses["advisors-shipping-address"]}`,
-    price: 0,
-  };
+  // const custom = {
+  //   id: 0,
+  //   officeName: `${lang.addresses["another-address"]}`,
+  //   address: `${lang.addresses["advisors-shipping-address"]}`,
+  //   price: 0,
+  // };
   const { user } = await getServerSession(authOptions);
 
   const addresses = await fetchSingleAddresses(params.enterpriseId, user.id);
   // console.log(addresses);
   // console.log(user.property);
-  if (user.property != "Vontobel") {
-    addresses.push(custom);
-  }
+  // if (user.property != "Vontobel") {
+  //   addresses.push(custom);
+  // }
 
   // console.log(user);
   // if (user.role === 1) {
