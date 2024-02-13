@@ -54,11 +54,7 @@ export default function ContentForm({ product, user, params }) {
     try {
       const canvas = await html2canvas(table);
       const dataUrl = canvas.toDataURL("image/png");
-<<<<<<< HEAD
       const response = await fetch(`${URL}/save-img/`, {
-=======
-      const response = await fetch(`${URL}/save-img/}`, {
->>>>>>> 236cb145f5bd457e6beab70e3deb105a6f9f2387
         method: "POST",
         headers: {
           "Content-Type": "application/json",
