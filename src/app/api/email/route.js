@@ -3,6 +3,8 @@ import nodemailer from "nodemailer";
 import prisma from "@/libs/prisma";
 import { getDictionary } from "@/utils/dictionary";
 
+const NEXT_URL_BASE = process.env.NEXT_URL_BASE;
+
 export async function POST(req) {
   const items = await req.json();
   // console.log(items.items);
@@ -84,7 +86,7 @@ export async function POST(req) {
         mailOptions.attachments.push({
           filename: `tarjeta_${producto.imgTarjeta}.png`,
           // path: `C:/Users/tachuela/Desktop/Tachuela/Grupo Regio/Web2Print/test-prisma-next-vercel/public/images/tar/${producto.imgTarjeta}`,
-          path: `/images/tar/${producto.imgTarjeta}`,
+          path: `${NEXT_URL_BASE}/images/tar/${producto.imgTarjeta}`,
           cid: producto.imgTarjeta,
         });
       }
