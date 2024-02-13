@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  console.log(items.items);
+  // console.log(items.items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -14,7 +14,7 @@ export async function POST(req) {
   // console.log(property.email);
   try {
     const totalSale = items.items.reduce((total, item) => {
-      console.log(item);
+      // console.log(item);
       return total + item.total;
     }, 0);
     // console.log(totalSale);
@@ -83,8 +83,8 @@ export async function POST(req) {
         // Agrega cada adjunto al array
         mailOptions.attachments.push({
           filename: `tarjeta_${producto.imgTarjeta}.png`,
-          path: `C:/Users/tachuela/Desktop/Tachuela/Grupo Regio/Web2Print/test-prisma-next-vercel/public/images/tar/${producto.imgTarjeta}`,
-          // path: `/images/tar/${producto.imgTarjeta}`,
+          // path: `C:/Users/tachuela/Desktop/Tachuela/Grupo Regio/Web2Print/test-prisma-next-vercel/public/images/tar/${producto.imgTarjeta}`,
+          path: `/images/tar/${producto.imgTarjeta}`,
           cid: producto.imgTarjeta,
         });
       }
