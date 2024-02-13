@@ -7,7 +7,7 @@ import fs from "fs";
 export async function POST(request) {
   try {
     const data = await request.json();
-    // console.log(data);
+    console.log(data);
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 18);
 
