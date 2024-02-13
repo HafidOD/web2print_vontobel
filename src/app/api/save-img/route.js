@@ -9,9 +9,9 @@ export async function POST(request) {
     const data = await request.json();
     // console.log(data);
     const timestamp = Date.now();
-    const randomString = Math.random().toString(18).substring(2, 8);
+    const randomString = Math.random().toString(36).substring(2, 18);
 
-    const base64Data = data.replace(/^data:image\/png;base64,/, "");
+    const base64Data = await data.replace(/^data:image\/png;base64,/, "");
     fs.writeFileSync(
       `public/images/tar/${timestamp}_${randomString}.png`,
       base64Data,

@@ -42,40 +42,37 @@ export default function ContentForm({ product, user, params }) {
     cardAddress: "",
     cardCP: "",
     cardComments: "",
-    imageData: null,
     cardQuantity: null,
   });
 
-  const [imageData, setImageData] = useState(null);
+  // const [imageData, setImageData] = useState(null);
   const tableRef = useRef();
 
-  const handleCapture = () => {
+  const handleCapture = async () => {
     const table = tableRef.current;
 
-    html2canvas(table).then((canvas) => {
+    try {
+      const canvas = await html2canvas(table);
       const dataUrl = canvas.toDataURL("image/png");
 
-      // setImageData(dataUrl);
-
-      fetch("http://localhost:3000/api/save-img", {
+      const response = await fetch("http://localhost:3000/api/save-img", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(dataUrl),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
-
-      setFormData({
-        ...formData,
-        imageData: dataUrl,
       });
-      // console.log(data);
 
-      // console.log(formData);
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      data.imgTarjeta = res.imageName;
+      // console.log(res.imageName);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleOpenPDF = async () => {
@@ -129,7 +126,7 @@ export default function ContentForm({ product, user, params }) {
     });
     // console.log(dataForm);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isTarjeta) {
       if (
@@ -168,29 +165,8 @@ export default function ContentForm({ product, user, params }) {
         toast.error(mensaje);
         return;
       }
-
-      const table = tableRef.current;
-
-      html2canvas(table).then((canvas) => {
-        const dataUrl = canvas.toDataURL("image/png");
-        // setImageData(dataUrl);
-        setFormData({
-          imageData: dataUrl,
-        });
-      });
-
-      console.log(formData);
+      await handleCapture();
     }
-    // const onAddToCart = (e) => {
-    //   e.stopPropagation();
-    //   if (counter > 0) {
-    //     data.quantity = counter;
-    //     data.total = counter * data.price;
-    //     cart.addItem(data);
-    //   } else {
-    //     toast.error(paramslang.products["increase-number-items"]);
-    //   }
-    // };
     data.quantity = formData.cardQuantity;
     // console.log(product);
     // console.log(data);
@@ -200,23 +176,12 @@ export default function ContentForm({ product, user, params }) {
     cart.addItem(data);
     setAddItem(true);
     // window.location.href = `/${lang}/dashboard/thankyou?saleId=${data.sale.id}&email=${primaryEmail}`;
-
-    // Llamar a la función proporcionada por las props para enviar los datos
-    // console.log("Datos del formulario:", formData);
-    // onSubmit(formData);
   };
-  // const handleFormSubmit = (formData) => {
-  //   console.log("Datos del formulario:", formData);
-  // };
 
-  // Ref para acceder al componente PrintingForm
-
-  // const handleSubmitButtonClick = () => {
-  //   printingFormRef.current.handleSubmit();
-  // };
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
   return (
     <div className="grid-cols-2 gap-10 lg:grid justify-items-center">
       <div className="w-full p-2 my-3 bg-white rounded-lg shadow-2xl md:w-2/3">

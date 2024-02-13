@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  console.log(items);
+  console.log(items.items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
@@ -72,7 +72,24 @@ export async function POST(req) {
       to: `${items.user.email}, ${property.email}`,
       subject: lang.order["subject-email"],
       html: emailContent,
+      attachments: [],
     };
+    items.items.forEach((producto) => {
+      if (
+        producto.categories.some(
+          (categoria) => categoria.categoryName === "Tarjetas"
+        )
+      ) {
+        // Agrega cada adjunto al array
+        mailOptions.attachments.push({
+          filename: `tarjeta_${producto.imgTarjeta}.png`,
+          path: `C:/Users/tachuela/Desktop/Tachuela/Grupo Regio/Web2Print/test-prisma-next-vercel/public/images/tar/${producto.imgTarjeta}`,
+          // path: `/images/tar/${producto.imgTarjeta}`,
+          cid: producto.imgTarjeta,
+        });
+      }
+    });
+
     // console.log(mailOptions);
     // } else {
     //   var mailOptions = {
