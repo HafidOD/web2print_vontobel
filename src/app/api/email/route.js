@@ -85,8 +85,8 @@ export async function POST(req) {
         // Agrega cada adjunto al array
         mailOptions.attachments.push({
           filename: `tarjeta_${producto.imgTarjeta}.png`,
-          // path: `C:/Users/tachuela/Desktop/Tachuela/Grupo Regio/Web2Print/test-prisma-next-vercel/public/images/tar/${producto.imgTarjeta}`,
-          path: `${NEXT_URL_BASE}/images/tar/${producto.imgTarjeta}`,
+          path: `/var/www/web2print.gruporegio.mx/web2print/public/images/tar/${producto.imgTarjeta}`,
+         // path: `${NEXT_URL_BASE}/images/tar/${producto.imgTarjeta}`,
           cid: producto.imgTarjeta,
         });
       }
