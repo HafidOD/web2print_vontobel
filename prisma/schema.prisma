@@ -58,11 +58,11 @@ model Address {
   country      String?
   state        String?
   postalCode   Int?
+  price        Int?
   enterpriseId Int?
+  propertyId   Int?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
-  propertyId   Int?
-  price        Int?
   enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
   property     Property?   @relation(fields: [propertyId], references: [id])
   users        User[]
@@ -71,12 +71,12 @@ model Address {
 model Product {
   id                 Int        @id @default(autoincrement())
   sku                String     @unique
-  nameProduct        String     @unique
+  nameProduct        String
   imageProduct       String?
   imageProduct2      String?
-  priceLocal         Float
-  priceNacional      Float?
-  priceExt           Float?
+  priceLocal         Float      @db.Float
+  priceNacional      Float?     @db.Float
+  priceExt           Float?     @db.Float
   descriptionProduct String?
   stockProduct       Int?
   unitsPackage       Int
