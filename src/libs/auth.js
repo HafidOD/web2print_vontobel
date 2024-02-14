@@ -9,6 +9,7 @@ export const authOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAg: 60,
   },
   providers: [
     CredentialsProvider({

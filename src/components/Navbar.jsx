@@ -28,8 +28,8 @@ export default function Navbar({ lang, paramslang }) {
   ];
   const removeAll = useCart((state) => state.removeAll);
 
-  function logout() {
-    removeAll();
+  async function logout() {
+    await removeAll();
     signOut({ redirect: false }).then(() => {
       window.location.href = "https://web2print.gruporegio.mx/en/";
     });

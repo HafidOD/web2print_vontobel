@@ -3,17 +3,17 @@ import nodemailer from "nodemailer";
 import prisma from "@/libs/prisma";
 import { getDictionary } from "@/utils/dictionary";
 
-const NEXT_URL_BASE = process.env.NEXT_URL_BASE;
+// const NEXT_URL_BASE = process.env.NEXT_URL_BASE;
 
 export async function POST(req) {
   const items = await req.json();
-  // console.log(items.items);
+  console.log(items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
     },
   });
-  // console.log(property.email);
+  console.log(property);
   try {
     const totalSale = items.items.reduce((total, item) => {
       // console.log(item);
@@ -54,9 +54,10 @@ export async function POST(req) {
       totalFinal,
       currentDate,
       sale.id,
-      lang
+      lang,
+      property
     );
-    // console.log(emailContent);
+    console.log(emailContent);
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -86,7 +87,7 @@ export async function POST(req) {
         mailOptions.attachments.push({
           filename: `tarjeta_${producto.imgTarjeta}.png`,
           path: `/var/www/web2print.gruporegio.mx/web2print/public/images/tar/${producto.imgTarjeta}`,
-         // path: `${NEXT_URL_BASE}/images/tar/${producto.imgTarjeta}`,
+          // path: `${NEXT_URL_BASE}/images/tar/${producto.imgTarjeta}`,
           cid: producto.imgTarjeta,
         });
       }
@@ -102,10 +103,10 @@ export async function POST(req) {
     //     html: emailContent,
     //   };
     // }
-    // return NextResponse.json(
-    //   { message: "ok", sale, property },
-    //   { status: 500 }
-    // );
+    return NextResponse.json(
+      { message: "ok", sale, property },
+      { status: 500 }
+    );
     const info = await transporter.sendMail(mailOptions);
     // console.log("Email sent: " + info.response);
     return NextResponse.json(
@@ -119,7 +120,14 @@ export async function POST(req) {
   }
 }
 
-function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
+function generateEmailContent(
+  items,
+  totalSale,
+  currentDate,
+  saleId,
+  lang,
+  property
+) {
   // console.log(saleId);
   // console.log(totalSale);
   // console.log(currentDate);
@@ -387,7 +395,7 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
             ${lang.pdf["amounts-expressed"]} ${
     items.user.typePrice === 3 ? lang.pdf.dollars : lang.pdf["mexican-pesos"]
   }<br />
-  ${items.user.property == "Vontobel" ? "" : lang.pdf["delivery-service"]}
+  ${property.logoCala ? lang.pdf["delivery-service"] : ""}
             
           </td>
           <td style="width: 10%; border: none; padding: 8px"></td>
@@ -460,9 +468,9 @@ function generateEmailContent(items, totalSale, currentDate, saleId, lang) {
           </th>
           <th style="width: 20%; border: none; padding: 8px">
           ${
-            items.user.property == "Vontobel"
-              ? ""
-              : `<img src="${process.env.NEXT_URL_BASE}/images/logos/Logo-CALA.png" alt="" width="120" />`
+            property.logoCala != 0
+              ? `<img src="${process.env.NEXT_URL_BASE}/images/logos/Logo-CALA.png" alt="" width="120" />`
+              : ""
           }
           </th>
           <th style="width: 15%; border: none; padding: 8px">
