@@ -7,13 +7,13 @@ import { getDictionary } from "@/utils/dictionary";
 
 export async function POST(req) {
   const items = await req.json();
-  console.log(items);
+  // console.log(items);
   const property = await prisma.property.findFirst({
     where: {
       propertyName: items.user.property,
     },
   });
-  console.log(property);
+  // console.log(property);
   try {
     const totalSale = items.items.reduce((total, item) => {
       // console.log(item);
@@ -57,7 +57,7 @@ export async function POST(req) {
       lang,
       property
     );
-    console.log(emailContent);
+    // console.log(emailContent);
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -103,10 +103,10 @@ export async function POST(req) {
     //     html: emailContent,
     //   };
     // }
-    return NextResponse.json(
-      { message: "ok", sale, property },
-      { status: 500 }
-    );
+    // return NextResponse.json(
+    //   { message: "ok", sale, property },
+    //   { status: 500 }
+    // );
     const info = await transporter.sendMail(mailOptions);
     // console.log("Email sent: " + info.response);
     return NextResponse.json(
