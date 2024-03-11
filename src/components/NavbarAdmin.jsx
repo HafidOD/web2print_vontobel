@@ -134,7 +134,7 @@ export default function NavbarAdmin({ lang, langparam }) {
                     onClick={() =>
                       signOut({ redirect: false }).then(() => {
                         window.location.href =
-                          "https://web2print.gruporegio.mx/en/";
+                          "https://web2printvontobel.gruporegio.mx/en/";
                       })
                     }
                     type="button"
